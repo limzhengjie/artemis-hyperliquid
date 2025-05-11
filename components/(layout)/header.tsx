@@ -31,7 +31,7 @@ const Header = () => {
     <header className="flex items-center justify-between px-6 py-2 border-b border-[var(--color-moongray-25)]">
       <div className="flex items-center gap-10">
         <h1 className="text-xl font-bold">logo</h1>
-        <nav>
+        <nav className="hidden sm:block">
           <ul className="flex items-center gap-8">
             {navigation.map(item => (
               <li key={item.href}>
@@ -49,7 +49,7 @@ const Header = () => {
           </ul>
         </nav>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="hidden sm:flex items-center gap-2">
         <Button variant="outline" className="flex items-center gap-1">
           <DatabaseIcon />
           <span>Need Stablecoin Data?</span>

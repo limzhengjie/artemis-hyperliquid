@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen cursor-default">
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
