@@ -82,7 +82,7 @@ const Sparkline = () => {
           type="natural"
           fill="url(#colorGradient)"
           stroke={color}
-          activeDot={{ stroke: 'white', strokeWidth: 1, r: 4 }}
+          activeDot={{ stroke: 'white', strokeWidth: 2, r: 4 }}
         />
       </AreaChart>
     </ChartContainer>
