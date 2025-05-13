@@ -33,9 +33,13 @@ import { formatValue } from '@/lib/utils'
 
 import ArtemisLogo from '@/components/(layout)/artemis-logo'
 
+type ChartData = {
+  [key: string]: number | string
+}
+
 interface Props {
   title: string
-  data: any[]
+  data: ChartData[]
   dataConfig: ChartConfig
   isTimeSeries?: boolean
   valueFormat?: ValueFormat
