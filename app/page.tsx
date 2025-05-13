@@ -10,12 +10,25 @@ import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
 import Blurb from '@/components/blurb'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
-
+import Quotes from '@/components/quotes'
 export default function Overview() {
   const dummyStats = [
     { period: 'Last Month', value: 560, pctChange: 10 },
     { period: 'Last Year', value: 560, pctChange: -5 },
     { period: 'Last 3 Months', value: 560, pctChange: 10 }
+  ]
+
+  const dummyQuotes = [
+    {
+      quote:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      author: 'Nic Carter, General Partner at Castle Island Ventures'
+    },
+    {
+      quote:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      author: 'Rob Hadick, General Partner at Dragonfly'
+    }
   ]
 
   return (
@@ -35,6 +48,7 @@ export default function Overview() {
           </div>
         </ContentWrapper>
       </div>
+
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
@@ -52,6 +66,16 @@ export default function Overview() {
           />
         </div>
       </ContentWrapper>
+
+      <div
+        className="w-full flex items-center justify-center gap-12 pt-12 pb-12"
+        style={{ background: 'var(--gradient-background)' }}
+      >
+        <ContentWrapper>
+          <Quotes quotes={dummyQuotes} />
+        </ContentWrapper>
+      </div>
+
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <div className="col-span-2">
