@@ -19,9 +19,22 @@ export default function Overview() {
   ]
 
   return (
-    <div className="w-full p-8 pb-12 flex flex-col gap-32 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <StatSummaryTile miniStatsData={dummyStats} />
-
+    <div className="w-full pb-12 flex flex-col items-center gap-32 font-[family-name:var(--font-geist-sans)]">
+      <div
+        className="w-full flex items-center justify-center gap-12 pt-12 pb-12"
+        style={{ background: 'var(--gradient-background)' }}
+      >
+        <ContentWrapper>
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <Blurb
+              title="Stablecoins: The Emerging Market Story"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+              textAlignment="center"
+            />
+            <StatSummaryTile miniStatsData={dummyStats} />
+          </div>
+        </ContentWrapper>
+      </div>
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
@@ -39,7 +52,6 @@ export default function Overview() {
           />
         </div>
       </ContentWrapper>
-
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <div className="col-span-2">
@@ -57,7 +69,6 @@ export default function Overview() {
           />
         </div>
       </ContentWrapper>
-
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <Blurb
@@ -75,7 +86,6 @@ export default function Overview() {
           </div>
         </div>
       </ContentWrapper>
-
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <div className="col-span-2">
