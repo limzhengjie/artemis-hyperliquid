@@ -18,7 +18,7 @@ export default function Overview() {
   ]
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto p-8 pb-12 flex flex-col gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full max-w-screen-xl mx-auto p-8 pb-12 flex flex-col gap-32 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <StatSummaryTile miniStatsData={dummyStats} />
       <div className="flex flex-col gap-8 items-center">
         <Blurb
