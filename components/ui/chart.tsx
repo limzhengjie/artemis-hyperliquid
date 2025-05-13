@@ -4,6 +4,7 @@ import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
 
 import { cn } from '@/lib/utils'
+import { VALUE_FORMAT, ValueFormat } from '@/constants/chart'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
@@ -12,6 +13,8 @@ export type ChartConfig = {
   [k in string]: {
     label?: React.ReactNode
     icon?: React.ComponentType
+    type?: 'area' | 'bar' | 'line'
+    stackId?: string
   } & (
     | { color?: string; theme?: never }
     | { color?: never; theme: Record<keyof typeof THEMES, string> }
@@ -115,6 +118,8 @@ function ChartTooltipContent({
   labelFormatter,
   labelClassName,
   formatter,
+  valueFormatter,
+  valueFormat,
   color,
   nameKey,
   labelKey
@@ -125,6 +130,8 @@ function ChartTooltipContent({
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
+    valueFormatter?: (value: number, format: ValueFormat) => string
+    valueFormat?: ValueFormat
   }) {
   const { config } = useChart()
 
@@ -173,76 +180,83 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        'border-[var(--color-background-light-outline)] bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl',
+        'border-[var(--color-background-light-outline)] bg-background grid min-w-[8rem] items-start gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs shadow-xl',
         className
       )}
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
-        {payload.map((item, index) => {
-          const key = `${nameKey || item.name || item.dataKey || 'value'}`
-          const itemConfig = getPayloadConfigFromPayload(config, item, key)
-          const indicatorColor = color || item.payload.fill || item.color
+        {payload
+          .sort((a, b) => (b.value as number) - (a.value as number))
+          .map((item, index) => {
+            const key = `${nameKey || item.name || item.dataKey || 'value'}`
+            const itemConfig = getPayloadConfigFromPayload(config, item, key)
+            const indicatorColor = color || item.payload.fill || item.color
 
-          return (
-            <div
-              key={item.dataKey}
-              className={cn(
-                '[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5',
-                indicator === 'dot' && 'items-center'
-              )}
-            >
-              {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, item.payload)
-              ) : (
-                <>
-                  {itemConfig?.icon ? (
-                    <itemConfig.icon />
-                  ) : (
-                    !hideIndicator && (
-                      <div
-                        className={cn(
-                          'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',
-                          {
-                            'h-2.5 w-2.5': indicator === 'dot',
-                            'w-1': indicator === 'line',
-                            'w-0 border-[1.5px] border-dashed bg-transparent':
-                              indicator === 'dashed',
-                            'my-0.5': nestLabel && indicator === 'dashed'
+            return (
+              <div
+                key={item.dataKey}
+                className={cn(
+                  '[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5',
+                  indicator === 'dot' && 'items-center'
+                )}
+              >
+                {formatter && item?.value !== undefined && item.name ? (
+                  formatter(item.value, item.name, item, index, item.payload)
+                ) : (
+                  <>
+                    {itemConfig?.icon ? (
+                      <itemConfig.icon />
+                    ) : (
+                      !hideIndicator && (
+                        <div
+                          className={cn(
+                            'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',
+                            {
+                              'h-2.5 w-2.5': indicator === 'dot',
+                              'w-1': indicator === 'line',
+                              'w-0 border-[1.5px] border-dashed bg-transparent':
+                                indicator === 'dashed',
+                              'my-0.5': nestLabel && indicator === 'dashed'
+                            }
+                          )}
+                          style={
+                            {
+                              '--color-bg': indicatorColor,
+                              '--color-border': indicatorColor
+                            } as React.CSSProperties
                           }
-                        )}
-                        style={
-                          {
-                            '--color-bg': indicatorColor,
-                            '--color-border': indicatorColor
-                          } as React.CSSProperties
-                        }
-                      />
-                    )
-                  )}
-                  <div
-                    className={cn(
-                      'flex flex-1 justify-between leading-none',
-                      nestLabel ? 'items-end' : 'items-center'
+                        />
+                      )
                     )}
-                  >
-                    <div className="grid gap-1.5">
-                      {nestLabel ? tooltipLabel : null}
-                      <span className="text-muted-foreground">
-                        {itemConfig?.label || item.name}
-                      </span>
+                    <div
+                      className={cn(
+                        'flex flex-1 justify-between leading-none',
+                        nestLabel ? 'items-end' : 'items-center'
+                      )}
+                    >
+                      <div className="grid gap-1.5">
+                        {nestLabel ? tooltipLabel : null}
+                        <span className="text-muted-foreground">
+                          {itemConfig?.label || item.name}
+                        </span>
+                      </div>
+                      {item.value && (
+                        <span className="ml-3 text-foreground font-mono font-medium tabular-nums">
+                          {valueFormatter
+                            ? valueFormatter(
+                                Number(item.value),
+                                valueFormat || VALUE_FORMAT.number
+                              )
+                            : item.value.toLocaleString()}
+                        </span>
+                      )}
                     </div>
-                    {item.value && (
-                      <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
-                      </span>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          )
-        })}
+                  </>
+                )}
+              </div>
+            )
+          })}
       </div>
     </div>
   )
