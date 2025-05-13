@@ -21,7 +21,7 @@ export default function Overview() {
   const dummyQuotes = [
     {
       quote:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'Stablecoins are being used not just for crypto trading, but increasingly feature in the ordinary economic lives of these individuals.',
       author: 'Nic Carter, General Partner at Castle Island Ventures'
     },
     {
