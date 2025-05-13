@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
 
