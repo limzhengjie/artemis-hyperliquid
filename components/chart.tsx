@@ -118,7 +118,10 @@ const Chart = ({
             // Check if this is the last bar element in the dataConfig
             const isLastBarElement = array
               .slice(index + 1)
-              .every(([_, cfg]) => (cfg.type as ChartType) !== CHART_TYPES.bar)
+              .every(
+                ([label, cfg]) =>
+                  (cfg.type as ChartType) !== CHART_TYPES.bar && label
+              )
 
             return (
               <Bar
