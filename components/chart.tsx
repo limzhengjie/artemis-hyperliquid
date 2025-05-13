@@ -44,6 +44,7 @@ interface Props {
   isTimeSeries?: boolean
   valueFormat?: ValueFormat
   xAxisLabel?: string
+  chartHeight?: number
 }
 
 const Chart = ({
@@ -52,7 +53,8 @@ const Chart = ({
   dataConfig,
   isTimeSeries = false,
   valueFormat = VALUE_FORMAT.number,
-  xAxisLabel
+  xAxisLabel,
+  chartHeight = 260
 }: Props) => {
   const renderChart = () => {
     return (
@@ -212,12 +214,16 @@ const Chart = ({
   }
 
   return (
-    <Card className="gap-4">
+    <Card className="w-full gap-4">
       <CardHeader>
         <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
       <CardContent className="p-0 flex flex-col gap-4">
-        <ChartContainer config={dataConfig} className="h-[250px] w-full">
+        <ChartContainer
+          config={dataConfig}
+          className="w-full"
+          style={{ height: chartHeight }}
+        >
           {renderChart()}
         </ChartContainer>
         <div className="ml-auto">
