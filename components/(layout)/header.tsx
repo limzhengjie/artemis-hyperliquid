@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { usePostHog } from 'posthog-js/react'
@@ -7,6 +8,8 @@ import { usePostHog } from 'posthog-js/react'
 import { cn } from '@/lib/utils'
 
 import { Button } from '@/components/ui/button'
+
+import ArtemisStablecoinLogo from '@/public/artemis-stablecoin-logo.svg'
 
 import { DatabaseIcon } from 'lucide-react'
 
@@ -32,7 +35,12 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between px-6 py-2 border-b border-[var(--color-moongray-25)]">
       <div className="flex items-center gap-10">
-        <h1 className="text-xl font-bold">logo</h1>
+        <Image
+          src={ArtemisStablecoinLogo}
+          alt="Artemis Stablecoin Logo"
+          width={120}
+          height={100}
+        />
         <nav className="hidden sm:block">
           <ul className="flex items-center gap-8">
             {navigation.map(item => (
