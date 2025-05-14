@@ -11,6 +11,8 @@ import StatSummaryTile from '@/components/stat-summary-tile'
 import Blurb from '@/components/blurb'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
+import LogoMarquee from '@/components/logo-marquee'
+
 export default function Overview() {
   const dummyStats = [
     { period: 'Last Month', value: 560, pctChange: 10 },
@@ -46,6 +48,13 @@ export default function Overview() {
             <StatSummaryTile miniStatsData={dummyStats} />
           </div>
         </ContentWrapper>
+      </div>
+
+      <div className="flex flex-col gap-12 mb-12">
+        <p className="text-center text-muted-foreground">
+          Special thanks to the Artemis Data Consortium Members
+        </p>
+        <LogoMarquee />
       </div>
 
       <ContentWrapper>
