@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 import {
   Area,
   Bar,
@@ -214,7 +216,7 @@ const Chart = ({
   }
 
   return (
-    <Card className="w-full gap-4">
+    <Card className="w-full gap-4 relative">
       <CardHeader>
         <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
@@ -230,6 +232,13 @@ const Chart = ({
           <ArtemisLogo poweredBy />
         </div>
       </CardContent>
+      <Image
+        src="/watermark.svg"
+        alt="Artemis Logo"
+        width={150}
+        height={100}
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10"
+      />
     </Card>
   )
 }
