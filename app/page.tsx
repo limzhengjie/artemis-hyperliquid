@@ -6,6 +6,8 @@ import {
   VALUE_FORMAT
 } from '@/constants/chart'
 
+import { QUOTES } from '@/constants/quotes'
+
 import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
 import Blurb from '@/components/blurb'
@@ -18,18 +20,6 @@ export default function Overview() {
     { period: 'Last Month', value: 560, pctChange: 10 },
     { period: 'Last Year', value: 560, pctChange: -5 },
     { period: 'Last 3 Months', value: 560, pctChange: 10 }
-  ]
-
-  const dummyQuotes = [
-    {
-      quote:
-        'Stablecoins are being used not just for crypto trading, but increasingly feature in the ordinary economic lives of these individuals.',
-      author: 'Nic Carter, General Partner at Castle Island Ventures'
-    },
-    {
-      quote: 'Some alpha about stablecoins and why they are super duper cool.',
-      author: 'Rob Hadick, General Partner at Dragonfly'
-    }
   ]
 
   return (
@@ -82,7 +72,7 @@ export default function Overview() {
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
-          <Quotes quotes={dummyQuotes} />
+          <Quotes quotes={QUOTES} />
         </ContentWrapper>
       </div>
 

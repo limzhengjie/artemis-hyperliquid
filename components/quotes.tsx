@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 
+import { Quote } from '@/constants/quotes'
+
 import { QuoteIcon } from 'lucide-react'
 
 interface Props {
-  quotes: { quote: string; author: string }[]
+  quotes: Quote[]
 }
 
 const Quotes = ({ quotes }: Props) => {
@@ -109,8 +111,17 @@ const Quotes = ({ quotes }: Props) => {
               <div className="text-4xl font-bold text-center">
                 {quotes[currentIndex].quote}
               </div>
-              <div className="text-sm text-muted-foreground">
-                {quotes[currentIndex].author}
+              <div className="flex items-center gap-4">
+                <Image
+                  src={quotes[currentIndex].image}
+                  alt={quotes[currentIndex].author}
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <p className="text-md text-muted-foreground">
+                  {quotes[currentIndex].author}
+                </p>
               </div>
             </motion.div>
           </AnimatePresence>
