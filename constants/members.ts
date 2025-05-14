@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 import AcctualLogo from '@/public/members/acctual.svg'
 import BeloLogo from '@/public/members/belo.svg'
 import BinanceLogo from '@/public/members/binance.svg'
@@ -16,6 +18,11 @@ import OrbitalLogo from '@/public/members/orbital.svg'
 import ReapLogo from '@/public/members/reap.svg'
 import SlingMoneyLogo from '@/public/members/sling-money.svg'
 import YellowCardLogo from '@/public/members/yellow-card.svg'
+
+export type Member = {
+  name: string
+  image: StaticImageData | string
+}
 
 export const MEMBERS_LOGOS = [
   {

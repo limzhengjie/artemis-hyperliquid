@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { Button } from '@/components/ui/button'
+
 import {
   AVG_RETENTION_RATE_DATA,
   AVG_RETENTION_RATE_CONFIG,
@@ -9,6 +11,7 @@ import {
 } from '@/constants/chart'
 
 import { QUOTES } from '@/constants/quotes'
+import { MEMBERS_LOGOS } from '@/constants/members'
 
 import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
@@ -16,7 +19,7 @@ import Blurb from '@/components/blurb'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
-
+import LogoGrid from '@/components/logo-grid'
 import ReportImage from '@/public/report.svg'
 
 export default function Overview() {
@@ -157,6 +160,19 @@ export default function Overview() {
           </div>
         </ContentWrapper>
       </div>
+
+      <ContentWrapper>
+        <div className="flex flex-col items-center justify-center gap-8">
+          <p className="text-4xl font-bold">Stablecoin Data Consortium</p>
+          <p className="text-muted-foreground">
+            Join us to define the stablecoin data standard of the future
+          </p>
+          <LogoGrid members={MEMBERS_LOGOS} />
+          <Button variant="cta" className="mt-3" asChild>
+            <a href="mailto:team@artemisanalytics.xyz">Join the Consortium</a>
+          </Button>
+        </div>
+      </ContentWrapper>
     </div>
   )
 }
