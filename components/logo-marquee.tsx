@@ -8,6 +8,7 @@ const LogoMarquee = () => {
     <Marquee gradient>
       {PARTNERS_LOGOS.map(logo => (
         <Image
+          key={logo.name}
           src={logo.image}
           alt={logo.name}
           style={{ marginRight: '70px' }}
