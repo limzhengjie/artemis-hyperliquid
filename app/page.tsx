@@ -50,10 +50,12 @@ export default function Overview() {
         </ContentWrapper>
       </div>
 
-      <div className="flex flex-col gap-12 mb-12">
+      <ContentWrapper>
         <p className="text-center text-muted-foreground">
           Special thanks to the Artemis Data Consortium Members
         </p>
+      </ContentWrapper>
+      <div className="flex flex-col gap-12 -mt-4 mb-12">
         <LogoMarquee />
       </div>
 
