@@ -49,7 +49,7 @@ export default function Overview() {
           Special thanks to the Artemis Data Consortium Members
         </p>
       </ContentWrapper>
-      <div className="flex flex-col gap-12 -mt-4 mb-12">
+      <div className="w-full flex flex-col gap-12 -mt-4 mb-12">
         <LogoMarquee />
       </div>
 

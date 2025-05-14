@@ -5,7 +5,7 @@ import { MEMBERS_LOGOS } from '@/constants/members'
 
 const LogoMarquee = () => {
   return (
-    <Marquee gradient gradientWidth={300}>
+    <Marquee gradient gradientWidth={200}>
       {MEMBERS_LOGOS.map(logo => (
         <Image
           key={logo.name}
