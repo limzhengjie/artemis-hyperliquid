@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 
 import { QuoteIcon } from 'lucide-react'
@@ -53,17 +54,51 @@ const Quotes = ({ quotes }: Props) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8">
-      <QuoteIcon className="w-10 h-10" strokeWidth={1.5} />
-      <div className="max-w-4xl flex flex-col justify-center items-center gap-12">
-        <div
-          className="relative overflow-hidden"
-          style={{ height: '200px', width: '100%' }}
-        >
-          <AnimatePresence initial={false} custom={direction} mode="wait">
+    <div className="relative flex flex-col justify-center items-center gap-6 px-4">
+      <Image
+        src="/pixels-left.svg"
+        alt="pixels"
+        width={30}
+        height={20}
+        className="absolute left-0 bottom-0 -translate-x-1/2 translate-y-25"
+      />
+      <div
+        className="absolute left-0 top-1/2 -translate-x-1/2"
+        style={{
+          width: '480px',
+          height: '2px',
+          background:
+            'linear-gradient(180deg, #5E4EB5 0%, rgba(255, 255, 255, 0) 100%)',
+          transform: 'rotate(90deg)',
+          opacity: 0.1
+        }}
+      />
+      <div
+        className="absolute right-0 top-1/2 translate-x-1/2"
+        style={{
+          width: '480px',
+          height: '2px',
+          background:
+            'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #5E4EB5 100%)',
+          transform: 'rotate(90deg)',
+          opacity: 0.1
+        }}
+      />
+      <Image
+        src="/pixels-right.svg"
+        alt="pixels"
+        width={30}
+        height={20}
+        className="absolute right-0 top-0 translate-x-1/2 -translate-y-25"
+      />
+
+      <div className="max-w-4xl flex flex-col justify-center items-center gap-6">
+        <QuoteIcon className="w-12 h-12" />
+        <div className="relative overflow-hidden" style={{ height: '200px' }}>
+          <AnimatePresence initial={true} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
-              className="flex flex-col justify-center items-center gap-12"
+              className="flex flex-col justify-center items-center gap-6"
               custom={direction}
               variants={slideVariants}
               initial="enter"

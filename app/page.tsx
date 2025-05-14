@@ -31,7 +31,7 @@ export default function Overview() {
   ]
 
   return (
-    <div className="w-full pb-12 flex flex-col items-center gap-32 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full pb-12 flex flex-col items-center gap-18 font-[family-name:var(--font-geist-sans)]">
       <div
         className="w-full flex items-center justify-center gap-12 pt-12 pb-12"
         style={{ background: 'var(--gradient-background)' }}
@@ -67,7 +67,7 @@ export default function Overview() {
       </ContentWrapper>
 
       <div
-        className="w-full flex items-center justify-center gap-12 pt-12 pb-12"
+        className="w-full flex items-center justify-center gap-12 pt-24 pb-24"
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>

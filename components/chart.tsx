@@ -222,7 +222,7 @@ const Chart = ({
         <ChartContainer
           config={dataConfig}
           className="w-full"
-          style={{ height: chartHeight }}
+          style={{ height: `${chartHeight}px` }}
         >
           {renderChart()}
         </ChartContainer>
