@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { usePostHog } from 'posthog-js/react'
 
 import { cn } from '@/lib/utils'
 
@@ -10,8 +11,9 @@ import { Button } from '@/components/ui/button'
 import { DatabaseIcon } from 'lucide-react'
 
 const Header = () => {
-  const pathname = usePathname()
+  const posthog = usePostHog()
 
+  const pathname = usePathname()
   const isActive = (path: string) => pathname === path
 
   const navigation = [
@@ -54,7 +56,17 @@ const Header = () => {
           <DatabaseIcon />
           <span>Need Stablecoin Data?</span>
         </Button>
-        <Button variant="cta" asChild>
+        <Button
+          variant="cta"
+          asChild
+          onClick={() =>
+            posthog.capture('clicked_artemis_terminal_button', {
+              $set: {
+                artemis_terminal_url: 'https://app.artemisanalytics.com/'
+              }
+            })
+          }
+        >
           <Link href="https://app.artemisanalytics.com/" target="_blank">
             Artemis Terminal
           </Link>
