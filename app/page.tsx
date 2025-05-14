@@ -25,8 +25,7 @@ export default function Overview() {
       author: 'Nic Carter, General Partner at Castle Island Ventures'
     },
     {
-      quote:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      quote: 'Some alpha about stablecoins and why they are super duper cool.',
       author: 'Rob Hadick, General Partner at Dragonfly'
     }
   ]
