@@ -177,7 +177,11 @@ const Chart = ({
           return null
         })}
 
-        <ChartLegend content={<ChartLegendContent />} verticalAlign="top" />
+        <ChartLegend
+          content={<ChartLegendContent />}
+          verticalAlign="top"
+          className="mb-4"
+        />
 
         {/* Define gradients for area charts */}
         <defs>
