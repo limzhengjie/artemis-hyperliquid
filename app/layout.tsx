@@ -32,12 +32,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          forcedTheme="light"
+          disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen cursor-default">
             <Header />
