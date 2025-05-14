@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 
-import { PARTNERS_LOGOS } from '@/constants/partners'
+import { MEMBERS_LOGOS } from '@/constants/members'
 
 const LogoMarquee = () => {
   return (
     <Marquee gradient>
-      {PARTNERS_LOGOS.map(logo => (
+      {MEMBERS_LOGOS.map(logo => (
         <Image
           key={logo.name}
           src={logo.image}
