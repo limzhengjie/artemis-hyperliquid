@@ -42,6 +42,11 @@
     var(--background),
     var(--gradient-background-to)
   );
+  --gradient-background-download: linear-gradient(
+    180deg,
+    var(--gradient-background-download-from),
+    var(--gradient-background-download-to)
+  );
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -90,6 +95,8 @@
   --color-positive: oklch(0.63 0.154 149.58);
   --color-negative: oklch(0.61 0.2042 28.26);
   --gradient-background-to: oklch(0.98 0.01 292);
+  --gradient-background-download-from: oklch(0.56 0.24 282.16 / 0.2);
+  --gradient-background-download-to: oklch(0.95 0.01 292.35 / 0.2);
 }
 
 .dark {

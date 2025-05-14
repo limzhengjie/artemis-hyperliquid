@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import {
   AVG_RETENTION_RATE_DATA,
   AVG_RETENTION_RATE_CONFIG,
@@ -14,6 +16,8 @@ import Blurb from '@/components/blurb'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
+
+import ReportImage from '@/public/report.svg'
 
 export default function Overview() {
   const dummyStats = [
@@ -127,6 +131,32 @@ export default function Overview() {
           />
         </div>
       </ContentWrapper>
+
+      <div
+        className="w-full flex items-center justify-center pt-24 pb-24"
+        style={{ background: 'var(--gradient-background-download)' }}
+      >
+        <ContentWrapper>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <Image
+              src={ReportImage}
+              alt="Report Download"
+              width={555}
+              height={100}
+            />
+            <div className="flex flex-col gap-8">
+              <p className="text-[var(--color-pluto-purple-500)] text-sm font-medium font-[family-name:var(--font-geist-mono)]">
+                2025 REPORT
+              </p>
+              <Blurb
+                title="Get a Copy of Our Report Here"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+                textAlignment="center"
+              />
+            </div>
+          </div>
+        </ContentWrapper>
+      </div>
     </div>
   )
 }
