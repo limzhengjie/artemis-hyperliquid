@@ -80,7 +80,7 @@ const Quotes = ({ quotes }: Props) => {
             </motion.div>
           </AnimatePresence>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-2">
           {quotes.map((quote, index) => (
             <div
               key={`${quote.quote}-${index}`}
