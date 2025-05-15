@@ -279,6 +279,8 @@ function ChartTooltipContentSparkline({
   labelFormatter,
   labelClassName,
   formatter,
+  valueFormatter,
+  valueFormat,
   color,
   nameKey,
   labelKey
@@ -289,6 +291,8 @@ function ChartTooltipContentSparkline({
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
+    valueFormatter?: (value: number, format: ValueFormat) => string
+    valueFormat?: ValueFormat
   }) {
   const { config } = useChart()
 
@@ -398,7 +402,12 @@ function ChartTooltipContentSparkline({
                   >
                     {item.value && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
+                        {valueFormatter
+                          ? valueFormatter(
+                              Number(item.value),
+                              valueFormat || VALUE_FORMAT.number
+                            )
+                          : item.value.toLocaleString()}
                       </span>
                     )}
                   </div>

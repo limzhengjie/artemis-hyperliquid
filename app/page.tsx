@@ -13,6 +13,9 @@ import {
 import { QUOTES } from '@/constants/quotes'
 import { MEMBERS_LOGOS } from '@/constants/members'
 
+import { getCurrentDate, getStartDate } from '@/lib/dates'
+import { getStablecoinSupplyData } from '@/lib/fetchStablecoinsData'
+
 import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
 import Blurb from '@/components/blurb'
@@ -24,12 +27,27 @@ import DownloadReport from '@/components/download-report'
 
 import ReportImage from '@/public/report.svg'
 
-export default function Overview() {
-  const dummyStats = [
-    { period: 'Last Month', value: 560, pctChange: 10 },
-    { period: 'Last Year', value: 560, pctChange: -5 },
-    { period: 'Last 3 Months', value: 560, pctChange: 10 }
-  ]
+export default async function Overview() {
+  const endDate = getCurrentDate()
+
+  const stablecoinSupply5YearData = await getStablecoinSupplyData(
+    getStartDate(365 * 5) as string,
+    endDate as string,
+    'weekly'
+  )
+
+  const stablecoinSupply4YearData = await getStablecoinSupplyData(
+    getStartDate(365 * 4 + 10) as string, // 10 days to buffer extra days to ensure we have data for the last 365 days
+    endDate as string,
+    'daily'
+  )
+
+  const latestStablecoinSupply =
+    stablecoinSupply4YearData[stablecoinSupply4YearData.length - 1].value
+
+  const latestStablecoinSupplyChange =
+    stablecoinSupply4YearData[stablecoinSupply4YearData.length - 1].value -
+    stablecoinSupply4YearData[stablecoinSupply4YearData.length - 2].value
 
   return (
     <div className="w-full pb-12 flex flex-col items-center gap-18 font-[family-name:var(--font-geist-sans)]">
@@ -47,7 +65,20 @@ export default function Overview() {
               />
               <DownloadReport />
             </div>
-            <StatSummaryTile miniStatsData={dummyStats} />
+            <StatSummaryTile
+              mainStatLabel="ISSUED STABLECOINS"
+              mainStat={{
+                value: latestStablecoinSupply,
+                type: VALUE_FORMAT.currency
+              }}
+              mainStatChange={{
+                value: latestStablecoinSupplyChange,
+                type: VALUE_FORMAT.currency,
+                label: 'over the last day'
+              }}
+              sparklineData={stablecoinSupply5YearData}
+              miniStatsData={stablecoinSupply4YearData}
+            />
           </div>
         </ContentWrapper>
       </div>
