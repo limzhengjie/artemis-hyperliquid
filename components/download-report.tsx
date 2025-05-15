@@ -4,6 +4,8 @@
 
 import { useState } from 'react'
 
+import { ArrowLeftIcon } from 'lucide-react'
+
 const INIT = 'INIT'
 const SUBMITTING = 'SUBMITTING'
 const ERROR = 'ERROR'
@@ -113,7 +115,6 @@ export default function DownloadReport() {
           setFormState(SUCCESS)
 
           // Send event to Loops
-          // Make sure the eventName matches the eventName in the Loops dashboard
           fetch('/api/loops-event', {
             method: 'POST',
             headers: {
@@ -121,7 +122,7 @@ export default function DownloadReport() {
             },
             body: JSON.stringify({
               email,
-              eventName: 'stablecoins2025ReportDownloaded'
+              eventName: 'stablecoins2025ReportDownloaded' // Make sure the eventName matches the eventName in the Loops dashboard
             })
           })
         } else {
@@ -155,7 +156,7 @@ export default function DownloadReport() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             width: '100%'
           }}
         >
@@ -255,17 +256,20 @@ export default function DownloadReport() {
         style={{
           color: '#6b7280',
           font: '14px, Inter, sans-serif',
-          textAlign: 'center',
+          textAlign: 'left',
           background: 'transparent',
           border: 'none',
           cursor: 'pointer',
-          textDecoration: isHovered ? 'underline' : 'none'
+          textDecoration: isHovered ? 'underline' : 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px'
         }}
         onMouseOut={() => setIsHovered(false)}
         onMouseOver={() => setIsHovered(true)}
         onClick={resetForm}
       >
-        &larr; Back
+        <ArrowLeftIcon className="w-4 h-4" /> <span>Back</span>
       </button>
     )
   }
