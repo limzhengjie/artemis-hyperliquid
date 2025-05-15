@@ -3,6 +3,12 @@
 import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
+
 import { cn } from '@/lib/utils'
 import { VALUE_FORMAT, ValueFormat } from '@/constants/chart'
 
@@ -445,55 +451,63 @@ function ChartLegendContent({
         const isHidden = legendProps[key] === true
 
         return (
-          <div
-            key={item.value}
-            className={cn(
-              'select-none cursor-pointer flex items-center gap-1.5',
-              isHidden && 'opacity-40'
-            )}
-            onMouseEnter={() => {
-              if (!legendProps[key]) {
-                setLegendProps(prev => ({ ...prev, hover: key }))
-              }
-            }}
-            onMouseLeave={() => {
-              setLegendProps(prev => ({ ...prev, hover: null }))
-            }}
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              setLegendProps(prev => ({
-                ...prev,
-                [key]: !prev[key],
-                hover: null
-              }))
-            }}
-            onDoubleClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              window.getSelection()?.removeAllRanges()
-
-              const allHidden = Object.keys(legendProps)
-                .filter(k => k !== 'hover')
-                .reduce((acc, k) => {
-                  acc[k] = true
-                  return acc
-                }, {} as Record<string, boolean | null>)
-              allHidden[key] = false
-
-              setLegendProps({ ...allHidden, hover: null })
-            }}
-          >
-            {itemConfig?.icon && !hideIcon ? (
-              <itemConfig.icon />
-            ) : (
+          <Tooltip key={item.value} delayDuration={700}>
+            <TooltipTrigger asChild>
               <div
-                className="h-3 w-3 shrink-0 rounded-[2px]"
-                style={{ backgroundColor: item.color }}
-              />
-            )}
-            <span>{itemConfig?.label}</span>
-          </div>
+                key={item.value}
+                className={cn(
+                  'select-none cursor-pointer flex items-center gap-1.5',
+                  isHidden && 'opacity-40'
+                )}
+                onMouseEnter={() => {
+                  if (!legendProps[key]) {
+                    setLegendProps(prev => ({ ...prev, hover: key }))
+                  }
+                }}
+                onMouseLeave={() => {
+                  setLegendProps(prev => ({ ...prev, hover: null }))
+                }}
+                onClick={e => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setLegendProps(prev => ({
+                    ...prev,
+                    [key]: !prev[key],
+                    hover: null
+                  }))
+                }}
+                onDoubleClick={e => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.getSelection()?.removeAllRanges()
+
+                  const allHidden = Object.keys(legendProps)
+                    .filter(k => k !== 'hover')
+                    .reduce((acc, k) => {
+                      acc[k] = true
+                      return acc
+                    }, {} as Record<string, boolean | null>)
+                  allHidden[key] = false
+
+                  setLegendProps({ ...allHidden, hover: null })
+                }}
+              >
+                {itemConfig?.icon && !hideIcon ? (
+                  <itemConfig.icon />
+                ) : (
+                  <div
+                    className="h-3 w-3 shrink-0 rounded-[2px]"
+                    style={{ backgroundColor: item.color }}
+                  />
+                )}
+                <span>{itemConfig?.label}</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={10}>
+              <div>Click to toggle visibility.</div>
+              <div>Double-click to isolate.</div>
+            </TooltipContent>
+          </Tooltip>
         )
       })}
     </div>
