@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 
 import { Quote } from '@/constants/quotes'
@@ -111,18 +112,20 @@ const Quotes = ({ quotes }: Props) => {
               <div className="text-4xl font-bold text-center">
                 {quotes[currentIndex].quote}
               </div>
-              <div className="flex items-center gap-4">
-                <Image
-                  src={quotes[currentIndex].image}
-                  alt={quotes[currentIndex].author}
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                <p className="text-md text-muted-foreground">
-                  {quotes[currentIndex].author}
-                </p>
-              </div>
+              <Link href={quotes[currentIndex].website} target="_blank">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={quotes[currentIndex].image}
+                    alt={quotes[currentIndex].author}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  <p className="text-md text-muted-foreground">
+                    {quotes[currentIndex].author}
+                  </p>
+                </div>
+              </Link>
             </motion.div>
           </AnimatePresence>
         </div>
