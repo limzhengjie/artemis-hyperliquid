@@ -39,11 +39,14 @@ export default function Overview() {
       >
         <ContentWrapper>
           <div className="flex flex-col md:flex-row items-center gap-3">
-            <Blurb
-              title="Stablecoins: The Emerging Market Story"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-              textAlignment="center"
-            />
+            <div className="flex flex-col gap-6">
+              <Blurb
+                title="Stablecoins: The Emerging Market Story"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                textAlignment="center"
+              />
+              <DownloadReport />
+            </div>
             <StatSummaryTile miniStatsData={dummyStats} />
           </div>
         </ContentWrapper>
