@@ -451,7 +451,7 @@ function ChartLegendContent({
         const isHidden = legendProps[key] === true
 
         return (
-          <Tooltip key={item.value} delayDuration={700}>
+          <Tooltip key={item.value} delayDuration={800}>
             <TooltipTrigger asChild>
               <div
                 key={item.value}
@@ -503,7 +503,7 @@ function ChartLegendContent({
                 <span>{itemConfig?.label}</span>
               </div>
             </TooltipTrigger>
-            <TooltipContent side="bottom" sideOffset={10}>
+            <TooltipContent side="top" sideOffset={10}>
               <div>Click to toggle visibility.</div>
               <div>Double-click to isolate.</div>
             </TooltipContent>
