@@ -114,7 +114,7 @@ const Chart = ({
           tickFormatter={value => formatValue(value, valueFormat)}
         />
         <ChartTooltip
-          cursor={false}
+          cursor={true}
           content={
             <ChartTooltipContent
               hideLabel={!isTimeSeries}
@@ -132,6 +132,11 @@ const Chart = ({
               indicator="dot"
             />
           }
+          wrapperStyle={{
+            backgroundColor: 'white',
+            opacity: 1,
+            zIndex: 9999
+          }}
         />
 
         {/* First render all bar charts */}
@@ -285,7 +290,7 @@ const Chart = ({
         alt="Artemis Logo"
         width={150}
         height={100}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none"
       />
     </Card>
   )
