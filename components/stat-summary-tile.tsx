@@ -71,7 +71,7 @@ const StatSummaryTile = ({
       <div className="flex-1 flex flex-col relative">
         <div className="flex-1">
           <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3 text-center flex-col items-center">
-            <p className="text-sm text-muted-foreground mb-3">
+            <p className="text-sm font-medium text-muted-foreground mb-3">
               {mainStatLabel}
             </p>
             <div className="flex flex-col gap-3">
