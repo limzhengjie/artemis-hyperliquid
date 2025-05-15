@@ -26,7 +26,9 @@ const formStyles = {
   successFont: 'Inter',
   successFontColor: '#684FF8',
   successFontSizePx: 14,
-  userGroup: 'Stablecoins - 2025 Report Download'
+  userGroup: 'Interested in Stablecoins',
+  source: 'Stablecoins 2025 Report Download',
+  mailingLists: 'cmapovue005770iwve0e19b2l' // https://app.loops.so/settings?page=lists
 }
 const domain = 'app.loops.so'
 
@@ -93,7 +95,9 @@ export default function DownloadReport() {
     // build body
     const formBody = `userGroup=${encodeURIComponent(
       formStyles.userGroup
-    )}&email=${encodeURIComponent(email)}&mailingLists=`
+    )}&email=${encodeURIComponent(email)}&source=${encodeURIComponent(
+      formStyles.source
+    )}&mailingLists=${encodeURIComponent(formStyles.mailingLists)}`
 
     // API request to add user to newsletter
     fetch(`https://${domain}/api/newsletter-form/${formStyles.id}`, {
@@ -252,7 +256,6 @@ export default function DownloadReport() {
         style={{
           color: '#6b7280',
           font: '14px, Inter, sans-serif',
-          margin: '10px auto',
           textAlign: 'center',
           background: 'transparent',
           border: 'none',
