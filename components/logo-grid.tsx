@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { Member } from '@/constants/members'
 
-import ArtemisLogo from '@/public/artemis-light.svg'
+import ArtemisBWLogo from '@/public/artemis-bw.svg'
 
 interface Props {
   members: Member[]
@@ -31,10 +31,10 @@ const LogoGrid = ({ members }: Props) => {
         ))}
       </div>
       <Image
-        src={ArtemisLogo}
+        src={ArtemisBWLogo}
         alt="Artemis Logo"
-        width={130}
-        height={130}
+        width={100}
+        height={100}
         className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white px-2"
       />
     </div>
