@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 
 import {
@@ -58,6 +59,23 @@ const Chart = ({
   xAxisLabel,
   chartHeight = 260
 }: Props) => {
+  const [legendProps, setLegendProps] = useState(
+    Object.keys(dataConfig)
+      .map(key => {
+        return {
+          key: key,
+          color: dataConfig[key].color
+        }
+      })
+      .reduce(
+        (a, { key }) => {
+          a[key] = false
+          return a
+        },
+        { hover: null } as Record<string, boolean | null | string>
+      )
+  )
+
   const renderChart = () => {
     return (
       <ComposedChart data={data}>
@@ -134,6 +152,13 @@ const Chart = ({
                 fill={`var(--color-${key})`}
                 stackId={config.stackId || undefined}
                 radius={isLastBarElement ? [2, 2, 0, 0] : [0, 0, 0, 0]} // Only round top corners for the last bar
+                fillOpacity={Number(
+                  String(legendProps.hover) === key ||
+                    legendProps.hover === null
+                    ? 1
+                    : 0.2
+                )}
+                hide={legendProps[key] === true}
               />
             )
           }
@@ -153,6 +178,13 @@ const Chart = ({
                 strokeWidth={2}
                 dot={false}
                 activeDot={{ stroke: 'white', strokeWidth: 2, r: 4 }}
+                fillOpacity={Number(
+                  String(legendProps.hover) === key ||
+                    legendProps.hover === null
+                    ? 1
+                    : 0.2
+                )}
+                hide={legendProps[key] === true}
               />
             )
           }
@@ -171,6 +203,13 @@ const Chart = ({
                 strokeWidth={2}
                 dot={false}
                 activeDot={{ stroke: 'white', strokeWidth: 2, r: 4 }}
+                strokeOpacity={Number(
+                  String(legendProps.hover) === key ||
+                    legendProps.hover === null
+                    ? 1
+                    : 0.2
+                )}
+                hide={legendProps[key] === true}
               />
             )
           }
@@ -178,9 +217,14 @@ const Chart = ({
         })}
 
         <ChartLegend
-          content={<ChartLegendContent />}
+          content={
+            <ChartLegendContent
+              legendProps={legendProps}
+              setLegendProps={setLegendProps}
+            />
+          }
           verticalAlign="top"
-          className="mb-4"
+          className="mb-4 select-none"
         />
 
         {/* Define gradients for area charts */}

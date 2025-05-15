@@ -413,11 +413,17 @@ function ChartLegendContent({
   hideIcon = false,
   payload,
   verticalAlign = 'bottom',
-  nameKey
+  nameKey,
+  legendProps,
+  setLegendProps
 }: React.ComponentProps<'div'> &
   Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
     hideIcon?: boolean
     nameKey?: string
+    legendProps: Record<string, boolean | null | string>
+    setLegendProps: React.Dispatch<
+      React.SetStateAction<Record<string, boolean | null | string>>
+    >
   }) {
   const { config } = useChart()
 
@@ -436,25 +442,57 @@ function ChartLegendContent({
       {payload.map(item => {
         const key = `${nameKey || item.dataKey || 'value'}`
         const itemConfig = getPayloadConfigFromPayload(config, item, key)
+        const isHidden = legendProps[key] === true
 
         return (
           <div
             key={item.value}
             className={cn(
-              '[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3'
+              'select-none cursor-pointer flex items-center gap-1.5',
+              isHidden && 'opacity-40'
             )}
+            onMouseEnter={() => {
+              if (!legendProps[key]) {
+                setLegendProps(prev => ({ ...prev, hover: key }))
+              }
+            }}
+            onMouseLeave={() => {
+              setLegendProps(prev => ({ ...prev, hover: null }))
+            }}
+            onClick={e => {
+              e.preventDefault()
+              e.stopPropagation()
+              setLegendProps(prev => ({
+                ...prev,
+                [key]: !prev[key],
+                hover: null
+              }))
+            }}
+            onDoubleClick={e => {
+              e.preventDefault()
+              e.stopPropagation()
+              window.getSelection()?.removeAllRanges()
+
+              const allHidden = Object.keys(legendProps)
+                .filter(k => k !== 'hover')
+                .reduce((acc, k) => {
+                  acc[k] = true
+                  return acc
+                }, {} as Record<string, boolean | null>)
+              allHidden[key] = false
+
+              setLegendProps({ ...allHidden, hover: null })
+            }}
           >
             {itemConfig?.icon && !hideIcon ? (
               <itemConfig.icon />
             ) : (
               <div
                 className="h-3 w-3 shrink-0 rounded-[2px]"
-                style={{
-                  backgroundColor: item.color
-                }}
+                style={{ backgroundColor: item.color }}
               />
             )}
-            {itemConfig?.label}
+            <span>{itemConfig?.label}</span>
           </div>
         )
       })}
