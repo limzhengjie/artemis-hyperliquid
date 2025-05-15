@@ -20,6 +20,8 @@ import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
 import LogoGrid from '@/components/logo-grid'
+import DownloadReport from '@/components/download-report'
+
 import ReportImage from '@/public/report.svg'
 
 export default function Overview() {
@@ -154,8 +156,9 @@ export default function Overview() {
               <Blurb
                 title="Get a Copy of Our Report Here"
                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-                textAlignment="center"
+                textAlignment="left"
               />
+              <DownloadReport />
             </div>
           </div>
         </ContentWrapper>
