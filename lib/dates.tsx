@@ -6,12 +6,12 @@ export const getISOStringWithoutTime = (date: Date) => {
 }
 
 export const getCurrentDate = () => {
-  let date = new Date()
+  const date = new Date()
   return getISOStringWithoutTime(date)
 }
 
 export const getStartDate = (daysBack: number) => {
-  let startDate = new Date()
+  const startDate = new Date()
   startDate.setDate(startDate.getDate() - daysBack)
   return getISOStringWithoutTime(startDate)
 }
