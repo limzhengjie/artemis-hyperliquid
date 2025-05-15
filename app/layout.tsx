@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/contexts/theme-provider'
 import { PostHogProvider } from '@/contexts/posthog-provider'
 
+import { TooltipProvider } from '@/components/ui/tooltip'
 import Header from '@/components/(layout)/header'
 import Footer from '@/components/(layout)/footer'
 
@@ -41,13 +42,15 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <PostHogProvider>
-            <div className="flex flex-col min-h-screen cursor-default">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          </PostHogProvider>
+          <TooltipProvider>
+            <PostHogProvider>
+              <div className="flex flex-col min-h-screen cursor-default">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+            </PostHogProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
