@@ -59,7 +59,7 @@ const StatSummaryTile = ({
 
       return {
         period: label,
-        value: Math.round(pastValue),
+        value: Math.round(mostRecentValue - pastValue),
         pctChange: Math.round(pctChange * 10) / 10,
         isCurrency: true
       }
