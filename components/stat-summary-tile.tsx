@@ -70,12 +70,12 @@ const StatSummaryTile = ({
     <Card className="w-full max-w-[540px] h-[540px] p-0 overflow-hidden gap-0">
       <div className="flex-1 flex flex-col relative">
         <div className="flex-1">
-          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3 text-center flex-col items-center">
+          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3 text-center w-full flex-col items-center">
             <p className="text-sm font-medium text-muted-foreground mb-3">
               {mainStatLabel}
             </p>
             <div className="flex flex-col gap-3">
-              <p className="text-7xl font-bold">
+              <p className="text-5xl lg:text-7xl font-bold">
                 {formatValue(mainStat.value, mainStat.type)}
               </p>
               <div className="flex items-center justify-center gap-1">
@@ -135,7 +135,7 @@ const MiniStatsBlock = ({
   return (
     <Card
       className={cn(
-        'px-6 pb-3 pt-3 flex flex-col gap-2 border-0 border-t border-r border-t-border-border border-r-border-border rounded-none overflow-hidden',
+        'px-2 md:px-4 lg:px-6 pb-3 pt-3 flex flex-col items-start sm:items-center lg:items-start gap-2 border-0 border-t border-r border-t-border-border border-r-border-border rounded-none overflow-hidden',
         isLast && 'border-r-0'
       )}
     >
@@ -152,7 +152,7 @@ const MiniStatsBlock = ({
             strokeWidth={3}
           />
         )}
-        <p className="text-2xl font-bold">
+        <p className="text-xl md:text-2xl font-bold">
           {formatValue(
             value,
             isCurrency ? VALUE_FORMAT.currency : VALUE_FORMAT.number

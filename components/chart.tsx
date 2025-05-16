@@ -269,9 +269,9 @@ const Chart = ({
   }
 
   return (
-    <Card className="w-full gap-4 relative">
+    <Card className="w-full gap-4 p-4 md:p-6 relative">
       <CardHeader>
-        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
       </CardHeader>
       <CardContent className="p-0 flex flex-col gap-4">
         <ChartContainer

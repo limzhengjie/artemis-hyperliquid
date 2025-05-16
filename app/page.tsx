@@ -56,7 +56,7 @@ export default async function Overview() {
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center gap-3">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-3">
             <div className="flex flex-col gap-6">
               <Blurb
                 title="Stablecoins: The Emerging Market Story"
@@ -88,7 +88,7 @@ export default async function Overview() {
           Special Thanks to the Artemis Data Partners
         </p>
       </ContentWrapper>
-      <div className="w-full flex flex-col gap-12 -mt-4 mb-12">
+      <div className="w-full flex flex-col gap-12 -mt-4 mb-6 md:mb-12">
         <LogoMarquee />
       </div>
 
@@ -120,8 +120,14 @@ export default async function Overview() {
       </div>
 
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="Stablecoin Market Cap Trends Upwards While Prices Rebound"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
             <Chart
               title="Stablecoin vs Crypto Performance (Index to 100)"
               data={AVG_RETENTION_RATE_DATA}
@@ -130,14 +136,11 @@ export default async function Overview() {
               xAxisLabel="Months"
             />
           </div>
-          <Blurb
-            title="Stablecoin Market Cap Trends Upwards While Prices Rebound"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-          />
         </div>
       </ContentWrapper>
+
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
             title="Stablecoins are Attractive Globally"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -154,8 +157,14 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="High Retention, Low Volatility: Why Stablecoins Are Built to Stay"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
             <Chart
               title="Avg Retention Rate Across Crypto Categories"
               data={AVG_RETENTION_RATE_DATA}
@@ -164,10 +173,6 @@ export default async function Overview() {
               xAxisLabel="Months"
             />
           </div>
-          <Blurb
-            title="High Retention, Low Volatility: Why Stablecoins Are Built to Stay"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-          />
         </div>
       </ContentWrapper>
 
