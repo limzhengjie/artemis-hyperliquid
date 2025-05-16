@@ -11,7 +11,7 @@ import {
 } from '@/constants/chart'
 
 import { QUOTES } from '@/constants/quotes'
-import { MEMBERS_LOGOS } from '@/constants/members'
+import { DATA_PARTNERS_LOGOS } from '@/constants/data-partners'
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 import { getStablecoinSupplyData } from '@/lib/fetchStablecoinsData'
@@ -85,7 +85,7 @@ export default async function Overview() {
 
       <ContentWrapper>
         <p className="text-center text-muted-foreground">
-          Special thanks to the Artemis Data Consortium Members
+          Special Thanks to the Artemis Data Partners
         </p>
       </ContentWrapper>
       <div className="w-full flex flex-col gap-12 -mt-4 mb-12">
@@ -200,13 +200,13 @@ export default async function Overview() {
 
       <ContentWrapper>
         <div className="flex flex-col items-center justify-center gap-8">
-          <p className="text-4xl font-bold">Stablecoin Data Consortium</p>
+          <p className="text-4xl font-bold">Stablecoin Data Partners</p>
           <p className="text-muted-foreground">
             Join us to define the stablecoin data standard of the future
           </p>
-          <LogoGrid members={MEMBERS_LOGOS} />
+          <LogoGrid dataPartners={DATA_PARTNERS_LOGOS} />
           <Button variant="cta" className="mt-3" asChild>
-            <a href="mailto:team@artemisanalytics.xyz">Join the Consortium</a>
+            <a href="mailto:team@artemisanalytics.xyz">Become a Data Partner</a>
           </Button>
         </div>
       </ContentWrapper>

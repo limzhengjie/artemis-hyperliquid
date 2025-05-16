@@ -1,29 +1,29 @@
 import Image from 'next/image'
 
-import { Member } from '@/constants/members'
+import { DataPartner } from '@/constants/data-partners'
 
 import ArtemisBWLogo from '@/public/artemis-bw.svg'
 
 interface Props {
-  members: Member[]
+  dataPartners: DataPartner[]
 }
 
-const LogoGrid = ({ members }: Props) => {
+const LogoGrid = ({ dataPartners }: Props) => {
   return (
     <div className="relative w-full max-w-[550px] border border-solid border-[var(--color-pluto-purple-100)] rounded-xl px-8 py-10 pb-12">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-        {members.map((member, index) => (
+        {dataPartners.map((dataPartner, index) => (
           <div
-            key={member.name}
+            key={dataPartner.name}
             className={`flex justify-center items-center ${
-              members.length === 18 && index >= 16
+              dataPartners.length === 18 && index >= 16
                 ? 'lg:col-span-1 lg:col-start-' + (index === 16 ? '2' : '3')
                 : ''
             }`}
           >
             <Image
-              src={member.image}
-              alt={member.name}
+              src={dataPartner.image}
+              alt={dataPartner.name}
               width={70}
               height={70}
             />
