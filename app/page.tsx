@@ -176,7 +176,29 @@ export default async function Overview() {
         style={{ background: 'var(--gradient-background-download)' }}
       >
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-8 relative">
+            <div
+              className="absolute left-0 top-1/2 -translate-x-1/2"
+              style={{
+                width: '508px',
+                height: '2px',
+                background:
+                  'linear-gradient(180deg, #5E4EB5 0%, rgba(255, 255, 255, 0) 100%)',
+                transform: 'rotate(90deg)',
+                opacity: 0.1
+              }}
+            />
+            <div
+              className="absolute right-0 top-1/2 translate-x-1/2"
+              style={{
+                width: '508px',
+                height: '2px',
+                background:
+                  'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #5E4EB5 100%)',
+                transform: 'rotate(90deg)',
+                opacity: 0.1
+              }}
+            />
             <Image
               src={ReportImage}
               alt="Report Download"
