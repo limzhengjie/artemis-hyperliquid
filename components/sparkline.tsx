@@ -36,7 +36,7 @@ const Sparkline = ({ data, valueFormat }: Props) => {
         margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
       >
         <ChartTooltip
-          cursor={false}
+          cursor={true}
           content={
             <ChartTooltipContentSparkline
               hideIndicator
