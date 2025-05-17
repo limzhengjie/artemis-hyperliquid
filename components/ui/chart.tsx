@@ -477,29 +477,63 @@ function ChartLegendContent({
                   setLegendProps(prev => ({ ...prev, hover: null }))
                 }}
                 onClick={e => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setLegendProps(prev => ({
-                    ...prev,
-                    [key]: !prev[key],
-                    hover: null
-                  }))
-                }}
-                onDoubleClick={e => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  window.getSelection()?.removeAllRanges()
+                  if (e.detail === 1) {
+                    const clickTimer = setTimeout(() => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      console.log('click')
+                      setLegendProps(prev => ({
+                        ...prev,
+                        [key]: !prev[key],
+                        hover: null
+                      }))
+                    }, 250)
 
-                  const allHidden = Object.keys(legendProps)
-                    .filter(k => k !== 'hover')
-                    .reduce((acc, k) => {
-                      acc[k] = true
-                      return acc
-                    }, {} as Record<string, boolean | null>)
-                  allHidden[key] = false
+                    e.currentTarget.setAttribute(
+                      'data-click-timer',
+                      clickTimer.toString()
+                    )
+                  }
 
-                  setLegendProps({ ...allHidden, hover: null })
+                  if (e.detail === 2) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    console.log('double click')
+                    const timerId =
+                      e.currentTarget.getAttribute('data-click-timer')
+                    if (timerId) {
+                      clearTimeout(parseInt(timerId))
+                      e.currentTarget.removeAttribute('data-click-timer')
+                    }
+
+                    window.getSelection()?.removeAllRanges()
+
+                    const allHidden = Object.keys(legendProps)
+                      .filter(k => k !== 'hover')
+                      .reduce((acc, k) => {
+                        acc[k] = true
+                        return acc
+                      }, {} as Record<string, boolean | null>)
+                    allHidden[key] = false
+
+                    setLegendProps({ ...allHidden, hover: null })
+                  }
                 }}
+                // onDoubleClick={e => {
+                //   e.preventDefault()
+                //   e.stopPropagation()
+                //   window.getSelection()?.removeAllRanges()
+
+                //   const allHidden = Object.keys(legendProps)
+                //     .filter(k => k !== 'hover')
+                //     .reduce((acc, k) => {
+                //       acc[k] = true
+                //       return acc
+                //     }, {} as Record<string, boolean | null>)
+                //   allHidden[key] = false
+
+                //   setLegendProps({ ...allHidden, hover: null })
+                // }}
               >
                 {itemConfig?.icon && !hideIcon ? (
                   <itemConfig.icon />
