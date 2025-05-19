@@ -477,11 +477,11 @@ function ChartLegendContent({
                   setLegendProps(prev => ({ ...prev, hover: null }))
                 }}
                 onClick={e => {
+                  // single click
                   if (e.detail === 1) {
                     const clickTimer = setTimeout(() => {
                       e.preventDefault()
                       e.stopPropagation()
-                      console.log('click')
                       setLegendProps(prev => ({
                         ...prev,
                         [key]: !prev[key],
@@ -495,10 +495,10 @@ function ChartLegendContent({
                     )
                   }
 
+                  // double click
                   if (e.detail === 2) {
                     e.preventDefault()
                     e.stopPropagation()
-                    console.log('double click')
                     const timerId =
                       e.currentTarget.getAttribute('data-click-timer')
                     if (timerId) {
@@ -519,21 +519,6 @@ function ChartLegendContent({
                     setLegendProps({ ...allHidden, hover: null })
                   }
                 }}
-                // onDoubleClick={e => {
-                //   e.preventDefault()
-                //   e.stopPropagation()
-                //   window.getSelection()?.removeAllRanges()
-
-                //   const allHidden = Object.keys(legendProps)
-                //     .filter(k => k !== 'hover')
-                //     .reduce((acc, k) => {
-                //       acc[k] = true
-                //       return acc
-                //     }, {} as Record<string, boolean | null>)
-                //   allHidden[key] = false
-
-                //   setLegendProps({ ...allHidden, hover: null })
-                // }}
               >
                 {itemConfig?.icon && !hideIcon ? (
                   <itemConfig.icon />
