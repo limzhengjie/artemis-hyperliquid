@@ -227,13 +227,13 @@ export default async function Overview() {
 
       <ContentWrapper>
         <div className="flex flex-col items-center justify-center gap-8">
-          <p className="text-4xl font-bold">Stablecoin Data Partners</p>
+          <p className="text-4xl font-bold">Artemis Data Partners</p>
           <p className="text-muted-foreground">
             Join us to define the stablecoin data standard of the future
           </p>
           <LogoGrid dataPartners={DATA_PARTNERS_LOGOS} />
           <Button variant="cta" className="mt-3" asChild>
-            <a href="mailto:team@artemisanalytics.xyz">Become a Data Partner</a>
+            <a href="mailto:team@artemisanalytics.xyz">Join Us</a>
           </Button>
         </div>
       </ContentWrapper>
