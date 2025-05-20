@@ -95,7 +95,7 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
-            title="How Big are Crypto Payments, Really?"
+            title="How Big are Stablecoin Payments, Really?"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
             textAlignment="center"
           />
@@ -129,7 +129,7 @@ export default async function Overview() {
           </div>
           <div className="col-span-2 md:order-1">
             <Chart
-              title="Stablecoin vs Crypto Performance (Index to 100)"
+              title="Stablecoin Performance (Index to 100)"
               data={AVG_RETENTION_RATE_DATA}
               dataConfig={AVG_RETENTION_RATE_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
@@ -166,7 +166,7 @@ export default async function Overview() {
           </div>
           <div className="col-span-2 md:order-1">
             <Chart
-              title="Avg Retention Rate Across Crypto Categories"
+              title="Avg Retention Rate Across Onchain Categories"
               data={AVG_RETENTION_RATE_DATA}
               dataConfig={AVG_RETENTION_RATE_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}

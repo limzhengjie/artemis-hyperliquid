@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   description:
     'Comprehensive stablecoin data analytics, market insights, and deep dives into the stablecoin ecosystem. Track performance, compare metrics, and stay informed with our living dashboard.',
   keywords:
-    'stablecoin, crypto analytics, USDC, USDT, DAI, market data, blockchain, cryptocurrency',
+    'stablecoin, stablecoin analytics, USDC, USDT, DAI, market data, blockchain, payments, stablecoin payments',
   openGraph: {
     title: 'Stablecoin.FYI | Real-time Stablecoin Analytics Dashboard',
     description:
