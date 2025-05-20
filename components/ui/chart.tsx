@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/tooltip'
 
 import { cn } from '@/lib/utils'
-import { VALUE_FORMAT, ValueFormat } from '@/constants/chart'
+import { ChartType, VALUE_FORMAT, ValueFormat } from '@/constants/chart'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
@@ -19,7 +19,7 @@ export type ChartConfig = {
   [k in string]: {
     label?: React.ReactNode
     icon?: React.ComponentType
-    type?: 'area' | 'bar' | 'line'
+    type?: ChartType
     stackId?: string
   } & (
     | { color?: string; theme?: never }
@@ -128,7 +128,8 @@ function ChartTooltipContent({
   valueFormat,
   color,
   nameKey,
-  labelKey
+  labelKey,
+  keyMapping = {}
 }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
   React.ComponentProps<'div'> & {
     hideLabel?: boolean
@@ -136,10 +137,20 @@ function ChartTooltipContent({
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
-    valueFormatter?: (value: number, format: ValueFormat) => string
+    valueFormatter?: (
+      value: number,
+      name: string,
+      format: ValueFormat
+    ) => string
     valueFormat?: ValueFormat
+    keyMapping?: Record<string, string>
   }) {
   const { config } = useChart()
+
+  const reverseKeyMapping: Record<string, string> = {}
+  Object.entries(keyMapping).forEach(([originalKey, percentageKey]) => {
+    reverseKeyMapping[percentageKey] = originalKey
+  })
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payload?.length) {
@@ -186,7 +197,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        'border-[var(--color-background-light-outline)] bg-background grid min-w-[8rem] items-start gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs shadow-xl',
+        'border-[var(--color-background-light-outline)] grid min-w-[8rem] items-start gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs shadow-xl',
         className
       )}
     >
@@ -195,9 +206,16 @@ function ChartTooltipContent({
         {payload
           .sort((a, b) => (b.value as number) - (a.value as number))
           .map((item, index) => {
-            const key = `${nameKey || item.name || item.dataKey || 'value'}`
-            const itemConfig = getPayloadConfigFromPayload(config, item, key)
+            const dataKey = `${nameKey || item.name || item.dataKey || 'value'}`
+            const displayKey = reverseKeyMapping[dataKey] || dataKey
+            const itemConfig = getPayloadConfigFromPayload(
+              config,
+              item,
+              displayKey
+            )
             const indicatorColor = color || item.payload.fill || item.color
+
+            const isPercentage = reverseKeyMapping[dataKey] !== undefined
 
             return (
               <div
@@ -244,7 +262,7 @@ function ChartTooltipContent({
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
                         <span className="text-muted-foreground">
-                          {itemConfig?.label || item.name}
+                          {itemConfig?.label || displayKey}
                         </span>
                       </div>
                       {item.value && (
@@ -252,8 +270,13 @@ function ChartTooltipContent({
                           {valueFormatter
                             ? valueFormatter(
                                 Number(item.value),
-                                valueFormat || VALUE_FORMAT.number
+                                dataKey,
+                                isPercentage
+                                  ? VALUE_FORMAT.percentage
+                                  : valueFormat || VALUE_FORMAT.number
                               )
+                            : isPercentage
+                            ? `${Number(item.value).toFixed(1)}%`
                             : item.value.toLocaleString()}
                         </span>
                       )}
@@ -430,7 +453,8 @@ function ChartLegendContent({
   verticalAlign = 'bottom',
   nameKey,
   legendProps,
-  setLegendProps
+  setLegendProps,
+  keyMapping = {}
 }: React.ComponentProps<'div'> &
   Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
     hideIcon?: boolean
@@ -439,8 +463,14 @@ function ChartLegendContent({
     setLegendProps: React.Dispatch<
       React.SetStateAction<Record<string, boolean | null | string>>
     >
+    keyMapping?: Record<string, string>
   }) {
   const { config } = useChart()
+
+  const reverseKeyMapping: Record<string, string> = {}
+  Object.entries(keyMapping).forEach(([originalKey, percentageKey]) => {
+    reverseKeyMapping[percentageKey] = originalKey
+  })
 
   if (!payload?.length) {
     return null
@@ -455,9 +485,15 @@ function ChartLegendContent({
       )}
     >
       {payload.map(item => {
-        const key = `${nameKey || item.dataKey || 'value'}`
-        const itemConfig = getPayloadConfigFromPayload(config, item, key)
-        const isHidden = legendProps[key] === true
+        const originalKey = `${nameKey || item.dataKey || 'value'}`
+        const displayKey = reverseKeyMapping[originalKey] || originalKey
+        const itemConfig = getPayloadConfigFromPayload(config, item, displayKey)
+
+        // Check if we need to use the original key or the mapped key for legend state
+        const legendKey = Object.keys(keyMapping).includes(displayKey)
+          ? displayKey
+          : originalKey
+        const isHidden = legendProps[legendKey] === true
 
         return (
           <Tooltip key={item.value} delayDuration={800}>
@@ -469,8 +505,8 @@ function ChartLegendContent({
                   isHidden && 'opacity-40'
                 )}
                 onMouseEnter={() => {
-                  if (!legendProps[key]) {
-                    setLegendProps(prev => ({ ...prev, hover: key }))
+                  if (!legendProps[legendKey]) {
+                    setLegendProps(prev => ({ ...prev, hover: legendKey }))
                   }
                 }}
                 onMouseLeave={() => {
@@ -484,7 +520,7 @@ function ChartLegendContent({
                       e.stopPropagation()
                       setLegendProps(prev => ({
                         ...prev,
-                        [key]: !prev[key],
+                        [legendKey]: !prev[legendKey],
                         hover: null
                       }))
                     }, 250)
@@ -514,7 +550,7 @@ function ChartLegendContent({
                         acc[k] = true
                         return acc
                       }, {} as Record<string, boolean | null>)
-                    allHidden[key] = false
+                    allHidden[legendKey] = false
 
                     setLegendProps({ ...allHidden, hover: null })
                   }

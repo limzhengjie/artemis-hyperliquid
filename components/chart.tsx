@@ -76,9 +76,77 @@ const Chart = ({
       )
   )
 
+  const processDataForStacked100 = (originalData: ChartData[]) => {
+    // create a deep copy of the data
+    const processedData = JSON.parse(JSON.stringify(originalData))
+
+    // Find all stackable keys (stacked100 type with same stackId)
+    const stackableKeys: Record<string, string[]> = {}
+    let hasStacked100 = false
+
+    Object.entries(dataConfig).forEach(([key, config]) => {
+      if (
+        (config.type as ChartType) === CHART_TYPES.stacked100 &&
+        config.stackId
+      ) {
+        hasStacked100 = true
+        if (!stackableKeys[config.stackId]) {
+          stackableKeys[config.stackId] = []
+        }
+        stackableKeys[config.stackId].push(key)
+      }
+    })
+
+    // if no stacked100 charts, return original data
+    if (!hasStacked100) return originalData
+
+    // calculate percentages for each stack
+    processedData.forEach((item: ChartData) => {
+      Object.entries(stackableKeys).forEach(([stackId, keys]) => {
+        // calculate total for this stack
+        const total = keys.reduce((sum, key) => {
+          return (
+            sum + (typeof item[key] === 'number' ? (item[key] as number) : 0)
+          )
+        }, 0)
+
+        // Convert each value to percentage and store in a new field
+        if (total > 0) {
+          keys.forEach(key => {
+            if (typeof item[key] === 'number') {
+              // Create a new field for the percentage value that includes the stackId
+              item[`${key}_percentage_${stackId}`] =
+                ((item[key] as number) / total) * 100
+            }
+          })
+        }
+      })
+    })
+    return processedData
+  }
+
+  // process data for stacked100 chart types
+  const chartData = processDataForStacked100(data)
+
+  // create a mapping of original keys to percentage keys for stacked100 charts
+  const keyToPercentageKeyMap: Record<string, string> = {}
+  Object.entries(dataConfig).forEach(([key, config]) => {
+    if (
+      (config.type as ChartType) === CHART_TYPES.stacked100 &&
+      config.stackId
+    ) {
+      keyToPercentageKeyMap[key] = `${key}_percentage_${config.stackId}`
+    }
+  })
+
+  // check if we have any stacked100 chart types
+  const hasStacked100 = Object.values(dataConfig).some(
+    config => (config.type as ChartType) === CHART_TYPES.stacked100
+  )
+
   const renderChart = () => {
     return (
-      <ComposedChart data={data}>
+      <ComposedChart data={chartData}>
         <CartesianGrid
           vertical={false}
           horizontal={true}
@@ -112,6 +180,7 @@ const Chart = ({
           axisLine={false}
           orientation="right"
           tickFormatter={value => formatValue(value, valueFormat)}
+          domain={hasStacked100 ? [0, 100] : ['dataMin', 'dataMax']}
         />
         <ChartTooltip
           cursor={true}
@@ -127,13 +196,26 @@ const Chart = ({
                   })
                 }
               }}
-              valueFormatter={value => formatValue(value, valueFormat)}
+              valueFormatter={(value, name) => {
+                // If this is a percentage key, use percentage format
+                const originalKey = Object.entries(keyToPercentageKeyMap).find(
+                  ([_, percentageKey]) => percentageKey === name
+                )?.[0]
+
+                if (originalKey) {
+                  return formatValue(value, VALUE_FORMAT.percentage)
+                }
+                return formatValue(value, valueFormat)
+              }}
               valueFormat={valueFormat}
               indicator="dot"
+              // Map percentage keys back to original keys for display
+              keyMapping={keyToPercentageKeyMap}
             />
           }
           wrapperStyle={{
             backgroundColor: 'white',
+            borderRadius: '0.5rem',
             opacity: 1,
             zIndex: 9999
           }}
@@ -141,22 +223,37 @@ const Chart = ({
 
         {/* First render all bar charts */}
         {Object.entries(dataConfig).map(([key, config], index, array) => {
-          if ((config.type as ChartType) === CHART_TYPES.bar) {
+          if (
+            (config.type as ChartType) === CHART_TYPES.bar ||
+            (config.type as ChartType) === CHART_TYPES.stacked100
+          ) {
             // Check if this is the last bar element in the dataConfig
             const isLastBarElement = array
               .slice(index + 1)
               .every(
                 ([label, cfg]) =>
-                  (cfg.type as ChartType) !== CHART_TYPES.bar && label
+                  (cfg.type as ChartType) !== CHART_TYPES.bar &&
+                  (cfg.type as ChartType) !== CHART_TYPES.stacked100 &&
+                  label
               )
+
+            // Determine if this is a stacked100 bar
+            const isStacked100 =
+              (config.type as ChartType) === CHART_TYPES.stacked100
+
+            // Use the percentage data for stacked100 bars with stackId
+            const dataKey =
+              isStacked100 && config.stackId
+                ? `${key}_percentage_${config.stackId}`
+                : key
 
             return (
               <Bar
                 key={key}
-                dataKey={key}
+                dataKey={dataKey}
                 fill={`var(--color-${key})`}
                 stackId={config.stackId || undefined}
-                radius={isLastBarElement ? [2, 2, 0, 0] : [0, 0, 0, 0]} // Only round top corners for the last bar
+                radius={isLastBarElement ? [2, 2, 0, 0] : [0, 0, 0, 0]}
                 fillOpacity={Number(
                   String(legendProps.hover) === key ||
                     legendProps.hover === null
@@ -226,6 +323,8 @@ const Chart = ({
             <ChartLegendContent
               legendProps={legendProps}
               setLegendProps={setLegendProps}
+              // Pass the key mapping to the legend content
+              keyMapping={keyToPercentageKeyMap}
             />
           }
           verticalAlign="top"

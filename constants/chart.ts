@@ -3,7 +3,8 @@ import { ChartConfig } from '@/components/ui/chart'
 export const CHART_TYPES = {
   area: 'area',
   bar: 'bar',
-  line: 'line'
+  line: 'line',
+  stacked100: 'stacked100'
 } as const
 
 export type ChartType = (typeof CHART_TYPES)[keyof typeof CHART_TYPES]
@@ -35,22 +36,26 @@ export const AVG_RETENTION_RATE_CONFIG = {
   Card: {
     label: 'Card',
     color: '#8672F9',
-    type: CHART_TYPES.line
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
   },
   DEX: {
     label: 'DEX',
     color: '#70A9FF',
-    type: CHART_TYPES.line
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
   },
   NFT: {
     label: 'NFT',
     color: '#51B495',
-    type: CHART_TYPES.line
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
   },
   Chains: {
     label: 'Chains',
     color: '#F7BD5F',
-    type: CHART_TYPES.line
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
   }
 } satisfies ChartConfig
 
