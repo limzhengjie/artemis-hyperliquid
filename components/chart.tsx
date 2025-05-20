@@ -199,7 +199,7 @@ const Chart = ({
               valueFormatter={(value, name) => {
                 // If this is a percentage key, use percentage format
                 const originalKey = Object.entries(keyToPercentageKeyMap).find(
-                  ([_, percentageKey]) => percentageKey === name
+                  entry => entry[1] === name
                 )?.[0]
 
                 if (originalKey) {
