@@ -38,7 +38,7 @@ const Header = () => {
         <Image
           src={ArtemisStablecoinLogo}
           alt="Artemis Stablecoin Logo"
-          width={120}
+          width={200}
           height={100}
         />
         <nav className="hidden sm:block">
