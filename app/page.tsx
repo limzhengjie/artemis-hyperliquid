@@ -93,7 +93,7 @@ export default async function Overview() {
           Special Thanks to the Artemis Data Partners
         </p>
       </ContentWrapper>
-      <div className="w-full flex flex-col gap-12 -mt-4 mb-6 md:mb-12">
+      <div className="w-full -mt-4 mb-4">
         <LogoMarquee />
       </div>
 
