@@ -10,7 +10,12 @@ import {
 } from '@/components/ui/tooltip'
 
 import { cn } from '@/lib/utils'
-import { ChartType, VALUE_FORMAT, ValueFormat } from '@/constants/chart'
+import {
+  ChartType,
+  CHART_TYPES,
+  VALUE_FORMAT,
+  ValueFormat
+} from '@/constants/chart'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
@@ -146,6 +151,21 @@ function ChartTooltipContent({
     keyMapping?: Record<string, string>
   }) {
   const { config } = useChart()
+
+  const allItemsHaveBarType = Object.values(config).every(
+    item => item.type === CHART_TYPES.bar
+  )
+
+  const allItemsHaveStacked100Type = Object.values(config).every(
+    item => item.type === CHART_TYPES.stacked100
+  )
+
+  const allItemsHaveStackId = Object.values(config).every(
+    item => item.stackId !== undefined
+  )
+
+  const enableTotalValue =
+    allItemsHaveStackId && (allItemsHaveBarType || allItemsHaveStacked100Type)
 
   const reverseKeyMapping: Record<string, string> = {}
   Object.entries(keyMapping).forEach(([originalKey, percentageKey]) => {
@@ -286,6 +306,29 @@ function ChartTooltipContent({
               </div>
             )
           })}
+
+        {/* Add Total row for stacked bar charts */}
+        {enableTotalValue && payload.length > 1 && (
+          <div className="flex w-full items-center justify-between pt-1 mt-1 border-t border-border">
+            <span className="font-medium">Total</span>
+            <span className="ml-3 text-foreground font-mono font-medium tabular-nums">
+              {(() => {
+                const total = payload.reduce(
+                  (sum, item) => sum + (Number(item.value) || 0),
+                  0
+                )
+                if (valueFormatter) {
+                  return valueFormatter(
+                    total,
+                    'total',
+                    valueFormat || VALUE_FORMAT.number
+                  )
+                }
+                return total.toLocaleString()
+              })()}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   )
