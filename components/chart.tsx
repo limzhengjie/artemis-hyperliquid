@@ -209,7 +209,7 @@ const Chart = ({
           )}
         </XAxis>
         <YAxis
-          width={45}
+          width={55}
           tickLine={false}
           axisLine={false}
           orientation={isTimeSeries ? 'right' : 'left'}

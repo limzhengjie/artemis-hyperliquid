@@ -32,7 +32,9 @@ import {
   USE_CASE_BY_CURRENCY_CONFIG,
   B2B_VOLUMES_DATA,
   B2B_VOLUMES_DATA_CONFIG,
-  B2B_PERCENT_OF_CURRENCY_FLOWS_DATA
+  B2B_PERCENT_OF_CURRENCY_FLOWS_DATA,
+  AVG_B2B_TXN_SIZE_BY_CHAIN_DATA,
+  AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG
 } from '@/constants/data/use-case'
 
 const Charts = () => {
@@ -161,6 +163,14 @@ const Charts = () => {
         dataConfig={USE_CASE_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
         isTimeSeries
+        hidePoweredBy
+      />
+      <Chart
+        title="Average B2B Transaction Size by Blockchain"
+        data={AVG_B2B_TXN_SIZE_BY_CHAIN_DATA}
+        dataConfig={AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        hideLegend
         hidePoweredBy
       />
     </div>

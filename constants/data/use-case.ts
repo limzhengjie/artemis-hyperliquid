@@ -70,3 +70,18 @@ export const B2B_PERCENT_OF_CURRENCY_FLOWS_DATA = [
   { date: '2/1/2025', USDT: 84, USDC: 16 },
   { date: '3/1/2025', USDT: 64, USDC: 36 }
 ]
+
+export const AVG_B2B_TXN_SIZE_BY_CHAIN_DATA = [
+  { chain: 'Tron', avg_b2b_txn_size: 219820 },
+  { chain: 'Ethereum', avg_b2b_txn_size: 219228 },
+  { chain: 'BSC', avg_b2b_txn_size: 23395 },
+  { chain: 'Polygon', avg_b2b_txn_size: 8811 }
+]
+
+export const AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG = {
+  avg_b2b_txn_size: {
+    label: 'Avg B2B Txn Size',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
