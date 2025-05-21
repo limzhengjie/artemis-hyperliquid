@@ -29,7 +29,9 @@ import {
   STABLECOIN_VOLUME_BY_CHAIN_DATA,
   STABLECOIN_VOLUME_BY_CHAIN_CONFIG,
   STABLECOIN_VOLUME_BY_CURRENCY_DATA,
-  STABLECOIN_VOLUME_BY_CURRENCY_CONFIG
+  STABLECOIN_VOLUME_BY_CURRENCY_CONFIG,
+  STABLECOIN_FLOWS_BY_COUNTRY_DATA,
+  STABLECOIN_FLOWS_BY_COUNTRY_CONFIG
 } from '@/constants/data/overview'
 
 import ReportImage from '@/public/report.svg'
@@ -167,17 +169,17 @@ export default async function Overview() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-2">
             <Blurb
-              title="High Retention, Low Volatility: Why Stablecoins Are Built to Stay"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+              title="Which Countries Send the Most Stablecoins?"
+              description="Based on the geographic data provided by firms for the study, combined with additional geographic attribution estimates obtained by looking at IP addresses and timezones of on-chain entities as their transactions reach blockchain nodes, we were able to identify countries originating the bulk of stablecoin transactions. The USA, Singapore, Hong Kong, Japan, and the UK were the top stablecoin sending countries."
             />
           </div>
           <div className="col-span-2 md:order-1">
             <Chart
-              title="Avg Retention Rate Across Onchain Categories"
-              data={AVG_RETENTION_RATE_DATA}
-              dataConfig={AVG_RETENTION_RATE_CONFIG}
+              title="Top Stablecoin Flows Originators by Country"
+              data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
+              dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
-              xAxisLabel="Months"
+              hideLegend
             />
           </div>
         </div>

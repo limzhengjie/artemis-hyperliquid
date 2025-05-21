@@ -636,3 +636,33 @@ export const STABLECOIN_VOLUME_BY_CURRENCY_CONFIG = {
     stackId: 'a'
   }
 } satisfies ChartConfig
+
+export const STABLECOIN_FLOWS_BY_COUNTRY_DATA = [
+  { country: 'United States', percent: 18.74 },
+  { country: 'Singapore', percent: 18.44 },
+  { country: 'Hong Kong', percent: 9.79 },
+  { country: 'Japan', percent: 8.04 },
+  { country: 'United Kingdom', percent: 6.8 },
+  { country: 'Germany', percent: 4.52 },
+  { country: 'The Netherlands', percent: 2.54 },
+  { country: 'India', percent: 1.91 },
+  { country: 'Canada', percent: 1.87 },
+  { country: 'France', percent: 1.77 },
+  { country: 'Brazil', percent: 1.24 },
+  { country: 'Australia', percent: 1.21 },
+  { country: 'Spain', percent: 1.21 },
+  { country: 'Poland', percent: 1.2 },
+  { country: 'Taiwan', percent: 1.2 },
+  { country: 'Thailand', percent: 1.01 },
+  { country: 'United Arab Emirates', percent: 0.97 },
+  { country: 'Indonesia', percent: 0.82 },
+  { country: 'Italy', percent: 0.69 }
+]
+
+export const STABLECOIN_FLOWS_BY_COUNTRY_CONFIG = {
+  percent: {
+    label: 'Percent',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
