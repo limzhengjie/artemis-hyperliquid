@@ -12,6 +12,8 @@ const LogoMarquee = () => {
           src={logo.image}
           alt={logo.name}
           style={{ marginRight: '70px' }}
+          width={100}
+          height={100}
         />
       ))}
     </Marquee>
