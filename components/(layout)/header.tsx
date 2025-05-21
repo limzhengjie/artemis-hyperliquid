@@ -35,12 +35,14 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between px-6 py-2 border-b border-[var(--color-moongray-25)]">
       <div className="flex items-center gap-10">
-        <Image
-          src={ArtemisStablecoinLogo}
-          alt="Artemis Stablecoin Logo"
-          width={200}
-          height={100}
-        />
+        <Link href="/">
+          <Image
+            src={ArtemisStablecoinLogo}
+            alt="Artemis Stablecoin Logo"
+            width={200}
+            height={100}
+          />
+        </Link>
         <nav className="hidden sm:block">
           <ul className="flex items-center gap-8">
             {navigation.map(item => (
