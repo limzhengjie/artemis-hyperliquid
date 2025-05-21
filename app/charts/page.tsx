@@ -34,7 +34,9 @@ import {
   B2B_VOLUMES_DATA_CONFIG,
   B2B_PERCENT_OF_CURRENCY_FLOWS_DATA,
   AVG_B2B_TXN_SIZE_BY_CHAIN_DATA,
-  AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG
+  AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG,
+  CRYPTO_CARD_LINKED_VOLUMES_DATA,
+  CRYPTO_CARD_LINKED_VOLUMES_CONFIG
 } from '@/constants/data/use-case'
 
 const Charts = () => {
@@ -170,6 +172,15 @@ const Charts = () => {
         data={AVG_B2B_TXN_SIZE_BY_CHAIN_DATA}
         dataConfig={AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="Crypto Card Linked Volumes"
+        data={CRYPTO_CARD_LINKED_VOLUMES_DATA}
+        dataConfig={CRYPTO_CARD_LINKED_VOLUMES_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
         hideLegend
         hidePoweredBy
       />

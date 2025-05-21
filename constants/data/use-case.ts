@@ -85,3 +85,40 @@ export const AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG = {
     type: CHART_TYPES.bar
   }
 } satisfies ChartConfig
+
+export const CRYPTO_CARD_LINKED_VOLUMES_DATA = [
+  { date: '1/1/2023', card: 231156585.7 },
+  { date: '2/1/2023', card: 233624482.4 },
+  { date: '3/1/2023', card: 244317401.14 },
+  { date: '4/1/2023', card: 244796401.2 },
+  { date: '5/1/2023', card: 257253935.52 },
+  { date: '6/1/2023', card: 264349888.5 },
+  { date: '7/1/2023', card: 293799864.05 },
+  { date: '8/1/2023', card: 284271303.05 },
+  { date: '9/1/2023', card: 299354899.76 },
+  { date: '10/1/2023', card: 427455041.29 },
+  { date: '11/1/2023', card: 466864376.42 },
+  { date: '12/1/2023', card: 504799873.33 },
+  { date: '1/1/2024', card: 533158276.24 },
+  { date: '2/1/2024', card: 543389819.14 },
+  { date: '3/1/2024', card: 543689585.61 },
+  { date: '4/1/2024', card: 588099545.4 },
+  { date: '5/1/2024', card: 618837410.43 },
+  { date: '6/1/2024', card: 618245464.56 },
+  { date: '7/1/2024', card: 729579819.14 },
+  { date: '8/1/2024', card: 751460234.08 },
+  { date: '9/1/2024', card: 770379157.85 },
+  { date: '10/1/2024', card: 909796401.5 },
+  { date: '11/1/2024', card: 957405944.15 },
+  { date: '12/1/2024', card: 969935930.3 },
+  { date: '1/1/2025', card: 1044194323.78 },
+  { date: '2/1/2025', card: 1102790316.47 }
+]
+
+export const CRYPTO_CARD_LINKED_VOLUMES_CONFIG = {
+  card: {
+    label: 'Volume',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
