@@ -265,7 +265,7 @@ function ChartTooltipContent({
                           {itemConfig?.label || displayKey}
                         </span>
                       </div>
-                      {item.value && (
+                      {item.value !== undefined && (
                         <span className="ml-3 text-foreground font-mono font-medium tabular-nums">
                           {valueFormatter
                             ? valueFormatter(
@@ -423,7 +423,7 @@ function ChartTooltipContentSparkline({
                       nestLabel ? 'items-end' : 'items-center'
                     )}
                   >
-                    {item.value && (
+                    {item.value !== undefined && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
                         {valueFormatter
                           ? valueFormatter(
