@@ -10,7 +10,7 @@ const Blurb = ({ title, description, textAlignment = 'left' }: Props) => {
   return (
     <div
       className={cn(
-        'w-full flex flex-col gap-4 md:gap-8 max-w-3xl',
+        'w-full flex flex-col gap-4 md:gap-8 max-w-4xl',
         textAlignment === 'center' && 'items-center',
         textAlignment === 'right' && 'items-end'
       )}
