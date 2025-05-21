@@ -40,12 +40,6 @@ export const REGION_BY_CHAIN_CONFIG = {
     color: '#F5AC37',
     type: CHART_TYPES.stacked100,
     stackId: 'a'
-  },
-  Solana: {
-    label: 'Solana',
-    color: '#45CD85',
-    type: CHART_TYPES.stacked100,
-    stackId: 'a'
   }
 } satisfies ChartConfig
 
@@ -59,21 +53,10 @@ export const REGION_BY_CHAIN_CONFIG_WITH_XRP = {
   }
 } satisfies ChartConfig
 
-export const REGION_BY_CHAIN_CONFIG_WITH_XRP_AND_OTHERS = {
-  ...REGION_BY_CHAIN_CONFIG_WITH_XRP,
-  Others: {
-    label: 'Others',
-    color: '#59557B',
-    type: CHART_TYPES.stacked100,
-    stackId: 'a'
-  }
-} satisfies ChartConfig
-
 export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Argentina',
     Polygon: 5.97983168,
-    Solana: 0.0000235,
     Tron: 35.9339466,
     BSC: 0.45658061,
     Ethereum: 57.622788
@@ -81,7 +64,6 @@ export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Brazil',
     Polygon: 0.03356166,
-    Solana: 0.00245419,
     Tron: 80.69763,
     BSC: 18.1887142,
     Ethereum: 1.07511615
@@ -89,7 +71,6 @@ export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Chile',
     Polygon: 0.00846813,
-    Solana: 0.02953321,
     Tron: 46.0406604,
     BSC: 33.4374595,
     Ethereum: 20.4818464
@@ -97,7 +78,6 @@ export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Colombia',
     Polygon: 0.00776979,
-    Solana: 0.0000305,
     Tron: 95.3844043,
     BSC: 0.04617211,
     Ethereum: 4.56131395
@@ -105,7 +85,6 @@ export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Ecuador',
     Polygon: 0.07974209,
-    Solana: 0.00814133,
     Tron: 78.1930902,
     BSC: 12.2299558,
     Ethereum: 9.47678751
@@ -113,7 +92,6 @@ export const LATIN_AMERICA_BY_CHAIN_DATA = [
   {
     country: 'Peru',
     Polygon: 0.70973709,
-    Solana: 0.0002531,
     Tron: 30.8406346,
     BSC: 1.93191281,
     Ethereum: 66.516684
@@ -157,7 +135,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Egypt',
     Polygon: 0.39599143,
-    Solana: 0,
     Tron: 75.5267357,
     BSC: 13.9086563,
     Ethereum: 10.1660881
@@ -165,7 +142,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Ethiopia',
     Polygon: 0,
-    Solana: 0,
     Tron: 81.576233,
     BSC: 3.61076208,
     Ethereum: 14.7872127
@@ -173,7 +149,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Ghana',
     Polygon: 0.00360745,
-    Solana: 0,
     Tron: 74.6530909,
     BSC: 1.86785206,
     Ethereum: 23.3816399
@@ -181,7 +156,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Kenya',
     Polygon: 0.00680641,
-    Solana: 0,
     Tron: 44.7975747,
     BSC: 1.07639575,
     Ethereum: 54.1181618
@@ -189,7 +163,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Mauritius',
     Polygon: 0.00038395,
-    Solana: 0,
     Tron: 79.2534849,
     BSC: 0.01771039,
     Ethereum: 20.7283923
@@ -197,7 +170,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Morocco',
     Polygon: 0.09331289,
-    Solana: 0,
     Tron: 82.2701034,
     BSC: 8.84628373,
     Ethereum: 8.78530031
@@ -205,7 +177,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Nigeria',
     Polygon: 0.00132921,
-    Solana: 0.00000108,
     Tron: 6.12483108,
     BSC: 0.07765371,
     Ethereum: 93.7939881
@@ -213,7 +184,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Seychelles',
     Polygon: 0.00078387,
-    Solana: 0,
     Tron: 76.6674942,
     BSC: 5.33354006,
     Ethereum: 17.9978024
@@ -221,7 +191,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'South Africa',
     Polygon: 0.14594021,
-    Solana: 0.0003774,
     Tron: 32.4088974,
     BSC: 9.04902271,
     Ethereum: 58.2321797
@@ -229,7 +198,6 @@ export const AFRICA_BY_CHAIN_DATA = [
   {
     country: 'Uganda',
     Polygon: 0.03682915,
-    Solana: 0,
     Tron: 26.9816982,
     BSC: 2.2992607,
     Ethereum: 70.6777248
@@ -295,7 +263,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 6.71997521,
     Ethereum: 0,
     Polygon: 0,
-    Solana: 0,
     Tron: 89.9529811
   },
   {
@@ -303,7 +270,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 0.26114366,
     Ethereum: 29.4542219,
     Polygon: 0.01151601,
-    Solana: 0.00968084,
     Tron: 69.4429391
   },
   {
@@ -311,7 +277,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 6.36463054,
     Ethereum: 5.44335515,
     Polygon: 0.01259241,
-    Solana: 0,
     Tron: 88.0198488
   },
   {
@@ -319,7 +284,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 7.09941584,
     Ethereum: 49.2260344,
     Polygon: 0.25648418,
-    Solana: 0,
     Tron: 39.6514739
   },
   {
@@ -327,7 +291,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 0.50189263,
     Ethereum: 35.6500762,
     Polygon: 0.00764546,
-    Solana: 0,
     Tron: 63.8361505
   },
   {
@@ -335,7 +298,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 0.00479883,
     Ethereum: 20.3696248,
     Polygon: 0,
-    Solana: 0,
     Tron: 79.6255763
   },
   {
@@ -343,7 +305,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 0.00080744,
     Ethereum: 4.94646262,
     Polygon: 0.0000841,
-    Solana: 0,
     Tron: 95.0525891
   },
   {
@@ -351,7 +312,6 @@ export const AMERICAS_BY_CHAIN_DATA = [
     BSC: 0.23210207,
     Ethereum: 36.6310878,
     Polygon: 0.54949396,
-    Solana: 0.0000628,
     Tron: 62.4078213
   }
 ]
@@ -405,7 +365,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 2.3833986,
     Ethereum: 5.44971877,
     Polygon: 0.45083498,
-    Solana: 0,
     Tron: 91.7160057,
     XRP: 0
   },
@@ -414,7 +373,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 0.1761855,
     Ethereum: 75.7802045,
     Polygon: 0.03615715,
-    Solana: 0,
     Tron: 23.9976307,
     XRP: 0.0000181
   },
@@ -423,7 +381,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 1.63653435,
     Ethereum: 32.2001153,
     Polygon: 45.6940419,
-    Solana: 0.0000929,
     Tron: 20.4675972,
     XRP: 0.00046977
   },
@@ -432,7 +389,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 21.7660454,
     Ethereum: 3.036856,
     Polygon: 0.04950358,
-    Solana: 0.0001,
     Tron: 75.1344458,
     XRP: 0.01089954
   },
@@ -441,7 +397,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 0.0998007,
     Ethereum: 96.7556935,
     Polygon: 0.0002178,
-    Solana: 0,
     Tron: 3.12973009,
     XRP: 0
   },
@@ -450,7 +405,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 7.94025517,
     Ethereum: 44.5733971,
     Polygon: 0.34077787,
-    Solana: 0.04924481,
     Tron: 32.2506978,
     XRP: 6.63718474
   },
@@ -459,7 +413,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 13.4295262,
     Ethereum: 5.16690145,
     Polygon: 0.26371629,
-    Solana: 0.00045972,
     Tron: 81.1177376,
     XRP: 0.00017865
   },
@@ -468,7 +421,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 1.62449582,
     Ethereum: 10.2579611,
     Polygon: 0.13959641,
-    Solana: 0,
     Tron: 87.6885599,
     XRP: 0.00011142
   },
@@ -477,7 +429,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 1.06837887,
     Ethereum: 64.3663828,
     Polygon: 0.04866164,
-    Solana: 0.00345696,
     Tron: 33.4909401,
     XRP: 0.0204521
   },
@@ -486,7 +437,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 14.8302498,
     Ethereum: 5.31520751,
     Polygon: 0.24290675,
-    Solana: 0.00040899,
     Tron: 79.4165579,
     XRP: 0.11116629
   },
@@ -495,7 +445,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 13.9395844,
     Ethereum: 15.0025027,
     Polygon: 0.29345496,
-    Solana: 0.00029469,
     Tron: 70.667332,
     XRP: 0.01083968
   },
@@ -504,7 +453,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 2.85141274,
     Ethereum: 3.89565558,
     Polygon: 0.29714911,
-    Solana: 0,
     Tron: 92.9135041,
     XRP: 0.00311622
   },
@@ -513,7 +461,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 0.61527309,
     Ethereum: 42.2297598,
     Polygon: 0.00969469,
-    Solana: 0.00027805,
     Tron: 57.1440624,
     XRP: 0.000042
   },
@@ -522,7 +469,6 @@ export const ASIA_BY_CHAIN_DATA = [
     BSC: 32.1628022,
     Ethereum: 3.35932688,
     Polygon: 0.49313224,
-    Solana: 0,
     Tron: 63.9847132,
     XRP: 0
   }
@@ -607,100 +553,80 @@ export const EUROPE_BY_CHAIN_DATA = [
     BSC: 6.60773604,
     Ethereum: 12.0038118,
     Polygon: 0.52240079,
-    Solana: 0,
     Tron: 80.859267,
-    XRP: 0,
-    Others: 0.00678438
+    XRP: 0
   },
   {
     country: 'Finland',
     BSC: 17.4218786,
     Ethereum: 17.0824107,
     Polygon: 0.87706561,
-    Solana: 0.0001509,
     Tron: 64.6039328,
-    XRP: 0,
-    Others: 0.01456138
+    XRP: 0
   },
   {
     country: 'France',
     BSC: 4.49957644,
     Ethereum: 12.7402227,
     Polygon: 1.14370968,
-    Solana: 0.01688023,
     Tron: 81.3126354,
-    XRP: 0.01812881,
-    Others: 0.26884674
+    XRP: 0.01812881
   },
   {
     country: 'Germany',
     BSC: 2.85918573,
     Ethereum: 29.1205895,
     Polygon: 0.24847758,
-    Solana: 0.00757438,
     Tron: 67.6986516,
-    XRP: 0.00048979,
-    Others: 0.06503149
+    XRP: 0.00048979
   },
   {
     country: 'Ireland',
     BSC: 2.37143594,
     Ethereum: 27.6578138,
     Polygon: 0.23512455,
-    Solana: 0.00161232,
     Tron: 69.5059987,
-    XRP: 0.00424637,
-    Others: 0.224
+    XRP: 0.00424637
   },
   {
     country: 'Netherlands',
     BSC: 5.38240766,
     Ethereum: 34.3053643,
     Polygon: 0.01434099,
-    Solana: 0.20782386,
     Tron: 59.915312,
-    XRP: 0.02070103,
-    Others: 0.15405012
+    XRP: 0.02070103
   },
   {
     country: 'Portugal',
     BSC: 2.77826535,
     Ethereum: 26.013178,
     Polygon: 0.37524841,
-    Solana: 0,
     Tron: 70.8199992,
-    XRP: 0.01247178,
-    Others: 0.00083727
+    XRP: 0.01247178
   },
   {
     country: 'Spain',
     BSC: 2.13846565,
     Ethereum: 71.3229189,
     Polygon: 0.04063197,
-    Solana: 0.00011587,
     Tron: 26.4922112,
-    XRP: 0.00557901,
-    Others: 0.000774
+    XRP: 0.00557901
   },
   {
     country: 'Switzerland',
     BSC: 1.73489574,
     Ethereum: 33.4539878,
     Polygon: 0.06161065,
-    Solana: 0.00681936,
     Tron: 64.7313488,
-    XRP: 0.00093677,
-    Others: 0.01040097
+    XRP: 0.00093677
   },
   {
     country: 'United Kingdom',
     BSC: 3.72273769,
     Ethereum: 23.2909741,
     Polygon: 0.65820324,
-    Solana: 0.15141403,
     Tron: 71.7581974,
-    XRP: 0.1989903,
-    Others: 0.219
+    XRP: 0.1989903
   }
 ]
 

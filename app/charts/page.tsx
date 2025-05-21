@@ -16,7 +16,6 @@ import {
   REGION_BY_CURRENCY_CONFIG,
   REGION_BY_CHAIN_CONFIG,
   REGION_BY_CHAIN_CONFIG_WITH_XRP,
-  REGION_BY_CHAIN_CONFIG_WITH_XRP_AND_OTHERS,
   LATIN_AMERICA_BY_CHAIN_DATA,
   LATIN_AMERICA_BY_CURRENCY_DATA,
   AFRICA_BY_CHAIN_DATA,
@@ -28,6 +27,13 @@ import {
   EUROPE_BY_CHAIN_DATA,
   EUROPE_BY_CURRENCY_DATA
 } from '@/constants/data/regions'
+
+import {
+  USE_CASE_BY_CURRENCY_CONFIG,
+  B2B_VOLUMES_DATA,
+  B2B_VOLUMES_DATA_CONFIG,
+  B2B_PERCENT_OF_CURRENCY_FLOWS_DATA
+} from '@/constants/data/use-case'
 
 const Charts = () => {
   return (
@@ -111,6 +117,20 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
+        title="Stablecoin Volume by Blockchain in Europe"
+        data={EUROPE_BY_CHAIN_DATA}
+        dataConfig={REGION_BY_CHAIN_CONFIG}
+        valueFormat={VALUE_FORMAT.percentage}
+        hidePoweredBy
+      />
+      <Chart
+        title="Stablecoin Volume by Currency in Europe"
+        data={EUROPE_BY_CURRENCY_DATA}
+        dataConfig={REGION_BY_CURRENCY_CONFIG}
+        valueFormat={VALUE_FORMAT.percentage}
+        hidePoweredBy
+      />
+      <Chart
         title="Stablecoin Volume by Blockchain in Asia"
         data={ASIA_BY_CHAIN_DATA}
         dataConfig={REGION_BY_CHAIN_CONFIG_WITH_XRP}
@@ -124,22 +144,25 @@ const Charts = () => {
         valueFormat={VALUE_FORMAT.percentage}
         hidePoweredBy
       />
-      <Chart
-        title="Stablecoin Volume by Blockchain in Europe"
-        data={EUROPE_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG_WITH_XRP_AND_OTHERS}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Currency in Europe"
-        data={EUROPE_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
 
-      {/* <h1 className="text-2xl font-bold">Use Case Breakdowns</h1> */}
+      <h1 className="text-2xl font-bold">Use Case Breakdowns</h1>
+      <Chart
+        title="B2B Stablecoin Volumes"
+        data={B2B_VOLUMES_DATA}
+        dataConfig={B2B_VOLUMES_DATA_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="B2B Percent of Currency Flows"
+        data={B2B_PERCENT_OF_CURRENCY_FLOWS_DATA}
+        dataConfig={USE_CASE_BY_CURRENCY_CONFIG}
+        valueFormat={VALUE_FORMAT.percentage}
+        isTimeSeries
+        hidePoweredBy
+      />
     </div>
   )
 }
