@@ -27,7 +27,9 @@ import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
   STABLECOIN_ACTIVITY_BY_TYPE_CONFIG,
   STABLECOIN_VOLUME_BY_CHAIN_DATA,
-  STABLECOIN_VOLUME_BY_CHAIN_CONFIG
+  STABLECOIN_VOLUME_BY_CHAIN_CONFIG,
+  STABLECOIN_VOLUME_BY_CURRENCY_DATA,
+  STABLECOIN_VOLUME_BY_CURRENCY_CONFIG
 } from '@/constants/data/overview'
 
 import ReportImage from '@/public/report.svg'
@@ -147,16 +149,16 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
-            title="Stablecoins are Attractive Globally"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            title="The Most Used Stablecoins for Global Transactions"
+            description="Tether's USDT was by far the most popular stablecoin used to settle flows for firms in the study. We explore the breakdown of USDT versus Circle's USDC on a country-by-country basis later in the report."
           />
           <div className="col-span-2">
             <Chart
-              title="Adjusted Number of Transactions by Region"
-              data={AVG_RETENTION_RATE_DATA}
-              dataConfig={AVG_RETENTION_RATE_CONFIG}
+              title="Stablecoin Volume by Currency"
+              data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
+              dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
-              xAxisLabel="Months"
+              isTimeSeries
             />
           </div>
         </div>

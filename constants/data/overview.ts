@@ -488,3 +488,151 @@ export const STABLECOIN_VOLUME_BY_CHAIN_CONFIG = {
     stackId: 'a'
   }
 } satisfies ChartConfig
+
+export const STABLECOIN_VOLUME_BY_CURRENCY_DATA = [
+  {
+    date: '1/1/2023',
+    USDT: 95.23,
+    USDC: 4.77
+  },
+  {
+    date: '2/1/2023',
+    USDT: 93.26,
+    USDC: 6.74
+  },
+  {
+    date: '3/1/2023',
+    USDT: 93.9,
+    USDC: 6.1
+  },
+  {
+    date: '4/1/2023',
+    USDT: 87.38,
+    USDC: 12.62
+  },
+  {
+    date: '5/1/2023',
+    USDT: 79.37,
+    USDC: 20.63
+  },
+  {
+    date: '6/1/2023',
+    USDT: 95.9,
+    USDC: 4.1
+  },
+  {
+    date: '7/1/2023',
+    USDT: 86.37,
+    USDC: 13.63
+  },
+  {
+    date: '8/1/2023',
+    USDT: 92.43,
+    USDC: 7.57
+  },
+  {
+    date: '9/1/2023',
+    USDT: 76.36,
+    USDC: 23.64
+  },
+  {
+    date: '10/1/2023',
+    USDT: 93.42,
+    USDC: 6.58
+  },
+  {
+    date: '11/1/2023',
+    USDT: 87.77,
+    USDC: 12.23
+  },
+  {
+    date: '12/1/2023',
+    USDT: 94.65,
+    USDC: 5.35
+  },
+  {
+    date: '1/1/2024',
+    USDT: 71.54,
+    USDC: 28.46
+  },
+  {
+    date: '2/1/2024',
+    USDT: 83.04,
+    USDC: 16.96
+  },
+  {
+    date: '3/1/2024',
+    USDT: 62.04,
+    USDC: 37.96
+  },
+  {
+    date: '4/1/2024',
+    USDT: 79.26,
+    USDC: 20.74
+  },
+  {
+    date: '5/1/2024',
+    USDT: 84.85,
+    USDC: 15.15
+  },
+  {
+    date: '6/1/2024',
+    USDT: 70.13,
+    USDC: 29.87
+  },
+  {
+    date: '7/1/2024',
+    USDT: 76.65,
+    USDC: 23.35
+  },
+  {
+    date: '8/1/2024',
+    USDT: 81.01,
+    USDC: 18.99
+  },
+  {
+    date: '9/1/2024',
+    USDT: 76.42,
+    USDC: 23.58
+  },
+  {
+    date: '10/1/2024',
+    USDT: 73.15,
+    USDC: 26.85
+  },
+  {
+    date: '11/1/2024',
+    USDT: 76.37,
+    USDC: 23.63
+  },
+  {
+    date: '12/1/2024',
+    USDT: 74.8,
+    USDC: 25.2
+  },
+  {
+    date: '1/1/2025',
+    USDT: 90.82,
+    USDC: 9.18
+  },
+  {
+    date: '2/1/2025',
+    USDT: 86.11,
+    USDC: 13.89
+  }
+]
+
+export const STABLECOIN_VOLUME_BY_CURRENCY_CONFIG = {
+  USDT: {
+    label: 'USDT',
+    color: '#26A17B',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  },
+  USDC: {
+    label: 'USDC',
+    color: '#2775CA',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  }
+} satisfies ChartConfig
