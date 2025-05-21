@@ -26,9 +26,9 @@ const Header = () => {
       active: isActive('/')
     },
     {
-      label: 'Market Map',
-      href: '/market-map',
-      active: isActive('/market-map')
+      label: 'Regions',
+      href: '/regions',
+      active: isActive('/regions')
     }
   ]
 
