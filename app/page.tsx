@@ -2,11 +2,7 @@ import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
-import {
-  AVG_RETENTION_RATE_DATA,
-  AVG_RETENTION_RATE_CONFIG,
-  VALUE_FORMAT
-} from '@/constants/chart'
+import { VALUE_FORMAT } from '@/constants/chart'
 
 import { QUOTES } from '@/constants/quotes'
 import { DATA_PARTNERS_LOGOS } from '@/constants/data-partners'
