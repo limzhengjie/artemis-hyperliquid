@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 
@@ -237,9 +238,14 @@ export default async function Overview() {
             Join us to define the stablecoin data standard of the future
           </p>
           <LogoGrid dataPartners={DATA_PARTNERS_LOGOS} />
-          <Button variant="cta" className="mt-3" asChild>
-            <a href="mailto:team@artemisanalytics.xyz">Join Us</a>
-          </Button>
+          <Link
+            href="https://ry0v9n8oa4l.typeform.com/to/pibk76PA"
+            target="_blank"
+          >
+            <Button variant="cta" className="mt-3">
+              Join Us
+            </Button>
+          </Link>
         </div>
       </ContentWrapper>
     </div>

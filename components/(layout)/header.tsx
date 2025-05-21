@@ -62,10 +62,15 @@ const Header = () => {
         </nav>
       </div>
       <div className="hidden sm:flex items-center gap-2">
-        <Button variant="outline" className="flex items-center gap-1">
-          <DatabaseIcon />
-          <span>Need Stablecoin Data?</span>
-        </Button>
+        <Link
+          href="https://ry0v9n8oa4l.typeform.com/to/pn9GQfzu"
+          target="_blank"
+        >
+          <Button variant="outline" className="flex items-center gap-1">
+            <DatabaseIcon />
+            <span>Need Stablecoin Data?</span>
+          </Button>
+        </Link>
         <Button
           variant="cta"
           asChild
