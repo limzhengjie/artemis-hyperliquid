@@ -244,3 +244,247 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_CONFIG = {
     stackId: 'a'
   }
 } satisfies ChartConfig
+
+export const STABLECOIN_VOLUME_BY_CHAIN_DATA = [
+  {
+    date: '1/1/2023',
+    Solana: 0.0,
+    Tron: 60.73,
+    BSC: 0.0,
+    Ethereum: 39.27,
+    Polygon: 0.0
+  },
+  {
+    date: '2/1/2023',
+    Solana: 0.0,
+    Tron: 62.1,
+    BSC: 0.0,
+    Ethereum: 37.9,
+    Polygon: 0.0
+  },
+  {
+    date: '3/1/2023',
+    Solana: 0.0,
+    Tron: 61.11,
+    BSC: 0.0,
+    Ethereum: 38.89,
+    Polygon: 0.0
+  },
+  {
+    date: '4/1/2023',
+    Solana: 0.0,
+    Tron: 54.21,
+    BSC: 0.0,
+    Ethereum: 45.79,
+    Polygon: 0.0
+  },
+  {
+    date: '5/1/2023',
+    Solana: 0.0,
+    Tron: 46.99,
+    BSC: 0.0,
+    Ethereum: 53.01,
+    Polygon: 0.0
+  },
+  {
+    date: '6/1/2023',
+    Solana: 0.0,
+    Tron: 75.4,
+    BSC: 0.0,
+    Ethereum: 24.6,
+    Polygon: 0.0
+  },
+  {
+    date: '7/1/2023',
+    Solana: 0.0,
+    Tron: 35.09,
+    BSC: 0.0,
+    Ethereum: 64.91,
+    Polygon: 0.0
+  },
+  {
+    date: '8/1/2023',
+    Solana: 0.0,
+    Tron: 37.44,
+    BSC: 0.0,
+    Ethereum: 62.56,
+    Polygon: 0.0
+  },
+  {
+    date: '9/1/2023',
+    Solana: 0.0,
+    Tron: 32.57,
+    BSC: 0.0,
+    Ethereum: 67.42,
+    Polygon: 0.0
+  },
+  {
+    date: '10/1/2023',
+    Solana: 0.0,
+    Tron: 45.06,
+    BSC: 0.0,
+    Ethereum: 54.94,
+    Polygon: 0.0
+  },
+  {
+    date: '11/1/2023',
+    Solana: 0.0,
+    Tron: 38.39,
+    BSC: 0.0,
+    Ethereum: 61.61,
+    Polygon: 0.0
+  },
+  {
+    date: '12/1/2023',
+    Solana: 0.0,
+    Tron: 51.13,
+    BSC: 0.0,
+    Ethereum: 48.87,
+    Polygon: 0.0
+  },
+  {
+    date: '1/1/2024',
+    Solana: 0.0,
+    Tron: 43.75,
+    BSC: 1.15,
+    Ethereum: 54.93,
+    Polygon: 0.17
+  },
+  {
+    date: '2/1/2024',
+    Solana: 0.0,
+    Tron: 56.06,
+    BSC: 1.18,
+    Ethereum: 42.58,
+    Polygon: 0.18
+  },
+  {
+    date: '3/1/2024',
+    Solana: 0.0,
+    Tron: 49.32,
+    BSC: 1.23,
+    Ethereum: 49.12,
+    Polygon: 0.33
+  },
+  {
+    date: '4/1/2024',
+    Solana: 0.0,
+    Tron: 61.64,
+    BSC: 0.65,
+    Ethereum: 37.38,
+    Polygon: 0.33
+  },
+  {
+    date: '5/1/2024',
+    Solana: 0.0,
+    Tron: 68.89,
+    BSC: 0.48,
+    Ethereum: 30.32,
+    Polygon: 0.31
+  },
+  {
+    date: '6/1/2024',
+    Solana: 0.0,
+    Tron: 57.13,
+    BSC: 0.52,
+    Ethereum: 42.04,
+    Polygon: 0.31
+  },
+  {
+    date: '7/1/2024',
+    Solana: 2.97,
+    Tron: 62.04,
+    BSC: 0.66,
+    Ethereum: 30.86,
+    Polygon: 3.46
+  },
+  {
+    date: '8/1/2024',
+    Solana: 3.48,
+    Tron: 66.31,
+    BSC: 0.67,
+    Ethereum: 28.12,
+    Polygon: 1.43
+  },
+  {
+    date: '9/1/2024',
+    Solana: 1.83,
+    Tron: 63.53,
+    BSC: 1.15,
+    Ethereum: 32.15,
+    Polygon: 1.35
+  },
+  {
+    date: '10/1/2024',
+    Solana: 2.11,
+    Tron: 58.62,
+    BSC: 1.72,
+    Ethereum: 34.62,
+    Polygon: 2.94
+  },
+  {
+    date: '11/1/2024',
+    Solana: 2.83,
+    Tron: 59.07,
+    BSC: 2.5,
+    Ethereum: 32.74,
+    Polygon: 2.86
+  },
+  {
+    date: '12/1/2024',
+    Solana: 4.09,
+    Tron: 48.17,
+    BSC: 2.59,
+    Ethereum: 41.73,
+    Polygon: 3.41
+  },
+  {
+    date: '1/1/2025',
+    Solana: 0.0,
+    Tron: 56.26,
+    BSC: 4.95,
+    Ethereum: 35.82,
+    Polygon: 2.97
+  },
+  {
+    date: '2/1/2025',
+    Solana: 0.0,
+    Tron: 60.61,
+    BSC: 2.66,
+    Ethereum: 32.91,
+    Polygon: 3.82
+  }
+]
+
+export const STABLECOIN_VOLUME_BY_CHAIN_CONFIG = {
+  Solana: {
+    label: 'Solana',
+    color: '#14F195',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  },
+  Tron: {
+    label: 'Tron',
+    color: '#FF0013',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  },
+  BSC: {
+    label: 'BSC',
+    color: '#F0B90B',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  },
+  Ethereum: {
+    label: 'Ethereum',
+    color: '#627EEA',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  },
+  Polygon: {
+    label: 'Polygon',
+    color: '#8247E5',
+    type: CHART_TYPES.stacked100,
+    stackId: 'a'
+  }
+} satisfies ChartConfig

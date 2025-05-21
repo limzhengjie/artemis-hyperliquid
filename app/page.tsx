@@ -25,7 +25,9 @@ import DownloadReport from '@/components/download-report'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
-  STABLECOIN_ACTIVITY_BY_TYPE_CONFIG
+  STABLECOIN_ACTIVITY_BY_TYPE_CONFIG,
+  STABLECOIN_VOLUME_BY_CHAIN_DATA,
+  STABLECOIN_VOLUME_BY_CHAIN_CONFIG
 } from '@/constants/data/overview'
 
 import ReportImage from '@/public/report.svg'
@@ -126,17 +128,17 @@ export default async function Overview() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-2">
             <Blurb
-              title="Stablecoin Market Cap Trends Upwards While Prices Rebound"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+              title="Top Blockchains Used for Stablecoin Transactions in 2024"
+              description="The most popular blockchains employed to settle customer flows, as a share of value sent, were Tron, followed by Ethereum, Polygon (Ethereum L2), and Binance Smart Chain. This mirrors survey findings from our 2024 report which found that users preferentially used those same five blockchains, albeit with Ethereum being the most popular network."
             />
           </div>
           <div className="col-span-2 md:order-1">
             <Chart
-              title="Stablecoin Performance (Index to 100)"
-              data={AVG_RETENTION_RATE_DATA}
-              dataConfig={AVG_RETENTION_RATE_CONFIG}
+              title="Stablecoin Volume by Blockchain"
+              data={STABLECOIN_VOLUME_BY_CHAIN_DATA}
+              dataConfig={STABLECOIN_VOLUME_BY_CHAIN_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
-              xAxisLabel="Months"
+              isTimeSeries
             />
           </div>
         </div>

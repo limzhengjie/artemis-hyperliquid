@@ -17,7 +17,7 @@ const Blurb = ({ title, description, textAlignment = 'left' }: Props) => {
     >
       <h3
         className={cn(
-          'text-foreground font-semibold text-[24px] md:text-[40px] leading-[24px] md:leading-[40px]',
+          'text-foreground font-semibold text-[24px] md:text-[32px] leading-[24px] md:leading-[32px]',
           textAlignment === 'center' && 'text-center',
           textAlignment === 'right' && 'text-right'
         )}
