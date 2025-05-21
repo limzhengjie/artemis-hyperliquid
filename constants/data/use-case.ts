@@ -80,7 +80,7 @@ export const AVG_B2B_TXN_SIZE_BY_CHAIN_DATA = [
 
 export const AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG = {
   avg_b2b_txn_size: {
-    label: 'Avg B2B Txn Size',
+    label: 'Avg Transaction Size',
     color: '#8672F9',
     type: CHART_TYPES.bar
   }
@@ -118,6 +118,22 @@ export const CRYPTO_CARD_LINKED_VOLUMES_DATA = [
 export const CRYPTO_CARD_LINKED_VOLUMES_CONFIG = {
   card: {
     label: 'Volume',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
+
+export const AVG_CARD_TXN_SIZE_BY_TYPE_DATA = [
+  { card: 'USA Credit', avg_card_txn_size: 95 },
+  { card: 'Exa', avg_card_txn_size: 62 },
+  { card: 'Gnosis Pay', avg_card_txn_size: 61 },
+  { card: 'USA Debit', avg_card_txn_size: 43 },
+  { card: 'Europe Card', avg_card_txn_size: 39 }
+]
+
+export const AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG = {
+  avg_card_txn_size: {
+    label: 'Avg Transaction Size',
     color: '#8672F9',
     type: CHART_TYPES.bar
   }

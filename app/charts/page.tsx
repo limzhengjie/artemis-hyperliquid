@@ -36,7 +36,9 @@ import {
   AVG_B2B_TXN_SIZE_BY_CHAIN_DATA,
   AVG_B2B_TXN_SIZE_BY_CHAIN_CONFIG,
   CRYPTO_CARD_LINKED_VOLUMES_DATA,
-  CRYPTO_CARD_LINKED_VOLUMES_CONFIG
+  CRYPTO_CARD_LINKED_VOLUMES_CONFIG,
+  AVG_CARD_TXN_SIZE_BY_TYPE_DATA,
+  AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG
 } from '@/constants/data/use-case'
 
 const Charts = () => {
@@ -181,6 +183,14 @@ const Charts = () => {
         dataConfig={CRYPTO_CARD_LINKED_VOLUMES_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="Average Card Transaction Size by Card Type"
+        data={AVG_CARD_TXN_SIZE_BY_TYPE_DATA}
+        dataConfig={AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
         hideLegend
         hidePoweredBy
       />
