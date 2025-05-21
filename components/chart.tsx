@@ -49,6 +49,7 @@ interface Props {
   xAxisLabel?: string
   chartHeight?: number
   hideLegend?: boolean
+  hidePoweredBy?: boolean
 }
 
 const Chart = ({
@@ -59,7 +60,8 @@ const Chart = ({
   valueFormat = VALUE_FORMAT.number,
   xAxisLabel,
   chartHeight = 260,
-  hideLegend = false
+  hideLegend = false,
+  hidePoweredBy = false
 }: Props) => {
   const [legendProps, setLegendProps] = useState(
     Object.keys(dataConfig)
@@ -414,9 +416,11 @@ const Chart = ({
         >
           {renderChart()}
         </ChartContainer>
-        <div className="ml-auto">
-          <ArtemisLogo poweredBy />
-        </div>
+        {!hidePoweredBy && (
+          <div className="ml-auto">
+            <ArtemisLogo poweredBy />
+          </div>
+        )}
       </CardContent>
       <Image
         src="/watermark.svg"
