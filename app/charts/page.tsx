@@ -38,7 +38,15 @@ import {
   CRYPTO_CARD_LINKED_VOLUMES_DATA,
   CRYPTO_CARD_LINKED_VOLUMES_CONFIG,
   AVG_CARD_TXN_SIZE_BY_TYPE_DATA,
-  AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG
+  AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG,
+  P2P_VOLUMES_DATA,
+  P2P_VOLUMES_CONFIG,
+  AVG_P2P_TXN_SIZE_BY_APPLICATION_DATA,
+  AVG_P2P_TXN_SIZE_BY_APPLICATION_CONFIG,
+  B2C_VOLUMES_DATA,
+  B2C_VOLUMES_CONFIG,
+  LOANS_BY_APPLICATION_DATA,
+  LOANS_BY_APPLICATION_CONFIG
 } from '@/constants/data/use-case'
 
 const Charts = () => {
@@ -192,6 +200,40 @@ const Charts = () => {
         dataConfig={AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="P2P Stablecoin Volumes"
+        data={P2P_VOLUMES_DATA}
+        dataConfig={P2P_VOLUMES_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="Average P2P Transaction Size by Application"
+        data={AVG_P2P_TXN_SIZE_BY_APPLICATION_DATA}
+        dataConfig={AVG_P2P_TXN_SIZE_BY_APPLICATION_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="B2C Stablecoin Volumes"
+        data={B2C_VOLUMES_DATA}
+        dataConfig={B2C_VOLUMES_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
+        hideLegend
+        hidePoweredBy
+      />
+      <Chart
+        title="Loans by Application"
+        data={LOANS_BY_APPLICATION_DATA}
+        dataConfig={LOANS_BY_APPLICATION_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
         hidePoweredBy
       />
     </div>

@@ -138,3 +138,139 @@ export const AVG_CARD_TXN_SIZE_BY_TYPE_CONFIG = {
     type: CHART_TYPES.bar
   }
 } satisfies ChartConfig
+
+export const P2P_VOLUMES_DATA = [
+  { date: '1/1/2023', volume: 1413081322 },
+  { date: '2/1/2023', volume: 1483548478 },
+  { date: '3/1/2023', volume: 1884957870 },
+  { date: '4/1/2023', volume: 1910237156 },
+  { date: '5/1/2023', volume: 1861527701 },
+  { date: '6/1/2023', volume: 1848129073 },
+  { date: '7/1/2023', volume: 1785182034 },
+  { date: '8/1/2023', volume: 1596231672 },
+  { date: '9/1/2023', volume: 1451414126 },
+  { date: '10/1/2023', volume: 1438191924 },
+  { date: '11/1/2023', volume: 1577768114 },
+  { date: '12/1/2023', volume: 1943309226 },
+  { date: '1/1/2024', volume: 1846044182 },
+  { date: '2/1/2024', volume: 1768915050 },
+  { date: '3/1/2024', volume: 1942037066 },
+  { date: '4/1/2024', volume: 1673769283 },
+  { date: '5/1/2024', volume: 1583089925 },
+  { date: '6/1/2024', volume: 1479394760 },
+  { date: '7/1/2024', volume: 1522664583 },
+  { date: '8/1/2024', volume: 1494410747 },
+  { date: '9/1/2024', volume: 1472010907 },
+  { date: '10/1/2024', volume: 1597553794 },
+  { date: '11/1/2024', volume: 1731057578 },
+  { date: '12/1/2024', volume: 2180134511 },
+  { date: '1/1/2025', volume: 1672029774 },
+  { date: '2/1/2025', volume: 1506496509 }
+]
+
+export const P2P_VOLUMES_CONFIG = {
+  volume: {
+    label: 'Volume',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
+
+export const AVG_P2P_TXN_SIZE_BY_APPLICATION_DATA = [
+  { entity: 'Zelle', avg_p2p_txn_size: 277 },
+  { entity: 'Global Remittance', avg_p2p_txn_size: 250 },
+  { entity: 'Venmo', avg_p2p_txn_size: 73 },
+  { entity: 'Sling (Estimated)', avg_p2p_txn_size: 47 },
+  { entity: 'Celo P2P', avg_p2p_txn_size: 26 }
+]
+
+export const AVG_P2P_TXN_SIZE_BY_APPLICATION_CONFIG = {
+  avg_p2p_txn_size: {
+    label: 'Avg Transaction Size',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
+
+export const B2C_VOLUMES_DATA = [
+  { date: '1/1/2023', volume: 56231897.95 },
+  { date: '2/1/2023', volume: 71169604.03 },
+  { date: '3/1/2023', volume: 86549861.88 },
+  { date: '4/1/2023', volume: 92478098.91 },
+  { date: '5/1/2023', volume: 116669157.77 },
+  { date: '6/1/2023', volume: 127976590.54 },
+  { date: '7/1/2023', volume: 126318640.15 },
+  { date: '8/1/2023', volume: 138276430.17 },
+  { date: '9/1/2023', volume: 142535977.3 },
+  { date: '10/1/2023', volume: 165929283.91 },
+  { date: '11/1/2023', volume: 163861824.57 },
+  { date: '12/1/2023', volume: 169208483.53 },
+  { date: '1/1/2024', volume: 170755825.28 },
+  { date: '2/1/2024', volume: 166980925.55 },
+  { date: '3/1/2024', volume: 191996450.49 },
+  { date: '4/1/2024', volume: 198884620.28 },
+  { date: '5/1/2024', volume: 206907119.46 },
+  { date: '6/1/2024', volume: 211928426.03 },
+  { date: '7/1/2024', volume: 208851810.76 },
+  { date: '8/1/2024', volume: 231550783.17 },
+  { date: '9/1/2024', volume: 263549833.28 },
+  { date: '10/1/2024', volume: 272823714.98 },
+  { date: '11/1/2024', volume: 302221265.09 },
+  { date: '12/1/2024', volume: 291953086.8 },
+  { date: '1/1/2025', volume: 311088556.39 },
+  { date: '2/1/2025', volume: 274708023.33 }
+]
+
+export const B2C_VOLUMES_CONFIG = {
+  volume: {
+    label: 'Volume',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig
+
+export const LOANS_BY_APPLICATION_DATA = [
+  { date: '11/1/2022', Arf: 10884186.0, Mansa: 0 },
+  { date: '12/1/2022', Arf: 20117566.0, Mansa: 0 },
+  { date: '1/1/2023', Arf: 21008473.0, Mansa: 0 },
+  { date: '2/1/2023', Arf: 22916220.0, Mansa: 0 },
+  { date: '3/1/2023', Arf: 25026298.0, Mansa: 0 },
+  { date: '4/1/2023', Arf: 18700524.0, Mansa: 0 },
+  { date: '5/1/2023', Arf: 21454654.0, Mansa: 0 },
+  { date: '6/1/2023', Arf: 24034970.0, Mansa: 0 },
+  { date: '7/1/2023', Arf: 23241274.0, Mansa: 0 },
+  { date: '8/1/2023', Arf: 25647486.0, Mansa: 0 },
+  { date: '9/1/2023', Arf: 28489447.0, Mansa: 0 },
+  { date: '10/1/2023', Arf: 49740163.0, Mansa: 0 },
+  { date: '11/1/2023', Arf: 55032827.0, Mansa: 0 },
+  { date: '12/1/2023', Arf: 53461116.0, Mansa: 0 },
+  { date: '1/1/2024', Arf: 62958678.0, Mansa: 0 },
+  { date: '2/1/2024', Arf: 63251712.0, Mansa: 0 },
+  { date: '3/1/2024', Arf: 63127556.0, Mansa: 0 },
+  { date: '4/1/2024', Arf: 60790302.0, Mansa: 0 },
+  { date: '5/1/2024', Arf: 65712716.0, Mansa: 0 },
+  { date: '6/1/2024', Arf: 63099247.0, Mansa: 0 },
+  { date: '7/1/2024', Arf: 72194437.0, Mansa: 100000.0 },
+  { date: '8/1/2024', Arf: 67478569.0, Mansa: 1362420.0 },
+  { date: '9/1/2024', Arf: 88134528.0, Mansa: 1628175.0 },
+  { date: '10/1/2024', Arf: 104403100.0, Mansa: 1980885.0 },
+  { date: '11/1/2024', Arf: 117650000.0, Mansa: 104805.0 },
+  { date: '12/1/2024', Arf: 136350000.0, Mansa: 6300665.39 },
+  { date: '1/1/2025', Arf: 160100000.0, Mansa: 11497686.0 },
+  { date: '2/1/2025', Arf: 190400001.0, Mansa: 20424886.0 }
+]
+
+export const LOANS_BY_APPLICATION_CONFIG = {
+  Arf: {
+    label: 'Arf',
+    color: '#8672F9',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  },
+  Mansa: {
+    label: 'Mansa',
+    color: '#F7BD5F',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  }
+} satisfies ChartConfig
