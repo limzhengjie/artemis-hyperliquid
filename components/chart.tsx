@@ -48,6 +48,7 @@ interface Props {
   valueFormat?: ValueFormat
   xAxisLabel?: string
   chartHeight?: number
+  hideLegend?: boolean
 }
 
 const Chart = ({
@@ -57,7 +58,8 @@ const Chart = ({
   isTimeSeries = false,
   valueFormat = VALUE_FORMAT.number,
   xAxisLabel,
-  chartHeight = 260
+  chartHeight = 260,
+  hideLegend = false
 }: Props) => {
   const [legendProps, setLegendProps] = useState(
     Object.keys(dataConfig)
@@ -75,6 +77,33 @@ const Chart = ({
         { hover: null } as Record<string, boolean | null | string>
       )
   )
+  const XAxisDataKey = isTimeSeries
+    ? 'date'
+    : Object.keys(data[0] || {}).find(key => !dataConfig[key]) || 'month'
+
+  // calculate dynamic height for XAxis based on label length
+  const calculateXAxisHeight = () => {
+    if (isTimeSeries) return 40
+
+    // get all unique X-axis values
+    const xAxisValues = data.map(item => String(item[XAxisDataKey]))
+
+    // find the longest label
+    const longestLabel = xAxisValues.reduce(
+      (longest, current) =>
+        current.length > longest.length ? current : longest,
+      ''
+    )
+
+    // Estimate height based on label length and rotation
+    // Base height (40) + additional height based on label length
+    // The multiplier 3
+    const estimatedHeight = 40 + Math.min(longestLabel.length * 3, 60)
+
+    return Math.round(estimatedHeight)
+  }
+
+  const xAxisHeight = calculateXAxisHeight()
 
   const processDataForStacked100 = (originalData: ChartData[]) => {
     // create a deep copy of the data
@@ -153,12 +182,15 @@ const Chart = ({
           stroke="var(--color-moongray-25)"
         />
         <XAxis
-          dataKey={isTimeSeries ? 'date' : 'month'}
+          dataKey={XAxisDataKey}
           tickLine={false}
           axisLine={false}
-          tickMargin={8}
-          minTickGap={12}
-          interval="preserveStartEnd"
+          tickMargin={4}
+          minTickGap={isTimeSeries ? 12 : 0}
+          interval={isTimeSeries ? 'preserveStartEnd' : 0}
+          angle={isTimeSeries ? 0 : -45}
+          textAnchor={isTimeSeries ? 'middle' : 'end'}
+          height={xAxisHeight}
           tickFormatter={value => {
             if (isTimeSeries) {
               const date = new Date(value)
@@ -175,13 +207,12 @@ const Chart = ({
           )}
         </XAxis>
         <YAxis
-          // dataKey="desktop"
-          width={55}
+          width={45}
           tickLine={false}
           axisLine={false}
-          orientation="right"
+          orientation={isTimeSeries ? 'right' : 'left'}
           tickFormatter={value => formatValue(value, valueFormat)}
-          domain={hasStacked100 ? [0, 100] : ['dataMin', 'dataMax']}
+          domain={hasStacked100 ? [0, 100] : undefined}
         />
         <ChartTooltip
           cursor={true}
@@ -319,18 +350,20 @@ const Chart = ({
           return null
         })}
 
-        <ChartLegend
-          content={
-            <ChartLegendContent
-              legendProps={legendProps}
-              setLegendProps={setLegendProps}
-              // Pass the key mapping to the legend content
-              keyMapping={keyToPercentageKeyMap}
-            />
-          }
-          verticalAlign="top"
-          className="mb-4 select-none"
-        />
+        {!hideLegend && (
+          <ChartLegend
+            content={
+              <ChartLegendContent
+                legendProps={legendProps}
+                setLegendProps={setLegendProps}
+                // Pass the key mapping to the legend content
+                keyMapping={keyToPercentageKeyMap}
+              />
+            }
+            verticalAlign="top"
+            className="mb-4 select-none"
+          />
+        )}
 
         {/* Define gradients for area charts */}
         <defs>
