@@ -157,7 +157,8 @@ const Chart = ({
           tickLine={false}
           axisLine={false}
           tickMargin={8}
-          minTickGap={32}
+          minTickGap={12}
+          interval="preserveStartEnd"
           tickFormatter={value => {
             if (isTimeSeries) {
               const date = new Date(value)
