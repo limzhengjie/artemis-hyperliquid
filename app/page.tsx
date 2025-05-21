@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button'
 import {
   AVG_RETENTION_RATE_DATA,
   AVG_RETENTION_RATE_CONFIG,
-  PAYMENT_USAGE_BY_TYPE_DATA,
-  PAYMENT_USAGE_BY_TYPE_CONFIG,
   VALUE_FORMAT
 } from '@/constants/chart'
 
@@ -24,6 +22,11 @@ import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
 import LogoGrid from '@/components/logo-grid'
 import DownloadReport from '@/components/download-report'
+
+import {
+  STABLECOIN_ACTIVITY_BY_TYPE_DATA,
+  STABLECOIN_ACTIVITY_BY_TYPE_CONFIG
+} from '@/constants/data/overview'
 
 import ReportImage from '@/public/report.svg'
 
@@ -100,9 +103,9 @@ export default async function Overview() {
             textAlignment="center"
           />
           <Chart
-            title="Payment Usage by Type"
-            data={PAYMENT_USAGE_BY_TYPE_DATA}
-            dataConfig={PAYMENT_USAGE_BY_TYPE_CONFIG}
+            title="Stablecoin Activity by Type"
+            data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
+            dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
             valueFormat={VALUE_FORMAT.currency}
             isTimeSeries
             chartHeight={375}
