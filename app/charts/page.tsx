@@ -40,7 +40,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Top Stablecoin Flows Originators by Country"
+        title="Percent of Stablecoin Flows by Country"
         data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
         dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}

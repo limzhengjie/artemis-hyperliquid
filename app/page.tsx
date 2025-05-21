@@ -171,7 +171,7 @@ export default async function Overview() {
           </div>
           <div className="col-span-2 md:order-1">
             <Chart
-              title="Top Stablecoin Flows Originators by Country"
+              title="Percent of Stablecoin Flows by Country"
               data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
               dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
