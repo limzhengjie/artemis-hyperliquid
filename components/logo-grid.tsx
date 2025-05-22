@@ -12,7 +12,7 @@ const LogoGrid = ({ dataPartners }: Props) => {
   return (
     <div className="relative w-full max-w-[550px] border border-solid border-[var(--color-pluto-purple-100)] rounded-xl px-8 py-10 pb-12">
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-10">
-        {dataPartners.map((dataPartner, index) => (
+        {dataPartners.map(dataPartner => (
           <div
             key={dataPartner.name}
             className={`flex justify-center items-center`}
