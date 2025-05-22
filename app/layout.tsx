@@ -7,6 +7,7 @@ import { PostHogProvider } from '@/contexts/posthog-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Header from '@/components/(layout)/header'
 import Footer from '@/components/(layout)/footer'
+import ScrollToHash from '@/components/(layout)/scroll-to-hash'
 
 import './globals.css'
 
@@ -66,6 +67,7 @@ export default function RootLayout({
                 <main className="flex-1">{children}</main>
                 <Footer />
               </div>
+              <ScrollToHash />
             </PostHogProvider>
           </TooltipProvider>
         </ThemeProvider>
