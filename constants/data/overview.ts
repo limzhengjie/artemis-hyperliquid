@@ -702,3 +702,23 @@ export const STABLECOIN_FLOWS_BY_COUNTRY_CONFIG = {
     type: CHART_TYPES.bar
   }
 } satisfies ChartConfig
+
+export const STABLECOIN_COMPANIES_BY_CHAIN_DATA = [
+  { chain: 'Tron', companies: 12 },
+  { chain: 'Ethereum', companies: 11 },
+  { chain: 'BSC', companies: 7 },
+  { chain: 'Solana', companies: 6 },
+  { chain: 'Polygon', companies: 6 },
+  { chain: 'Stellar', companies: 4 },
+  { chain: 'Base', companies: 4 },
+  { chain: 'Celo', companies: 3 },
+  { chain: 'Optimism', companies: 2 }
+]
+
+export const STABLECOIN_COMPANIES_BY_CHAIN_CONFIG = {
+  companies: {
+    label: 'Companies',
+    color: '#8672F9',
+    type: CHART_TYPES.bar
+  }
+} satisfies ChartConfig

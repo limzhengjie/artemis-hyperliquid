@@ -11,7 +11,9 @@ import {
   STABLECOIN_VOLUME_BY_CURRENCY_DATA,
   STABLECOIN_VOLUME_BY_CURRENCY_CONFIG,
   STABLECOIN_FLOWS_BY_COUNTRY_DATA,
-  STABLECOIN_FLOWS_BY_COUNTRY_CONFIG
+  STABLECOIN_FLOWS_BY_COUNTRY_CONFIG,
+  STABLECOIN_COMPANIES_BY_CHAIN_DATA,
+  STABLECOIN_COMPANIES_BY_CHAIN_CONFIG
 } from '@/constants/data/overview'
 
 import {
@@ -60,6 +62,7 @@ const Charts = () => {
         dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
+        yAxisDomainToMax
         hidePoweredBy
       />
       <Chart
@@ -68,6 +71,7 @@ const Charts = () => {
         dataConfig={STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
+        yAxisDomainToMax
         hidePoweredBy
       />
       <Chart
@@ -76,6 +80,14 @@ const Charts = () => {
         dataConfig={STABLECOIN_CONSUMER_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
+        hidePoweredBy
+      />
+      <Chart
+        title="Number of Stablecoin Companies by Blockchain"
+        data={STABLECOIN_COMPANIES_BY_CHAIN_DATA}
+        dataConfig={STABLECOIN_COMPANIES_BY_CHAIN_CONFIG}
+        valueFormat={VALUE_FORMAT.number}
+        hideLegend
         hidePoweredBy
       />
       <Chart

@@ -50,6 +50,7 @@ interface Props {
   chartHeight?: number
   hideLegend?: boolean
   hidePoweredBy?: boolean
+  yAxisDomainToMax?: boolean
 }
 
 const Chart = ({
@@ -61,7 +62,8 @@ const Chart = ({
   xAxisLabel,
   chartHeight = 260,
   hideLegend = false,
-  hidePoweredBy = false
+  hidePoweredBy = false,
+  yAxisDomainToMax = false
 }: Props) => {
   const [legendProps, setLegendProps] = useState(
     Object.keys(dataConfig)
@@ -214,7 +216,13 @@ const Chart = ({
           axisLine={false}
           orientation={isTimeSeries ? 'right' : 'left'}
           tickFormatter={value => formatValue(value, valueFormat)}
-          domain={hasStacked100 ? [0, 100] : undefined}
+          domain={
+            hasStacked100
+              ? [0, 100]
+              : yAxisDomainToMax
+              ? ['dataMin', 'dataMax']
+              : undefined
+          }
         />
         <ChartTooltip
           cursor={true}
