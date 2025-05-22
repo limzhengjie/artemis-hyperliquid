@@ -14,6 +14,7 @@ import { getStablecoinSupplyData } from '@/lib/fetchStablecoinsData'
 import Chart from '@/components/chart'
 import StatSummaryTile from '@/components/stat-summary-tile'
 import Blurb from '@/components/blurb'
+import BlurbHero from '@/components/blurb-hero'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
@@ -64,11 +65,7 @@ export default async function Overview() {
         <ContentWrapper>
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-3">
             <div className="flex flex-col gap-6">
-              <Blurb
-                title="Stablecoins: The Emerging Market Story"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                textAlignment="center"
-              />
+              <BlurbHero />
               <DownloadReport />
             </div>
             <StatSummaryTile
@@ -117,7 +114,7 @@ export default async function Overview() {
       </ContentWrapper>
 
       <div
-        className="w-full flex items-center justify-center gap-12 pt-24 pb-24"
+        className="w-full flex items-center justify-center gap-12 pt-18 pb-18"
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
@@ -222,7 +219,7 @@ export default async function Overview() {
               </p>
               <Blurb
                 title="Get a Copy of Our Report Here"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+                description="Discover the latest trends, data, and insights shaping 2025. Download your copy today."
                 textAlignment="left"
               />
               <DownloadReport />

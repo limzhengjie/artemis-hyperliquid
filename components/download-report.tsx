@@ -212,7 +212,7 @@ export default function DownloadReport() {
                 margin: isInline ? '0px 8px 0px 0px' : '0px 0px 10px',
                 height: '32px',
                 width: '100%',
-                maxWidth: '240px',
+                maxWidth: '280px',
                 minWidth: '100px',
                 background: '#FFFFFF',
                 border: '1px solid #D1D5DB',
