@@ -32,7 +32,7 @@ const REGIONS: Tab[] = [
 ]
 
 const Regions = () => {
-  let [activeTab, setActiveTab] = useState(REGIONS[0].id)
+  const [activeTab, setActiveTab] = useState(REGIONS[0].id)
   const isFirstRender = useRef(true)
 
   useEffect(() => {
