@@ -1,10 +1,11 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { usePostHog } from 'posthog-js/react'
-import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 
@@ -81,17 +82,30 @@ const MenuItem = ({
   children,
   href,
   active,
-  onClick
+  onClick,
+  open,
+  index
 }: {
   children: React.ReactNode
   href: string
   active: boolean
   onClick: () => void
+  open: boolean
+  index: number
 }) => {
   const [hover, setHover] = useState(false)
 
   return (
-    <div className="py-4 animate-fadeIn">
+    <motion.div
+      className="w-full py-3"
+      initial={{ opacity: 0, x: -20 }}
+      animate={open ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+      transition={{
+        duration: 0.4,
+        ease: 'easeOut',
+        delay: open ? index * 0.2 : 0
+      }}
+    >
       <Link
         href={href}
         className={cn(
@@ -105,7 +119,7 @@ const MenuItem = ({
       >
         {children}
       </Link>
-    </div>
+    </motion.div>
   )
 }
 
@@ -211,12 +225,14 @@ const Header = () => {
       <div className="md:hidden">
         <MobileMenu open={menuOpen}>
           <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
-            {navigation.map(item => (
+            {navigation.map((item, index) => (
               <MenuItem
                 key={item.href}
                 href={item.href}
                 active={item.active}
                 onClick={() => setMenuOpen(false)}
+                open={menuOpen}
+                index={index}
               >
                 {item.label}
               </MenuItem>
