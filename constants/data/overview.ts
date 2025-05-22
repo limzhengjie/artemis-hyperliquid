@@ -213,15 +213,15 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
 ]
 
 export const STABLECOIN_ACTIVITY_BY_TYPE_CONFIG = {
-  B2B: {
-    label: 'B2B',
-    color: '#8672F9',
-    type: CHART_TYPES.bar,
-    stackId: 'a'
-  },
   P2P: {
     label: 'P2P',
     color: '#51B495',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  },
+  B2B: {
+    label: 'B2B',
+    color: '#8672F9',
     type: CHART_TYPES.bar,
     stackId: 'a'
   },
@@ -240,6 +240,42 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_CONFIG = {
   Loans: {
     label: 'Loans',
     color: '#E5A1C5',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  }
+} satisfies ChartConfig
+
+export const STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG = {
+  B2B: {
+    label: 'B2B',
+    color: '#8672F9',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  },
+  Card: {
+    label: 'Card',
+    color: '#70A9FF',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  },
+  B2C: {
+    label: 'B2C',
+    color: '#F7BD5F',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  },
+  Loans: {
+    label: 'Loans',
+    color: '#E5A1C5',
+    type: CHART_TYPES.bar,
+    stackId: 'a'
+  }
+} satisfies ChartConfig
+
+export const STABLECOIN_CONSUMER_ACTIVITY_BY_TYPE_CONFIG = {
+  P2P: {
+    label: 'P2P',
+    color: '#51B495',
     type: CHART_TYPES.bar,
     stackId: 'a'
   }

@@ -4,6 +4,8 @@ import { VALUE_FORMAT } from '@/constants/chart'
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
   STABLECOIN_ACTIVITY_BY_TYPE_CONFIG,
+  STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG,
+  STABLECOIN_CONSUMER_ACTIVITY_BY_TYPE_CONFIG,
   STABLECOIN_VOLUME_BY_CHAIN_DATA,
   STABLECOIN_VOLUME_BY_CHAIN_CONFIG,
   STABLECOIN_VOLUME_BY_CURRENCY_DATA,
@@ -56,6 +58,22 @@ const Charts = () => {
         title="Stablecoin Activity by Type"
         data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
         dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
+        hidePoweredBy
+      />
+      <Chart
+        title="Stablecoin Business Activity by Type"
+        data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
+        dataConfig={STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
+        hidePoweredBy
+      />
+      <Chart
+        title="Stablecoin Consumer Activity by Type"
+        data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
+        dataConfig={STABLECOIN_CONSUMER_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
         hidePoweredBy
