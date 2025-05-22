@@ -24,7 +24,7 @@ const formStyles = {
   buttonFontColor: '#ffffff',
   buttonColor: '#684FF8',
   buttonFontSizePx: 14,
-  successMessage: "We've sent the report to your email!",
+  successMessage: 'Redirecting to report...',
   successFont: 'Inter',
   successFontColor: '#684FF8',
   successFontSizePx: 14,
@@ -32,6 +32,7 @@ const formStyles = {
   mailingLists: 'cmapovue005770iwve0e19b2l' // https://app.loops.so/settings?page=lists
 }
 const domain = 'app.loops.so'
+const reportLink = 'https://app.artemis.xyz/' // TODO: change to the report link
 
 export default function DownloadReport() {
   const [email, setEmail] = useState('')
@@ -124,6 +125,10 @@ export default function DownloadReport() {
               email,
               eventName: 'stablecoins2025ReportDownloaded' // Make sure the eventName matches the eventName in the Loops dashboard
             })
+          }).then(() => {
+            setTimeout(() => {
+              window.open(reportLink, '_blank')
+            }, 1000)
           })
         } else {
           dataPromise.then((data: any) => {
