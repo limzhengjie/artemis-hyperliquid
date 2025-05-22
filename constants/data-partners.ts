@@ -1,23 +1,25 @@
 import { StaticImageData } from 'next/image'
 
-import AcctualLogo from '@/public/data-partners/acctual.svg'
-import BeloLogo from '@/public/data-partners/belo.svg'
-import BinanceLogo from '@/public/data-partners/binance.svg'
-import BitsoLogo from '@/public/data-partners/bitso.svg'
-import BrlaLogo from '@/public/data-partners/brla.svg'
-import BVNKLogo from '@/public/data-partners/bvnk.svg'
-import ConduitLogo from '@/public/data-partners/conduit.svg'
-import FelixLogo from '@/public/data-partners/felix.svg'
-import HumaLogo from '@/public/data-partners/huma.svg'
-import LemonLogo from '@/public/data-partners/lemon.svg'
-import LoopCryptoLogo from '@/public/data-partners/loop-crypto.svg'
-import MansaLogo from '@/public/data-partners/mansa.svg'
-import MesoLogo from '@/public/data-partners/meso.svg'
-import MoneyLogo from '@/public/data-partners/money.svg'
-import OrbitalLogo from '@/public/data-partners/orbital.svg'
-import ReapLogo from '@/public/data-partners/reap.svg'
-import SlingMoneyLogo from '@/public/data-partners/sling-money.svg'
-import YellowCardLogo from '@/public/data-partners/yellow-card.svg'
+import AcctualLogo from '@/public/data-partners/acctual.png'
+import ArfLogo from '@/public/data-partners/arf.png'
+import BeloLogo from '@/public/data-partners/belo.png'
+import BinanceLogo from '@/public/data-partners/binance.png'
+import BitsoLogo from '@/public/data-partners/bitso.png'
+import BVNKLogo from '@/public/data-partners/bvnk.png'
+import ConduitLogo from '@/public/data-partners/conduit.png'
+import FelixLogo from '@/public/data-partners/felix.png'
+import HumaLogo from '@/public/data-partners/huma.png'
+import LemonLogo from '@/public/data-partners/lemon.png'
+import LoopCryptoLogo from '@/public/data-partners/loop-crypto.png'
+import MansaLogo from '@/public/data-partners/mansa.png'
+import MesoLogo from '@/public/data-partners/meso.png'
+import MoneyLogo from '@/public/data-partners/money.png'
+import OrbitalLogo from '@/public/data-partners/orbital.png'
+import ReapLogo from '@/public/data-partners/reap.png'
+import RioLogo from '@/public/data-partners/rio.png'
+import ShieldLogo from '@/public/data-partners/shield.png'
+import WalapayLogo from '@/public/data-partners/walapay.png'
+import YellowCardLogo from '@/public/data-partners/yellow-card.png'
 
 export type DataPartner = {
   name: string
@@ -54,20 +56,32 @@ export const DATA_PARTNERS_LOGOS = [
     image: YellowCardLogo
   },
   {
-    name: 'Lemon',
-    image: LemonLogo
-  },
-  {
     name: 'Huma',
     image: HumaLogo
   },
   {
-    name: 'Mansa',
-    image: MansaLogo
+    name: 'Lemon',
+    image: LemonLogo
   },
   {
-    name: 'Brla',
-    image: BrlaLogo
+    name: 'Acctual',
+    image: AcctualLogo
+  },
+  {
+    name: 'Arf',
+    image: ArfLogo
+  },
+  {
+    name: 'Belo',
+    image: BeloLogo
+  },
+  {
+    name: 'LoopCrypto',
+    image: LoopCryptoLogo
+  },
+  {
+    name: 'Mansa',
+    image: MansaLogo
   },
   {
     name: 'Meso',
@@ -78,23 +92,19 @@ export const DATA_PARTNERS_LOGOS = [
     image: OrbitalLogo
   },
   {
+    name: 'Rio',
+    image: RioLogo
+  },
+  {
+    name: 'Shield',
+    image: ShieldLogo
+  },
+  {
+    name: 'Walapay',
+    image: WalapayLogo
+  },
+  {
     name: 'Money',
     image: MoneyLogo
-  },
-  {
-    name: 'Belo',
-    image: BeloLogo
-  },
-  {
-    name: 'Acctual',
-    image: AcctualLogo
-  },
-  {
-    name: 'LoopCrypto',
-    image: LoopCryptoLogo
-  },
-  {
-    name: 'SlingMoney',
-    image: SlingMoneyLogo
   }
 ]

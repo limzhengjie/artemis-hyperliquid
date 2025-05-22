@@ -11,15 +11,11 @@ interface Props {
 const LogoGrid = ({ dataPartners }: Props) => {
   return (
     <div className="relative w-full max-w-[550px] border border-solid border-[var(--color-pluto-purple-100)] rounded-xl px-8 py-10 pb-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-10">
         {dataPartners.map((dataPartner, index) => (
           <div
             key={dataPartner.name}
-            className={`flex justify-center items-center ${
-              dataPartners.length === 18 && index >= 16
-                ? 'lg:col-span-1 lg:col-start-' + (index === 16 ? '2' : '3')
-                : ''
-            }`}
+            className={`flex justify-center items-center`}
           >
             <Image
               src={dataPartner.image}
