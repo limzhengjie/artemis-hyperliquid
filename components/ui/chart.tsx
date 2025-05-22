@@ -17,6 +17,8 @@ import {
   ValueFormat
 } from '@/constants/chart'
 
+import { RotateCcwIcon } from 'lucide-react'
+
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
 
@@ -519,6 +521,14 @@ function ChartLegendContent({
     return null
   }
 
+  // Count how many items are hidden
+  const hiddenItemsCount = Object.entries(legendProps).filter(
+    ([key, value]) => key !== 'hover' && value === true
+  ).length
+
+  // Determine if we should show the reset button (2+ items hidden)
+  const showResetButton = hiddenItemsCount >= 2
+
   return (
     <div
       className={cn(
@@ -617,6 +627,34 @@ function ChartLegendContent({
           </Tooltip>
         )
       })}
+
+      {/* Reset button */}
+      {showResetButton && (
+        <Tooltip delayDuration={300}>
+          <TooltipTrigger asChild>
+            <div
+              className="cursor-pointer flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => {
+                // Reset all items to visible
+                const resetState = Object.keys(legendProps)
+                  .filter(k => k !== 'hover')
+                  .reduce((acc, k) => {
+                    acc[k] = false
+                    return acc
+                  }, {} as Record<string, boolean | null>)
+
+                setLegendProps({ ...resetState, hover: null })
+              }}
+            >
+              <RotateCcwIcon className="h-2.5 w-2.5" />
+              <span className="text-xs">Reset</span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="top" sideOffset={10}>
+            <div>Reset all items to visible</div>
+          </TooltipContent>
+        </Tooltip>
+      )}
     </div>
   )
 }
