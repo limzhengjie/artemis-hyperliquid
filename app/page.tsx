@@ -63,7 +63,7 @@ export default async function Overview() {
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-3">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-8">
             <div className="flex flex-col gap-6">
               <BlurbHero />
               <DownloadReport />
