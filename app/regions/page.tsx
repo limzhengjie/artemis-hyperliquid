@@ -1,7 +1,11 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
 import { VALUE_FORMAT } from '@/constants/chart'
 import Chart from '@/components/chart'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Blurb from '@/components/blurb'
+import AnimatedTabs, { Tab } from '@/components/tabs'
 
 import {
   REGION_BY_CURRENCY_CONFIG,
@@ -19,110 +23,179 @@ import {
   EUROPE_BY_CURRENCY_DATA
 } from '@/constants/data/regions'
 
+const REGIONS: Tab[] = [
+  { id: 'latin', label: 'Latin America' },
+  { id: 'africa', label: 'Africa' },
+  { id: 'americas', label: 'Americas' },
+  { id: 'europe', label: 'Europe' },
+  { id: 'asia', label: 'Asia' }
+]
+
 const Regions = () => {
+  let [activeTab, setActiveTab] = useState(REGIONS[0].id)
+  const isFirstRender = useRef(true)
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
+    // scroll to the section corresponding to the active tab
+    const element = document.getElementById(activeTab)
+    if (element) {
+      // Get the height of the sticky header
+      const stickyHeader = document.querySelector('.sticky')
+      const headerHeight = stickyHeader
+        ? stickyHeader.getBoundingClientRect().height
+        : 0
+
+      // Calculate the element's position accounting for the header height
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset - headerHeight
+
+      // Scroll to the adjusted position
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }, [activeTab])
+
   return (
-    <div className="w-full pt-12 pb-12 flex flex-col items-center gap-12 font-[family-name:var(--font-geist-sans)]">
-      <ContentWrapper>
-        <Blurb
-          title="Stablecoin Volume by Region"
-          description=" Of the companies included in the broader study, 52% provided geographic-level reporting, enabling analysis of stablecoin usage patterns across both regional and national contexts."
-        />
-      </ContentWrapper>
+    <div className="w-full flex flex-col items-center font-[family-name:var(--font-geist-sans)]">
+      {/* Sticky header section */}
+      <div className="sticky top-0 z-10 w-full bg-white pt-12 pb-4 flex flex-col items-center gap-6">
+        <ContentWrapper>
+          <Blurb
+            title="Stablecoin Volume by Region"
+            description=" Of the companies included in the broader study, 52% provided geographic-level reporting, enabling analysis of stablecoin usage patterns across both regional and national contexts."
+          />
+        </ContentWrapper>
 
-      <ContentWrapper>
-        <div className="w-full flex gap-4">
-          <Chart
-            title="Stablecoin Volume by Blockchain in Latin America"
-            data={LATIN_AMERICA_BY_CHAIN_DATA}
-            dataConfig={REGION_BY_CHAIN_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-          <Chart
-            title="Stablecoin Volume by Token in Latin America"
-            data={LATIN_AMERICA_BY_CURRENCY_DATA}
-            dataConfig={REGION_BY_CURRENCY_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-        </div>
-      </ContentWrapper>
+        <ContentWrapper>
+          <div className="w-full flex justify-center">
+            <AnimatedTabs
+              tabs={REGIONS}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          </div>
+        </ContentWrapper>
+      </div>
 
-      <ContentWrapper>
-        <div className="w-full flex gap-4">
-          <Chart
-            title="Stablecoin Volume by Blockchain in Africa"
-            data={AFRICA_BY_CHAIN_DATA}
-            dataConfig={REGION_BY_CHAIN_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-          <Chart
-            title="Stablecoin Volume by Token in Africa"
-            data={AFRICA_BY_CURRENCY_DATA}
-            dataConfig={REGION_BY_CURRENCY_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-        </div>
-      </ContentWrapper>
+      {/* Scrollable content section */}
+      <div className="w-full pb-12 flex flex-col items-center gap-12">
+        <ContentWrapper>
+          <h3 className="text-2xl font-bold mb-4" id="latin">
+            Latin America
+          </h3>
+          <div className="w-full flex gap-4">
+            <Chart
+              title="Stablecoin Volume by Blockchain in Latin America"
+              data={LATIN_AMERICA_BY_CHAIN_DATA}
+              dataConfig={REGION_BY_CHAIN_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+            <Chart
+              title="Stablecoin Volume by Token in Latin America"
+              data={LATIN_AMERICA_BY_CURRENCY_DATA}
+              dataConfig={REGION_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+          </div>
+        </ContentWrapper>
 
-      <ContentWrapper>
-        <div className="w-full flex gap-4">
-          <Chart
-            title="Stablecoin Volume by Blockchain in Americas"
-            data={AMERICAS_BY_CHAIN_DATA}
-            dataConfig={REGION_BY_CHAIN_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-          <Chart
-            title="Stablecoin Volume by Token in Americas"
-            data={AMERICAS_BY_CURRENCY_DATA}
-            dataConfig={REGION_BY_CURRENCY_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-        </div>
-      </ContentWrapper>
+        <ContentWrapper>
+          <h3 className="text-2xl font-bold mb-4" id="africa">
+            Africa
+          </h3>
+          <div className="w-full flex gap-4">
+            <Chart
+              title="Stablecoin Volume by Blockchain in Africa"
+              data={AFRICA_BY_CHAIN_DATA}
+              dataConfig={REGION_BY_CHAIN_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+            <Chart
+              title="Stablecoin Volume by Token in Africa"
+              data={AFRICA_BY_CURRENCY_DATA}
+              dataConfig={REGION_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+          </div>
+        </ContentWrapper>
 
-      <ContentWrapper>
-        <div className="w-full flex gap-4">
-          <Chart
-            title="Stablecoin Volume by Blockchain in Europe"
-            data={EUROPE_BY_CHAIN_DATA}
-            dataConfig={REGION_BY_CHAIN_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-          <Chart
-            title="Stablecoin Volume by Token in Europe"
-            data={EUROPE_BY_CURRENCY_DATA}
-            dataConfig={REGION_BY_CURRENCY_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-        </div>
-      </ContentWrapper>
+        <ContentWrapper>
+          <h3 className="text-2xl font-bold mb-4" id="americas">
+            Americas
+          </h3>
+          <div className="w-full flex gap-4">
+            <Chart
+              title="Stablecoin Volume by Blockchain in Americas"
+              data={AMERICAS_BY_CHAIN_DATA}
+              dataConfig={REGION_BY_CHAIN_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+            <Chart
+              title="Stablecoin Volume by Token in Americas"
+              data={AMERICAS_BY_CURRENCY_DATA}
+              dataConfig={REGION_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+          </div>
+        </ContentWrapper>
 
-      <ContentWrapper>
-        <div className="w-full flex gap-4">
-          <Chart
-            title="Stablecoin Volume by Blockchain in Asia"
-            data={ASIA_BY_CHAIN_DATA}
-            dataConfig={REGION_BY_CHAIN_CONFIG_WITH_XRP}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-          <Chart
-            title="Stablecoin Volume by Token in Asia"
-            data={ASIA_BY_CURRENCY_DATA}
-            dataConfig={REGION_BY_CURRENCY_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            hidePoweredBy
-          />
-        </div>
-      </ContentWrapper>
+        <ContentWrapper>
+          <h3 className="text-2xl font-bold mb-4" id="europe">
+            Europe
+          </h3>
+          <div className="w-full flex gap-4">
+            <Chart
+              title="Stablecoin Volume by Blockchain in Europe"
+              data={EUROPE_BY_CHAIN_DATA}
+              dataConfig={REGION_BY_CHAIN_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+            <Chart
+              title="Stablecoin Volume by Token in Europe"
+              data={EUROPE_BY_CURRENCY_DATA}
+              dataConfig={REGION_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+          </div>
+        </ContentWrapper>
+
+        <ContentWrapper>
+          <h3 className="text-2xl font-bold mb-4" id="asia">
+            Asia
+          </h3>
+          <div className="w-full flex gap-4">
+            <Chart
+              title="Stablecoin Volume by Blockchain in Asia"
+              data={ASIA_BY_CHAIN_DATA}
+              dataConfig={REGION_BY_CHAIN_CONFIG_WITH_XRP}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+            <Chart
+              title="Stablecoin Volume by Token in Asia"
+              data={ASIA_BY_CURRENCY_DATA}
+              dataConfig={REGION_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hidePoweredBy
+            />
+          </div>
+        </ContentWrapper>
+      </div>
     </div>
   )
 }
