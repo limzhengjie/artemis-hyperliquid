@@ -239,6 +239,16 @@ const Header = () => {
                 {item.label}
               </MenuItem>
             ))}
+            <MenuItem
+              key="methodology"
+              href="/methodology"
+              active={isActive('/methodology')}
+              onClick={() => setMenuOpen(false)}
+              open={menuOpen}
+              index={navigation.length}
+            >
+              Methodology
+            </MenuItem>
 
             <div className="py-6">
               <Link
