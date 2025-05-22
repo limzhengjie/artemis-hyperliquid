@@ -19,7 +19,8 @@ export const QUOTES: Quote[] = [
     website: 'https://x.com/nic__carter'
   },
   {
-    quote: 'Some alpha about stablecoins and why they are super duper cool.',
+    quote:
+      'Stablecoins fulfill the vision that 15 years worth of fintech entrepreneurs having been building towards - collapsing the  gap between antiquated financial rails and our digitally native lives through the use of fully programmable internet money.',
     author: 'Rob Hadick, General Partner at Dragonfly',
     image: RobHadickImage,
     website: 'https://x.com/HadickM'

@@ -96,8 +96,8 @@ const Quotes = ({ quotes }: Props) => {
       />
 
       <div className="max-w-4xl flex flex-col justify-center items-center gap-6">
-        <QuoteIcon className="w-10 h-10 md:w-12 md:h-12" />
-        <div className="relative overflow-hidden h-[200px]">
+        <QuoteIcon className="w-10 h-10" />
+        <div className="relative overflow-hidden h-[300px]">
           <AnimatePresence initial={true} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
@@ -109,7 +109,7 @@ const Quotes = ({ quotes }: Props) => {
               exit="exit"
               transition={{ duration: 0.5, ease: 'easeInOut' }}
             >
-              <div className="text-lg md:text-4xl font-bold text-center">
+              <div className="text-lg md:text-3xl font-bold text-center">
                 {quotes[currentIndex].quote}
               </div>
               <Link href={quotes[currentIndex].website} target="_blank">
