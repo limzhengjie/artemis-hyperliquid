@@ -6,9 +6,8 @@ import DragonflyLogo from '@/public/partners/dragonfly.png'
 const BlurbHero = () => {
   return (
     <div className="w-full flex flex-col gap-4 max-w-4xl">
-      <h1 className="flex flex-col gap-1 text-foreground font-semibold text-[32px] md:text-[54px] leading-[32px] md:leading-[54px] text-left">
-        <span>Stablecoins:</span>
-        <span>The Emerging Market Story</span>
+      <h1 className="text-foreground font-semibold text-[32px] md:text-[54px] leading-[32px] md:leading-[54px] text-left">
+        Stablecoin Payments from the Ground Up
       </h1>
       <div className="flex flex-col gap-4">
         <p className="text-muted-foreground text-md">In partnership with</p>

@@ -21,24 +21,24 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Stablecoin.FYI | Real-time Stablecoin Analytics Dashboard',
+  title: 'Stablecoin Payments from the Ground Up | Artemis',
   description:
-    'Comprehensive stablecoin data analytics, market insights, and deep dives into the stablecoin ecosystem. Track performance, compare metrics, and stay informed with our living dashboard.',
+    'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
   keywords:
-    'stablecoin, stablecoin analytics, USDC, USDT, DAI, market data, blockchain, payments, stablecoin payments',
+    'stablecoin payments from the ground up, Artemis, stablecoin, stablecoin analytics, USDC, USDT, Tether, market data, blockchain, payments, stablecoin payments, stablecoin b2b, stablecoin p2p',
   openGraph: {
-    title: 'Stablecoin.FYI | Real-time Stablecoin Analytics Dashboard',
+    title: 'Stablecoin Payments from the Ground Up | Artemis',
     description:
-      'Comprehensive stablecoin data analytics, market insights, and deep dives into the stablecoin ecosystem.',
+      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
     url: 'https://stablecoin.fyi',
-    siteName: 'Stablecoin.FYI',
+    siteName: 'Stablecoin Payments from the Ground Up | Artemis',
     type: 'website'
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Stablecoin.FYI | Real-time Stablecoin Analytics Dashboard',
+    title: 'Stablecoin Payments from the Ground Up | Artemis',
     description:
-      'Comprehensive stablecoin data analytics, market insights, and deep dives into the stablecoin ecosystem. Track performance, compare metrics, and stay informed with our living dashboard.'
+      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.'
   }
 }
 
