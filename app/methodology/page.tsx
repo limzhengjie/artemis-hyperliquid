@@ -2,7 +2,7 @@ import ContentWrapper from '@/components/(layout)/content-wrapper'
 
 const Methodology = () => {
   return (
-    <div className="w-full pt-12 flex flex-col items-center gap-6 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full pt-12 pb-12 flex flex-col items-center gap-6 font-[family-name:var(--font-geist-sans)]">
       <ContentWrapper>
         <div className="flex flex-col gap-6">
           <h1 className="text-foreground font-semibold text-[28px] md:text-[32px] leading-[28px] md:leading-[32px] text-left">
