@@ -44,6 +44,12 @@ const Sparkline = ({ data, valueFormat }: Props) => {
               valueFormat={valueFormat}
             />
           }
+          wrapperStyle={{
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            opacity: 1,
+            zIndex: 9999
+          }}
         />
         <defs>
           <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
