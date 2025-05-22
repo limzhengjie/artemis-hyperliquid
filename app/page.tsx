@@ -153,7 +153,7 @@ export default async function Overview() {
           />
           <div className="col-span-2">
             <Chart
-              title="Stablecoin Volume by Currency"
+              title="Stablecoin Volume by Token"
               data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
               dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}

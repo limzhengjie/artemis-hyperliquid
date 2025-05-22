@@ -69,7 +69,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency"
+        title="Stablecoin Volume by Token"
         data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
         dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
@@ -96,7 +96,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency in Latin America"
+        title="Stablecoin Volume by Token in Latin America"
         data={LATIN_AMERICA_BY_CURRENCY_DATA}
         dataConfig={REGION_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
@@ -110,7 +110,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency in Africa"
+        title="Stablecoin Volume by Token in Africa"
         data={AFRICA_BY_CURRENCY_DATA}
         dataConfig={REGION_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
@@ -124,7 +124,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency in Americas"
+        title="Stablecoin Volume by Token in Americas"
         data={AMERICAS_BY_CURRENCY_DATA}
         dataConfig={REGION_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
@@ -138,7 +138,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency in Europe"
+        title="Stablecoin Volume by Token in Europe"
         data={EUROPE_BY_CURRENCY_DATA}
         dataConfig={REGION_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
@@ -152,7 +152,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Volume by Currency in Asia"
+        title="Stablecoin Volume by Token in Asia"
         data={ASIA_BY_CURRENCY_DATA}
         dataConfig={REGION_BY_CURRENCY_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
