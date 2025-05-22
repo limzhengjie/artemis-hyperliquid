@@ -633,7 +633,7 @@ function ChartLegendContent({
         <Tooltip delayDuration={300}>
           <TooltipTrigger asChild>
             <div
-              className="cursor-pointer flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+              className="cursor-pointer flex items-center gap-1 transition-colors"
               onClick={() => {
                 // Reset all items to visible
                 const resetState = Object.keys(legendProps)
@@ -646,7 +646,7 @@ function ChartLegendContent({
                 setLegendProps({ ...resetState, hover: null })
               }}
             >
-              <RotateCcwIcon className="h-2.5 w-2.5" />
+              <RotateCcwIcon className="h-2.5 w-2" />
               <span className="text-xs">Reset</span>
             </div>
           </TooltipTrigger>
