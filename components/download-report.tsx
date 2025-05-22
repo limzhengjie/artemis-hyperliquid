@@ -4,6 +4,8 @@
 
 import { useState } from 'react'
 
+import { ARTEMIS_TERMINAL_URL } from '@/constants/general'
+
 import { ArrowLeftIcon } from 'lucide-react'
 
 const INIT = 'INIT'
@@ -32,7 +34,7 @@ const formStyles = {
   mailingLists: 'cmapovue005770iwve0e19b2l' // https://app.loops.so/settings?page=lists
 }
 const domain = 'app.loops.so'
-const reportLink = 'https://app.artemis.xyz/' // TODO: change to the report link
+const reportLink = `${ARTEMIS_TERMINAL_URL}/stablecoins-2025-report` // TODO: change to the report link
 
 export default function DownloadReport() {
   const [email, setEmail] = useState('')

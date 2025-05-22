@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
+import { ARTEMIS_TERMINAL_URL } from '@/constants/general'
+
 interface Props {
   width?: number
   poweredBy?: boolean
@@ -23,7 +25,7 @@ const ArtemisLogo = ({ width = 82, poweredBy = false }: Props) => {
   return (
     <div className="flex items-center gap-2">
       {poweredBy && <p className="text-sm">Powered by</p>}
-      <Link href="https://app.artemis.xyz/" target="_blank">
+      <Link href={ARTEMIS_TERMINAL_URL} target="_blank">
         <Image src={logoSrc} alt="Artemis Logo" width={width} height={width} />
       </Link>
     </div>
