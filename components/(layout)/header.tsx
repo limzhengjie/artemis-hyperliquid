@@ -208,12 +208,12 @@ const Header = () => {
               onClick={() =>
                 posthog.capture('clicked_artemis_terminal_button', {
                   $set: {
-                    artemis_terminal_url: 'https://app.artemisanalytics.com/'
+                    artemis_terminal_url: 'https://app.artemis.xyz/'
                   }
                 })
               }
             >
-              <Link href="https://app.artemisanalytics.com/" target="_blank">
+              <Link href="https://app.artemis.xyz/" target="_blank">
                 Artemis Terminal
               </Link>
             </Button>
@@ -259,13 +259,13 @@ const Header = () => {
                   setMenuOpen(false)
                   posthog.capture('clicked_artemis_terminal_button', {
                     $set: {
-                      artemis_terminal_url: 'https://app.artemisanalytics.com/'
+                      artemis_terminal_url: 'https://app.artemis.xyz/'
                     }
                   })
                 }}
                 asChild
               >
-                <Link href="https://app.artemisanalytics.com/" target="_blank">
+                <Link href="https://app.artemis.xyz/" target="_blank">
                   Artemis Terminal
                 </Link>
               </Button>

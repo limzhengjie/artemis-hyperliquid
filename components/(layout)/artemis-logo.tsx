@@ -23,7 +23,7 @@ const ArtemisLogo = ({ width = 82, poweredBy = false }: Props) => {
   return (
     <div className="flex items-center gap-2">
       {poweredBy && <p className="text-sm">Powered by</p>}
-      <Link href="https://app.artemisanalytics.com/" target="_blank">
+      <Link href="https://app.artemis.xyz/" target="_blank">
         <Image src={logoSrc} alt="Artemis Logo" width={width} height={width} />
       </Link>
     </div>
