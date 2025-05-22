@@ -64,6 +64,7 @@ const Charts = () => {
         isTimeSeries
         yAxisDomainToMax
         hidePoweredBy
+        chartHeight={320}
       />
       <Chart
         title="Stablecoin Business Activity by Type"
