@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { Card } from './ui/card'
 
 import { VALUE_FORMAT, type ValueFormat } from '@/constants/chart'
@@ -103,6 +105,13 @@ const StatSummaryTile = ({
           </div>
         </div>
         <Sparkline data={sparklineData} valueFormat={VALUE_FORMAT.currency} />
+        <Image
+          src="/watermark.svg"
+          alt="Artemis Logo"
+          width={100}
+          height={100}
+          className="absolute bottom-0 right-0 opacity-10 pointer-events-none p-2"
+        />
       </div>
       <div className="grid grid-cols-3 gap-0">
         {createMiniStatsData().map((stat, index) => (
