@@ -155,10 +155,20 @@ const Header = () => {
       active: isActive('/')
     },
     {
-      label: 'Regions',
+      label: 'By Region',
       href: '/regions',
       active: isActive('/regions')
+    },
+    {
+      label: 'By Use Case',
+      href: '/use-case',
+      active: isActive('/use-case')
     }
+    // {
+    //   label: 'Partners',
+    //   href: '/partners',
+    //   active: isActive('/partners')
+    // }
   ]
 
   return (
