@@ -13,7 +13,7 @@ export default function LogoTiles({ logos, activeLogo, setActiveLogo }: Props) {
   return (
     <div className="w-full">
       <div className="mx-auto max-w-2xl px-5">
-        <div className="-mx-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 overflow-hidden sm:mx-0 relative">
+        <div className="-mx-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:mx-0 relative">
           <AnimatePresence>
             {logos.map((logo, index) => (
               <motion.div

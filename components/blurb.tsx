@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 interface Props {
   title: string
-  description: string
+  description: string | React.ReactNode
   textAlignment?: 'left' | 'center' | 'right'
 }
 
