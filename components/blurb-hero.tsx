@@ -29,12 +29,12 @@ const BlurbHero = () => {
         Stablecoins have quickly become a credible alternative to traditional
         payment and settlement networks. In just five years, their supply has
         grown from under $10 billion to over $240 billion. To better understand
-        this how stablecoins are actually used, we spoke with 20 companies
-        across a range of use cases and collected estimates from 11 more.
-        Altogether, they’ve settled $94.2 billion in payments since 2020, with
-        current volumes pointing to a $72.3 billion annual run rate. This report
-        offers a rare, bottom-up look at how stablecoins are being used in the
-        real world.
+        how stablecoins are actually used, we spoke with 20 companies across a
+        range of use cases and collected estimates from 11 more. Altogether,
+        they’ve settled $94.2 billion in payments since 2020, with current
+        volumes pointing to a $72.3 billion annual run rate. This report offers
+        a rare, bottom-ups look at how stablecoins are being used in the real
+        world.
       </p>
     </div>
   )
