@@ -69,7 +69,7 @@ const Regions = () => {
         <ContentWrapper>
           <Blurb
             title="Stablecoin Volume by Region"
-            description=" Of the companies included in the broader study, 52% provided geographic-level reporting, enabling analysis of stablecoin usage patterns across both regional and national contexts."
+            description="Of the companies included in the broader study, 52% provided geographic-level reporting, enabling analysis of stablecoin usage patterns across both regional and national contexts. These insights shed light on how stablecoin-powered companies, including fintechs, exchanges, payment platforms, and on/off-ramp providers, operate across markets. By examining regional behavior, we can identify that USDT and Tron are the most popular Stablecoin and Chain used around the world."
           />
         </ContentWrapper>
 
