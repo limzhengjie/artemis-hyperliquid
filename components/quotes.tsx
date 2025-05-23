@@ -63,12 +63,12 @@ const Quotes = ({ quotes }: Props) => {
         alt="pixels"
         width={30}
         height={20}
-        className="absolute left-0 bottom-0 -translate-x-1/2 translate-y-25"
+        className="absolute left-0 bottom-0 -translate-x-1/2 translate-y-20"
       />
       <div
         className="absolute left-0 top-1/2 -translate-x-1/2"
         style={{
-          width: '480px',
+          width: '530px',
           height: '2px',
           background:
             'linear-gradient(180deg, #5E4EB5 0%, rgba(255, 255, 255, 0) 100%)',
@@ -79,7 +79,7 @@ const Quotes = ({ quotes }: Props) => {
       <div
         className="absolute right-0 top-1/2 translate-x-1/2"
         style={{
-          width: '480px',
+          width: '530px',
           height: '2px',
           background:
             'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #5E4EB5 100%)',
