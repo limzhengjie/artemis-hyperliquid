@@ -1,4 +1,4 @@
-export default function ReapCutout() {
+export default function ReapInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>

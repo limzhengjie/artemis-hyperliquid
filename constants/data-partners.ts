@@ -22,13 +22,13 @@ import ShieldLogo from '@/public/data-partners/shield.png'
 import WalapayLogo from '@/public/data-partners/walapay.png'
 import YellowCardLogo from '@/public/data-partners/yellow-card.png'
 
-import BinanceInfo from '@/constants/cutouts/binance'
-import BitsoInfo from '@/constants/cutouts/bitso'
-import BVNKInfo from '@/constants/cutouts/bvnk'
-import ConduitInfo from '@/constants/cutouts/conduit'
-import HumaInfo from '@/constants/cutouts/huma'
-import ReapInfo from '@/constants/cutouts/reap'
-import YellowCardInfo from '@/constants/cutouts/yellow-card'
+import BinanceInfo from '@/constants/data-partner-info/binance'
+import BitsoInfo from '@/constants/data-partner-info/bitso'
+import BVNKInfo from '@/constants/data-partner-info/bvnk'
+import ConduitInfo from '@/constants/data-partner-info/conduit'
+import HumaInfo from '@/constants/data-partner-info/huma'
+import ReapInfo from '@/constants/data-partner-info/reap'
+import YellowCardInfo from '@/constants/data-partner-info/yellow-card'
 
 export type DataPartner = {
   name: string

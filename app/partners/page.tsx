@@ -7,10 +7,12 @@ import ContentWrapper from '@/components/(layout)/content-wrapper'
 import LogoTiles from '@/components/logo-tiles'
 import Blurb from '@/components/blurb'
 
-import { CUTOUTS, Cutout } from '@/constants/cutouts'
+import { DATA_PARTNERS, DataPartner } from '@/constants/data-partners'
 
 const Partners = () => {
-  const [activeCutout, setActiveCutout] = useState<Cutout>(CUTOUTS[0])
+  const [activePartner, setActivePartner] = useState<DataPartner>(
+    DATA_PARTNERS[0]
+  )
 
   return (
     <div className="w-full pt-12 pb-12 flex flex-col items-center gap-12 font-[family-name:var(--font-geist-sans)]">
@@ -20,22 +22,22 @@ const Partners = () => {
 
       <ContentWrapper>
         <LogoTiles
-          logos={CUTOUTS}
-          activeLogo={activeCutout}
-          setActiveLogo={setActiveCutout}
+          logos={DATA_PARTNERS}
+          activeLogo={activePartner}
+          setActiveLogo={setActivePartner}
         />
       </ContentWrapper>
 
       <ContentWrapper>
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeCutout.value}
-            initial={{ y: 10, opacity: 0 }}
+            key={activePartner.name}
+            initial={{ y: 0, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
+            exit={{ y: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {React.createElement(activeCutout.cutout)}
+            {activePartner.info && React.createElement(activePartner.info)}
           </motion.div>
         </AnimatePresence>
       </ContentWrapper>

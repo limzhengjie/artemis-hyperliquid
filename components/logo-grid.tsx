@@ -22,7 +22,7 @@ const LogoGrid = ({ dataPartners }: Props) => {
               alt={dataPartner.name}
               width={70}
               height={70}
-              className="grayscale-100 brightness-75"
+              className="grayscale-100 brightness-75 transition-all duration-500"
             />
           </div>
         ))}

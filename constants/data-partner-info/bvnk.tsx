@@ -1,4 +1,4 @@
-export default function BVNKCutout() {
+export default function BVNKInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>

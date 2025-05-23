@@ -1,4 +1,4 @@
-export default function HumaCutout() {
+export default function HumaInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>

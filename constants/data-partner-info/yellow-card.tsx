@@ -1,4 +1,4 @@
-export default function YellowCardCutout() {
+export default function YellowCardInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>

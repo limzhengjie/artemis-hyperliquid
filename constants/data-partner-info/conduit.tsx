@@ -1,4 +1,4 @@
-export default function ConduitCutout() {
+export default function ConduitInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>

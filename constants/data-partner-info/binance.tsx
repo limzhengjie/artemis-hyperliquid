@@ -1,4 +1,4 @@
-export default function BinanceCutout() {
+export default function BinanceInfo() {
   return (
     <div className="w-full flex flex-col items-start gap-4">
       <p>
