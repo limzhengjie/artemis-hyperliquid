@@ -14,6 +14,7 @@ const LogoMarquee = () => {
           style={{ marginRight: '70px' }}
           width={100}
           height={100}
+          className="grayscale-100 brightness-75"
         />
       ))}
     </Marquee>
