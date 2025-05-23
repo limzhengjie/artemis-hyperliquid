@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { StaticImageData } from 'next/image'
 
 import AcctualLogo from '@/public/data-partners/acctual.png'
@@ -21,31 +22,45 @@ import ShieldLogo from '@/public/data-partners/shield.png'
 import WalapayLogo from '@/public/data-partners/walapay.png'
 import YellowCardLogo from '@/public/data-partners/yellow-card.png'
 
+import BinanceInfo from '@/constants/cutouts/binance'
+import BitsoInfo from '@/constants/cutouts/bitso'
+import BVNKInfo from '@/constants/cutouts/bvnk'
+import ConduitInfo from '@/constants/cutouts/conduit'
+import HumaInfo from '@/constants/cutouts/huma'
+import ReapInfo from '@/constants/cutouts/reap'
+import YellowCardInfo from '@/constants/cutouts/yellow-card'
+
 export type DataPartner = {
   name: string
   image: StaticImageData | string
+  info?: FC
 }
 
-export const DATA_PARTNERS_LOGOS = [
+export const DATA_PARTNERS = [
   {
     name: 'Binance',
-    image: BinanceLogo
+    image: BinanceLogo,
+    info: BinanceInfo
   },
   {
     name: 'BVNK',
-    image: BVNKLogo
+    image: BVNKLogo,
+    info: BVNKInfo
   },
   {
     name: 'Conduit',
-    image: ConduitLogo
+    image: ConduitLogo,
+    info: ConduitInfo
   },
   {
     name: 'Reap',
-    image: ReapLogo
+    image: ReapLogo,
+    info: ReapInfo
   },
   {
     name: 'Bitso',
-    image: BitsoLogo
+    image: BitsoLogo,
+    info: BitsoInfo
   },
   {
     name: 'Felix',
@@ -53,11 +68,13 @@ export const DATA_PARTNERS_LOGOS = [
   },
   {
     name: 'YellowCard',
-    image: YellowCardLogo
+    image: YellowCardLogo,
+    info: YellowCardInfo
   },
   {
     name: 'Huma',
-    image: HumaLogo
+    image: HumaLogo,
+    info: HumaInfo
   },
   {
     name: 'Lemon',

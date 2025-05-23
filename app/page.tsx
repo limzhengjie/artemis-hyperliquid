@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { VALUE_FORMAT } from '@/constants/chart'
 
 import { QUOTES } from '@/constants/quotes'
-import { DATA_PARTNERS_LOGOS } from '@/constants/data-partners'
+import { DATA_PARTNERS } from '@/constants/data-partners'
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 import { getStablecoinSupplyData } from '@/lib/fetchStablecoinsData'
@@ -235,7 +235,7 @@ export default async function Overview() {
           <p className="text-muted-foreground">
             Join us to define the stablecoin data standard of the future
           </p>
-          <LogoGrid dataPartners={DATA_PARTNERS_LOGOS} />
+          <LogoGrid dataPartners={DATA_PARTNERS} />
           <Link
             href="https://ry0v9n8oa4l.typeform.com/to/pibk76PA"
             target="_blank"
