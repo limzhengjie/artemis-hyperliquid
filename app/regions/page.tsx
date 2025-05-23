@@ -65,7 +65,7 @@ const Regions = () => {
   return (
     <div className="w-full flex flex-col items-center font-[family-name:var(--font-geist-sans)]">
       {/* Sticky header section */}
-      <div className="sticky top-0 z-10 w-full bg-white pt-12 pb-4 flex flex-col items-center gap-6">
+      <div className="sticky top-0 z-10 w-full bg-white pt-6 lg:pt-12 pb-4 flex flex-col items-center gap-3 lg:gap-6">
         <ContentWrapper>
           <Blurb
             title="Stablecoin Volume by Region"
@@ -90,7 +90,7 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="latin">
             Latin America
           </h3>
-          <div className="w-full flex gap-4">
+          <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Latin America"
               data={LATIN_AMERICA_BY_CHAIN_DATA}
@@ -112,7 +112,7 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="africa">
             Africa
           </h3>
-          <div className="w-full flex gap-4">
+          <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Africa"
               data={AFRICA_BY_CHAIN_DATA}
@@ -134,7 +134,7 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="americas">
             Americas
           </h3>
-          <div className="w-full flex gap-4">
+          <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Americas"
               data={AMERICAS_BY_CHAIN_DATA}
@@ -156,7 +156,7 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="europe">
             Europe
           </h3>
-          <div className="w-full flex gap-4">
+          <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Europe"
               data={EUROPE_BY_CHAIN_DATA}
@@ -178,7 +178,7 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="asia">
             Asia
           </h3>
-          <div className="w-full flex gap-4">
+          <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Asia"
               data={ASIA_BY_CHAIN_DATA}
