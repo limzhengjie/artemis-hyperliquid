@@ -32,7 +32,7 @@ import {
   STABLECOIN_FLOWS_BY_COUNTRY_CONFIG
 } from '@/constants/data/overview'
 
-import ReportImage from '@/public/report.svg'
+import ReportImage from '@/public/report.png'
 
 export default async function Overview() {
   const endDate = getCurrentDate()
@@ -220,7 +220,7 @@ export default async function Overview() {
               </p>
               <Blurb
                 title="Get a Copy of Our Report Here"
-                description="Discover the latest trends, data, and insights shaping 2025. Download your copy today."
+                description="Discover the latest stablecoin trends, data, and insights shaping 2025. Download your copy today."
                 textAlignment="left"
               />
               <DownloadReport />
