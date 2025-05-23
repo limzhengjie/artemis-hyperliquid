@@ -163,12 +163,12 @@ const Header = () => {
       label: 'By Use Case',
       href: '/use-case',
       active: isActive('/use-case')
+    },
+    {
+      label: 'Partners',
+      href: '/partners',
+      active: isActive('/partners')
     }
-    // {
-    //   label: 'Partners',
-    //   href: '/partners',
-    //   active: isActive('/partners')
-    // }
   ]
 
   return (
@@ -179,8 +179,7 @@ const Header = () => {
             <Image
               src={ArtemisStablecoinLogo}
               alt="Artemis Stablecoin Logo"
-              width={200}
-              height={100}
+              className="w-[160px] md:w-[180px]"
             />
           </Link>
           <nav className="hidden md:block">
