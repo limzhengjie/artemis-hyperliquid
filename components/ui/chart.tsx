@@ -393,7 +393,7 @@ function ChartTooltipContentSparkline({
 
     return (
       <div className={cn('font-semibold text-center', labelClassName)}>
-        {formattedDate}
+        Week of {formattedDate}
       </div>
     )
   }, [
