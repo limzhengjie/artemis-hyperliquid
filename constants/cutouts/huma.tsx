@@ -68,7 +68,7 @@ export default function HumaCutout() {
         <p>
           <sup>1</sup>
           <a
-            href="https://www.circle.com/case-studies/arf#:~:text=Arf%20leverages%20USDC%2C%20a%20regulated,to%20raise%20additional%20working%20capital"
+            href="https://www.circle.com/case-studies/arf"
             target="_blank"
             rel="noopener noreferrer"
           >
