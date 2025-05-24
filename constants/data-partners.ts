@@ -22,12 +22,25 @@ import ShieldLogo from '@/public/data-partners/shield.png'
 import WalapayLogo from '@/public/data-partners/walapay.png'
 import YellowCardLogo from '@/public/data-partners/yellow-card.png'
 
+import AcctualInfo from '@/constants/data-partner-info/acctual'
+import ArfInfo from '@/constants/data-partner-info/arf'
+import BeloInfo from '@/constants/data-partner-info/belo'
 import BinanceInfo from '@/constants/data-partner-info/binance'
 import BitsoInfo from '@/constants/data-partner-info/bitso'
 import BVNKInfo from '@/constants/data-partner-info/bvnk'
 import ConduitInfo from '@/constants/data-partner-info/conduit'
+import FelixInfo from '@/constants/data-partner-info/felix'
 import HumaInfo from '@/constants/data-partner-info/huma'
+import LemonInfo from '@/constants/data-partner-info/lemon'
+import LoopCryptoInfo from '@/constants/data-partner-info/loop-crypto'
+import MansaInfo from '@/constants/data-partner-info/mansa'
+import MesoInfo from '@/constants/data-partner-info/meso'
+import MoneyInfo from '@/constants/data-partner-info/money'
+import OrbitalInfo from '@/constants/data-partner-info/orbital'
 import ReapInfo from '@/constants/data-partner-info/reap'
+import RioInfo from '@/constants/data-partner-info/rio'
+import ShieldInfo from '@/constants/data-partner-info/shield'
+import WalapayInfo from '@/constants/data-partner-info/walapay'
 import YellowCardInfo from '@/constants/data-partner-info/yellow-card'
 
 export type DataPartner = {
@@ -64,7 +77,8 @@ export const DATA_PARTNERS = [
   },
   {
     name: 'Felix',
-    image: FelixLogo
+    image: FelixLogo,
+    info: FelixInfo
   },
   {
     name: 'YellowCard',
@@ -78,50 +92,62 @@ export const DATA_PARTNERS = [
   },
   {
     name: 'Lemon',
-    image: LemonLogo
+    image: LemonLogo,
+    info: LemonInfo
   },
   {
     name: 'Acctual',
-    image: AcctualLogo
+    image: AcctualLogo,
+    info: AcctualInfo
   },
   {
     name: 'Arf',
-    image: ArfLogo
+    image: ArfLogo,
+    info: ArfInfo
   },
   {
     name: 'Belo',
-    image: BeloLogo
+    image: BeloLogo,
+    info: BeloInfo
   },
   {
     name: 'LoopCrypto',
-    image: LoopCryptoLogo
+    image: LoopCryptoLogo,
+    info: LoopCryptoInfo
   },
   {
     name: 'Mansa',
-    image: MansaLogo
+    image: MansaLogo,
+    info: MansaInfo
   },
   {
     name: 'Meso',
-    image: MesoLogo
+    image: MesoLogo,
+    info: MesoInfo
   },
   {
     name: 'Orbital',
-    image: OrbitalLogo
+    image: OrbitalLogo,
+    info: OrbitalInfo
   },
   {
     name: 'Rio',
-    image: RioLogo
+    image: RioLogo,
+    info: RioInfo
   },
   {
     name: 'Shield',
-    image: ShieldLogo
+    image: ShieldLogo,
+    info: ShieldInfo
   },
   {
     name: 'Walapay',
-    image: WalapayLogo
+    image: WalapayLogo,
+    info: WalapayInfo
   },
   {
     name: 'Money',
-    image: MoneyLogo
+    image: MoneyLogo,
+    info: MoneyInfo
   }
 ]
