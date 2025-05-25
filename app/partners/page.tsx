@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePostHog } from 'posthog-js/react'
 
+import { Button } from '@/components/ui/button'
+
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import LogoTiles from '@/components/logo-tiles'
 import Blurb from '@/components/blurb'
@@ -52,11 +54,21 @@ const Partners = () => {
       </ContentWrapper>
 
       <ContentWrapper>
-        <LogoTiles
-          logos={DATA_PARTNERS}
-          activeLogo={activePartner}
-          setActiveLogo={setActivePartner}
-        />
+        <div className="flex flex-col items-center justify-center gap-4">
+          <LogoTiles
+            logos={DATA_PARTNERS}
+            activeLogo={activePartner}
+            setActiveLogo={setActivePartner}
+          />
+          <Link
+            href="https://ry0v9n8oa4l.typeform.com/to/pibk76PA"
+            target="_blank"
+          >
+            <Button variant="cta" className="mt-3">
+              Join Us
+            </Button>
+          </Link>
+        </div>
       </ContentWrapper>
 
       <ContentWrapper>
