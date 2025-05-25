@@ -12,8 +12,8 @@ import {
   P2P_VOLUMES_CONFIG,
   B2C_VOLUMES_DATA,
   B2C_VOLUMES_CONFIG,
-  LOANS_BY_APPLICATION_DATA,
-  LOANS_BY_APPLICATION_CONFIG
+  PREFUNDING_DATA,
+  PREFUNDING_CONFIG
 } from '@/constants/data/use-case'
 
 const UseCase = () => {
@@ -118,15 +118,15 @@ const UseCase = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
             <Blurb
-              title="Loans"
+              title="Prefunding"
               description="Stablecoin-based loan volume from Arf and Mansa, two lending platforms focused on serving digital asset and crossborder payment firms, has grown steadily since late 2022. These platforms provide short-term credit lines denominated in USDT and USDC, specifically tailored for use cases like pre-funding cross-border transfers, supplier payouts, and working capital needs."
             />
           </div>
           <div className="col-span-2 md:order-2">
             <Chart
-              title="Loans by Application"
-              data={LOANS_BY_APPLICATION_DATA}
-              dataConfig={LOANS_BY_APPLICATION_CONFIG}
+              title="Stablecoin Prefunding"
+              data={PREFUNDING_DATA}
+              dataConfig={PREFUNDING_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               hidePoweredBy

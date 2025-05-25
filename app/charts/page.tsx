@@ -49,8 +49,8 @@ import {
   AVG_P2P_TXN_SIZE_BY_APPLICATION_CONFIG,
   B2C_VOLUMES_DATA,
   B2C_VOLUMES_CONFIG,
-  LOANS_BY_APPLICATION_DATA,
-  LOANS_BY_APPLICATION_CONFIG
+  PREFUNDING_DATA,
+  PREFUNDING_CONFIG
 } from '@/constants/data/use-case'
 
 const Charts = () => {
@@ -260,9 +260,9 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Loans by Application"
-        data={LOANS_BY_APPLICATION_DATA}
-        dataConfig={LOANS_BY_APPLICATION_CONFIG}
+        title="Stablecoin Prefunding"
+        data={PREFUNDING_DATA}
+        dataConfig={PREFUNDING_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
         hidePoweredBy

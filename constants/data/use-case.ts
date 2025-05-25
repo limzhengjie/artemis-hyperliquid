@@ -229,7 +229,7 @@ export const B2C_VOLUMES_CONFIG = {
   }
 } satisfies ChartConfig
 
-export const LOANS_BY_APPLICATION_DATA = [
+export const PREFUNDING_DATA = [
   { date: '11/1/2022', Arf: 10884186.0, Mansa: 0 },
   { date: '12/1/2022', Arf: 20117566.0, Mansa: 0 },
   { date: '1/1/2023', Arf: 21008473.0, Mansa: 0 },
@@ -260,7 +260,7 @@ export const LOANS_BY_APPLICATION_DATA = [
   { date: '2/1/2025', Arf: 190400001.0, Mansa: 20424886.0 }
 ]
 
-export const LOANS_BY_APPLICATION_CONFIG = {
+export const PREFUNDING_CONFIG = {
   Arf: {
     label: 'Arf',
     color: '#8672F9',
