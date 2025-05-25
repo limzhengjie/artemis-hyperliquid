@@ -7,7 +7,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 119648156.84,
     B2C: 62498046.22,
     Card: 231156585.7,
-    Loans: 21008473,
+    Prefunding: 21008473,
     P2P: 1413081322
   },
   {
@@ -15,7 +15,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 95545966.23,
     B2C: 73250771.02,
     Card: 233624482.4,
-    Loans: 22916220,
+    Prefunding: 22916220,
     P2P: 1483548478
   },
   {
@@ -23,7 +23,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 149084639.83,
     B2C: 89798288.82,
     Card: 244317401.14,
-    Loans: 25026298,
+    Prefunding: 25026298,
     P2P: 1884957870
   },
   {
@@ -31,7 +31,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 107684515.25,
     B2C: 99370367.11,
     Card: 244796401.2,
-    Loans: 18700524,
+    Prefunding: 18700524,
     P2P: 1910237156
   },
   {
@@ -39,7 +39,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 161812578.38,
     B2C: 118171683.87,
     Card: 257253935.52,
-    Loans: 21454654,
+    Prefunding: 21454654,
     P2P: 1861527701
   },
   {
@@ -47,7 +47,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 311168255.88,
     B2C: 131621997.64,
     Card: 264349888.5,
-    Loans: 24034970,
+    Prefunding: 24034970,
     P2P: 1848129073
   },
   {
@@ -55,7 +55,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 321178204.65,
     B2C: 129420311.25,
     Card: 293799864.05,
-    Loans: 23241274,
+    Prefunding: 23241274,
     P2P: 1785182034
   },
   {
@@ -63,7 +63,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 362932576.89,
     B2C: 143494363.67,
     Card: 284271303.05,
-    Loans: 25647486,
+    Prefunding: 25647486,
     P2P: 1596231672
   },
   {
@@ -71,7 +71,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 352222341.55,
     B2C: 143949391.2,
     Card: 299354899.76,
-    Loans: 28489447,
+    Prefunding: 28489447,
     P2P: 1451414126
   },
   {
@@ -79,7 +79,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 380915111.46,
     B2C: 169519566.51,
     Card: 427455041.29,
-    Loans: 49740163,
+    Prefunding: 49740163,
     P2P: 1438191924
   },
   {
@@ -87,7 +87,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 534180669.7,
     B2C: 164953556.87,
     Card: 466864376.42,
-    Loans: 55032827,
+    Prefunding: 55032827,
     P2P: 1577768114
   },
   {
@@ -95,7 +95,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 620152379.27,
     B2C: 176156649.83,
     Card: 504799873.33,
-    Loans: 53461116,
+    Prefunding: 53461116,
     P2P: 1943309226
   },
   {
@@ -103,7 +103,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 564049025.24,
     B2C: 173634209.48,
     Card: 533158276.24,
-    Loans: 62958678,
+    Prefunding: 62958678,
     P2P: 1846044182
   },
   {
@@ -111,7 +111,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 772267621.89,
     B2C: 162013582.05,
     Card: 543389819.14,
-    Loans: 63251712,
+    Prefunding: 63251712,
     P2P: 1768915050
   },
   {
@@ -119,7 +119,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1043486435.92,
     B2C: 192234465.09,
     Card: 543689585.61,
-    Loans: 63127556,
+    Prefunding: 63127556,
     P2P: 1942037066
   },
   {
@@ -127,7 +127,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1189066829.1,
     B2C: 207446812.68,
     Card: 588099545.4,
-    Loans: 60790302,
+    Prefunding: 60790302,
     P2P: 1673769283
   },
   {
@@ -135,7 +135,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1532028187.14,
     B2C: 213326704.36,
     Card: 618837410.43,
-    Loans: 65712716,
+    Prefunding: 65712716,
     P2P: 1583089925
   },
   {
@@ -143,7 +143,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1324593863.99,
     B2C: 203990527.63,
     Card: 618245464.56,
-    Loans: 63099247,
+    Prefunding: 63099247,
     P2P: 1479394760
   },
   {
@@ -151,7 +151,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1603134527.56,
     B2C: 228399055.16,
     Card: 729579819.14,
-    Loans: 72294437,
+    Prefunding: 72294437,
     P2P: 1522664583
   },
   {
@@ -159,7 +159,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1786383689.2,
     B2C: 242076701.57,
     Card: 751460234.08,
-    Loans: 68840989,
+    Prefunding: 68840989,
     P2P: 1494410747
   },
   {
@@ -167,7 +167,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 1789086265.21,
     B2C: 261141895.68,
     Card: 770379157.85,
-    Loans: 89762703,
+    Prefunding: 89762703,
     P2P: 1472010907
   },
   {
@@ -175,7 +175,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 2349236450.78,
     B2C: 289009003.58,
     Card: 909796401.5,
-    Loans: 106383985,
+    Prefunding: 106383985,
     P2P: 1597553794
   },
   {
@@ -183,7 +183,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 2217709856.93,
     B2C: 298529683.09,
     Card: 957405944.15,
-    Loans: 117754805,
+    Prefunding: 117754805,
     P2P: 1731057578
   },
   {
@@ -191,7 +191,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 2740539496.71,
     B2C: 286846170.6,
     Card: 969935930.3,
-    Loans: 142650665.4,
+    Prefunding: 142650665.4,
     P2P: 2180134511
   },
   {
@@ -199,7 +199,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 2458009762.34,
     B2C: 282255560.79,
     Card: 1044194323.78,
-    Loans: 166896660.7,
+    Prefunding: 166896660.7,
     P2P: 1672029774
   },
   {
@@ -207,7 +207,7 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_DATA = [
     B2B: 2960104660.28,
     B2C: 270426754.03,
     Card: 1102790316.47,
-    Loans: 190400001,
+    Prefunding: 190400001,
     P2P: 1506496509
   }
 ]
@@ -237,8 +237,8 @@ export const STABLECOIN_ACTIVITY_BY_TYPE_CONFIG = {
     type: CHART_TYPES.bar,
     stackId: 'a'
   },
-  Loans: {
-    label: 'Loans',
+  Prefunding: {
+    label: 'Prefunding',
     color: '#E5A1C5',
     type: CHART_TYPES.bar,
     stackId: 'a'

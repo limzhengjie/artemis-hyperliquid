@@ -22,7 +22,7 @@ const UseCase = () => {
       <ContentWrapper>
         <Blurb
           title="Stablecoin Use Cases"
-          description="Stablecoins are increasingly being used for a variety of use cases, including B2B payments, card-based spending, peer-to-peer payments, and loans."
+          description="Stablecoins are increasingly being used for a variety of use cases, including B2B payments, card-based spending, peer-to-peer payments, and prefunding."
         />
       </ContentWrapper>
 
@@ -119,7 +119,7 @@ const UseCase = () => {
           <div className="md:order-1">
             <Blurb
               title="Prefunding"
-              description="Stablecoin-based loan volume from Arf and Mansa, two lending platforms focused on serving digital asset and crossborder payment firms, has grown steadily since late 2022. These platforms provide short-term credit lines denominated in USDT and USDC, specifically tailored for use cases like pre-funding cross-border transfers, supplier payouts, and working capital needs."
+              description="Prefunding occurs when businesses send money in advance to ensure seamless transactions. In stablecoin transfers, this means delivering local currency before the stablecoin settles, creating a funding gap for the sender. Arf and Mansa provide short-term capital to stablecoin businesses, enabling prefunded cross-border payments and supplier payouts without tying up their own cash."
             />
           </div>
           <div className="col-span-2 md:order-2">

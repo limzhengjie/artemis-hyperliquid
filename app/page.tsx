@@ -102,14 +102,17 @@ export default async function Overview() {
             description="Based on the data provided by contributing firms and the additional on-chain estimates, we were able to characterize $92.4 billion of stablecoin settlements for various payment types between January 2023 and February 2025, with the vast majority of these settling on blockchains directly. The annual run rate pace for these settlements totalled approximately $72.3 billion in February 2025."
             textAlignment="center"
           />
-          <Chart
-            title="Stablecoin Activity by Type"
-            data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
-            dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
-            valueFormat={VALUE_FORMAT.currency}
-            isTimeSeries
-            chartHeight={375}
-          />
+          <div className="w-full max-w-[800px]">
+            <Chart
+              title="Stablecoin Activity by Type"
+              data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
+              dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              yAxisDomainToMax
+              chartHeight={375}
+            />
+          </div>
         </div>
       </ContentWrapper>
 
