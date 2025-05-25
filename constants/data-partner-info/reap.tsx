@@ -4,8 +4,8 @@ export default function ReapInfo() {
       <p>
         Reap is a financial technology company providing stablecoin-enabled
         infrastructure for the modern business, enabling borderless finance
-        globally. In 2024, we processed over $2 billion in stablecoin-funded
-        payments—making us the #1 stablecoin-enabled card issuer in Asia.
+        globally. As Asia's leading stablecoin-enabled card issuer, Reap
+        processes billions in stablecoin-funded payments each month.
       </p>
 
       <p>
