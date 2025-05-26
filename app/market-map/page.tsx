@@ -33,7 +33,7 @@ const MarketMap = async () => {
 
   return (
     <div className="w-full pt-12 pb-12 flex flex-col items-center gap-6 font-[family-name:var(--font-geist-sans)]">
-      <ContentWrapper>
+      <ContentWrapper className="max-w-8xl md:px-18 lg:px-24">
         <div className="flex flex-col gap-6">
           <h1 className="text-foreground font-semibold text-[28px] md:text-[32px] leading-[28px] md:leading-[32px] text-left">
             Stablecoin Market Landscape
@@ -133,7 +133,7 @@ const Section = ({
       className={`grid ${
         layout === 'full'
           ? 'grid-cols-1'
-          : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
+          : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
       } gap-3`}
     >
       {children}

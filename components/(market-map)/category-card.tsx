@@ -46,7 +46,7 @@ export default function CategoryCard({ category }: Props) {
       <CardHeader className="border-b">
         <CardTitle>
           <div className="flex flex-wrap items-center justify-between">
-            <p className="text-md">{category.label}</p>
+            <p className="text-sm">{category.label}</p>
             <Badge variant="count">{category.protocols.length}</Badge>
           </div>
         </CardTitle>
@@ -109,7 +109,7 @@ export default function CategoryCard({ category }: Props) {
                 )}
                 <p className="font-semibold text-sm">{protocol.name}</p>
               </div>
-              <div className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-xs">
                 {protocol.description && <p>{protocol.description}</p>}
                 {protocol.website && (
                   <Link href={protocol.website as string} target="_blank">
