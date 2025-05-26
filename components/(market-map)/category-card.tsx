@@ -58,7 +58,7 @@ export default function CategoryCard({ category }: Props) {
           ?.sort((a, b) => {
             if (a.type === 'primary' && b.type !== 'primary') return -1
             if (a.type !== 'primary' && b.type === 'primary') return 1
-            return a.type.localeCompare(b.type)
+            return a.name.localeCompare(b.name)
           })
           .map(protocol => (
             <HoverCard openDelay={0} closeDelay={0} key={protocol.protocol}>
@@ -152,99 +152,105 @@ export default function CategoryCard({ category }: Props) {
 
       {/* mobile view */}
       <CardContent className="flex flex-wrap gap-1.5 justify-center md:hidden">
-        {category.protocols?.map(protocol => (
-          <Drawer
-            key={protocol.protocol}
-            open={activeProtocolDrawer === protocol.protocol}
-            onOpenChange={open =>
-              setActiveProtocolDrawer(open ? String(protocol.protocol) : null)
-            }
-          >
-            <DrawerTrigger asChild>
-              <div
-                className={cn(
-                  'flex items-center gap-1 bg-[var(--accent)] px-1.5 py-0.5 rounded-sm transition-colors cursor-pointer hover:bg-[var(--border)]',
-                  protocol.type === 'primary'
-                    ? 'bg-[#FCE9A8] border-[#FFD700] border-1 shadow-md hover:bg-[#F9DD85]'
-                    : ''
-                )}
-              >
-                {protocol.logo && (
-                  <Image
-                    src={protocol.logo}
-                    alt={protocol.name}
-                    width={16}
-                    height={16}
-                    className="rounded-sm"
-                  />
-                )}
-                <span className="text-sm">{protocol.name}</span>
-              </div>
-            </DrawerTrigger>
-            <DrawerContent className="bg-inherit p-7">
-              <DrawerHeader>
-                <DrawerTitle className="flex flex-col gap-4">
-                  {protocol.type === 'primary' && (
-                    <Badge
-                      variant="highlight"
-                      className="flex items-center gap-1"
-                    >
-                      <Star
-                        className="w-4 h-4"
-                        strokeWidth={2.5}
-                        fill="currentColor"
-                      />
-                      Artemis Data Partner
-                    </Badge>
+        {category.protocols
+          ?.sort((a, b) => {
+            if (a.type === 'primary' && b.type !== 'primary') return -1
+            if (a.type !== 'primary' && b.type === 'primary') return 1
+            return a.name.localeCompare(b.name)
+          })
+          .map(protocol => (
+            <Drawer
+              key={protocol.protocol}
+              open={activeProtocolDrawer === protocol.protocol}
+              onOpenChange={open =>
+                setActiveProtocolDrawer(open ? String(protocol.protocol) : null)
+              }
+            >
+              <DrawerTrigger asChild>
+                <div
+                  className={cn(
+                    'flex items-center gap-1 bg-[var(--accent)] px-1.5 py-0.5 rounded-sm transition-colors cursor-pointer hover:bg-[var(--border)]',
+                    protocol.type === 'primary'
+                      ? 'bg-[#FCE9A8] border-[#FFD700] border-1 shadow-md hover:bg-[#F9DD85]'
+                      : ''
                   )}
-                  <div className="flex items-center gap-1">
-                    {protocol.logo && (
-                      <Image
-                        src={protocol.logo}
-                        alt={protocol.name}
-                        width={20}
-                        height={20}
-                        className="rounded-sm"
-                      />
-                    )}
-                    <p className="font-semibold text-sm">{protocol.name}</p>
-                  </div>
-                </DrawerTitle>
-              </DrawerHeader>
-
-              <div className="flex flex-col gap-2 text-sm">
-                {protocol.description && <p>{protocol.description}</p>}
-                {protocol.website && (
-                  <Link href={protocol.website as string} target="_blank">
-                    {createTooltipRow('Website:', protocol.website as string)}
-                  </Link>
-                )}
-                {protocol.twitter && (
-                  <Link href={protocol.twitter as string} target="_blank">
-                    {createTooltipRow('Twitter:', protocol.twitter as string)}
-                  </Link>
-                )}
-                {protocol.artemisProjectPage && (
-                  <Link
-                    href={protocol.artemisProjectPage as string}
-                    target="_blank"
-                    className="mt-3 flex gap-1 items-center p-2 rounded-md bg-[#AFAAFE] border-2 border-[#EFEDED] text-black shadow-md w-fit"
-                  >
+                >
+                  {protocol.logo && (
                     <Image
-                      src="/artemis-icon.svg"
-                      alt="Artemis Icon"
+                      src={protocol.logo}
+                      alt={protocol.name}
                       width={16}
-                      height={0}
-                      style={{ height: '100%', borderRadius: '4px' }}
+                      height={16}
+                      className="rounded-sm"
                     />
-                    <span className="font-bold">View on Artemis</span>
-                    <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
-                  </Link>
-                )}
-              </div>
-            </DrawerContent>
-          </Drawer>
-        ))}
+                  )}
+                  <span className="text-sm">{protocol.name}</span>
+                </div>
+              </DrawerTrigger>
+              <DrawerContent className="bg-inherit p-7">
+                <DrawerHeader>
+                  <DrawerTitle className="flex flex-col gap-4">
+                    {protocol.type === 'primary' && (
+                      <Badge
+                        variant="highlight"
+                        className="flex items-center gap-1"
+                      >
+                        <Star
+                          className="w-4 h-4"
+                          strokeWidth={2.5}
+                          fill="currentColor"
+                        />
+                        Artemis Data Partner
+                      </Badge>
+                    )}
+                    <div className="flex items-center gap-1">
+                      {protocol.logo && (
+                        <Image
+                          src={protocol.logo}
+                          alt={protocol.name}
+                          width={20}
+                          height={20}
+                          className="rounded-sm"
+                        />
+                      )}
+                      <p className="font-semibold text-sm">{protocol.name}</p>
+                    </div>
+                  </DrawerTitle>
+                </DrawerHeader>
+
+                <div className="flex flex-col gap-2 text-sm">
+                  {protocol.description && <p>{protocol.description}</p>}
+                  {protocol.website && (
+                    <Link href={protocol.website as string} target="_blank">
+                      {createTooltipRow('Website:', protocol.website as string)}
+                    </Link>
+                  )}
+                  {protocol.twitter && (
+                    <Link href={protocol.twitter as string} target="_blank">
+                      {createTooltipRow('Twitter:', protocol.twitter as string)}
+                    </Link>
+                  )}
+                  {protocol.artemisProjectPage && (
+                    <Link
+                      href={protocol.artemisProjectPage as string}
+                      target="_blank"
+                      className="mt-3 flex gap-1 items-center p-2 rounded-md bg-[#AFAAFE] border-2 border-[#EFEDED] text-black shadow-md w-fit"
+                    >
+                      <Image
+                        src="/artemis-icon.svg"
+                        alt="Artemis Icon"
+                        width={16}
+                        height={0}
+                        style={{ height: '100%', borderRadius: '4px' }}
+                      />
+                      <span className="font-bold">View on Artemis</span>
+                      <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+                    </Link>
+                  )}
+                </div>
+              </DrawerContent>
+            </Drawer>
+          ))}
       </CardContent>
     </Card>
   )
