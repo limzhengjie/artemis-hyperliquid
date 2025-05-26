@@ -50,7 +50,7 @@ const MenuButton = ({
 
   return (
     <div
-      className="md:hidden flex flex-col items-center justify-center cursor-pointer"
+      className="lg:hidden flex flex-col items-center justify-center cursor-pointer"
       onClick={onClick}
     >
       <div style={{ ...styles.line, ...styles.lineTop }} />
@@ -168,13 +168,18 @@ const Header = () => {
       label: 'Partners',
       href: '/partners',
       active: isActive('/partners')
+    },
+    {
+      label: 'Market Map',
+      href: '/market-map',
+      active: isActive('/market-map')
     }
   ]
 
   return (
     <>
       <header className="flex items-center justify-between px-6 py-2 border-b border-[var(--color-moongray-25)] relative z-[51]">
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-6 xl:gap-10">
           <Link href="/">
             <Image
               src={ArtemisStablecoinLogo}
@@ -183,7 +188,7 @@ const Header = () => {
             />
           </Link>
           <nav className="hidden md:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-6 xl:gap-8">
               {navigation.map(item => (
                 <li key={item.href}>
                   <Link
@@ -203,7 +208,7 @@ const Header = () => {
 
         <div className="flex items-center gap-2 relative z-[51]">
           <MenuButton open={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             <Link
               href="https://ry0v9n8oa4l.typeform.com/to/pn9GQfzu"
               target="_blank"
@@ -233,7 +238,7 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <MobileMenu open={menuOpen}>
           <div className="flex flex-col font-[family-name:var(--font-geist-sans)]">
             {navigation.map((item, index) => (
