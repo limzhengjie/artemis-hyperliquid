@@ -25,8 +25,8 @@ const MarketMap = async () => {
   ]
 
   const INFRA_PROVIDERS_CATEGORIES = [
-    'infrastructure',
     'blockchains',
+    'infrastructure',
     'issuers',
     'orchestrators'
   ]
