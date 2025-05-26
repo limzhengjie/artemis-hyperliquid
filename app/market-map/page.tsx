@@ -6,6 +6,8 @@ import CategoryCard from '@/components/(market-map)/category-card'
 const MarketMap = async () => {
   const categories = await getMarketMapCategoriesAndProtocols()
 
+  const ANALYTICS_AND_RATINGS_CATEGORIES = ['analytics', 'rating_agencies']
+
   const ONCHAIN_CATEGORIES = [
     'p2p',
     'loans',
@@ -43,6 +45,15 @@ const MarketMap = async () => {
             stablecoin market, including the different categories of
             participants.
           </p>
+          <Section layout="2-columns">
+            {categories
+              .filter(category =>
+                ANALYTICS_AND_RATINGS_CATEGORIES.includes(category.category)
+              )
+              .map(category => (
+                <CategoryCard key={category.category} category={category} />
+              ))}
+          </Section>
           <SectionHeader
             title="ONCHAIN"
             description="Core blockchain infrastructure and protocols"
@@ -125,7 +136,7 @@ const Section = ({
   layout,
   children
 }: {
-  layout: 'full' | 'grid'
+  layout: 'full' | '2-columns' | 'grid'
   children: React.ReactNode
 }) => {
   return (
@@ -133,6 +144,8 @@ const Section = ({
       className={`grid ${
         layout === 'full'
           ? 'grid-cols-1'
+          : layout === '2-columns'
+          ? 'grid-cols-1 sm:grid-cols-2'
           : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
       } gap-3`}
     >
