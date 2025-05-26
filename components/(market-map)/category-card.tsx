@@ -53,7 +53,7 @@ export default function CategoryCard({ category }: Props) {
       </CardHeader>
 
       {/* desktop view */}
-      <CardContent className="hidden md:flex flex-wrap gap-1.5 justify-start">
+      <CardContent className="hidden md:flex flex-wrap gap-1.5 justify-center">
         {category.protocols?.map(protocol => (
           <HoverCard openDelay={0} closeDelay={0} key={protocol.protocol}>
             <HoverCardTrigger asChild>
@@ -140,7 +140,7 @@ export default function CategoryCard({ category }: Props) {
       </CardContent>
 
       {/* mobile view */}
-      <CardContent className="flex flex-wrap gap-1.5 justify-start md:hidden">
+      <CardContent className="flex flex-wrap gap-1.5 justify-center md:hidden">
         {category.protocols?.map(protocol => (
           <Drawer
             key={protocol.protocol}
