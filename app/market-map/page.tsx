@@ -42,8 +42,9 @@ const MarketMap = async () => {
           </h1>
           <p className="text-muted-foreground">
             The stablecoin market map provides a comprehensive overview of the
-            stablecoin market, including the different categories of
-            participants.
+            stablecoin ecosystem, showing how money flows from on/off ramps and
+            infrastructure to financial services, alongside the analytics and
+            rating providers that provide market intelligence.
           </p>
           <Section layout="2-columns">
             {categories
@@ -55,24 +56,23 @@ const MarketMap = async () => {
               ))}
           </Section>
           <SectionHeader
-            title="ONCHAIN"
-            description="Core blockchain infrastructure and protocols"
-            gradientStart="#4FACFE"
-            gradientEnd="#00F2FE"
+            title="ON-OFF RAMPS"
+            description="Entry and exit points for moving funds between traditional finance and stablecoins"
+            gradientStart="#f093fb"
+            gradientEnd="#f5576c"
           />
-          <Section layout="grid">
+          <Section layout="full">
             {categories
               .filter(category =>
-                ONCHAIN_CATEGORIES.includes(category.category)
+                LAST_MILE_CATEGORIES.includes(category.category)
               )
-              .sort((a, b) => b.protocols.length - a.protocols.length)
               .map(category => (
                 <CategoryCard key={category.category} category={category} />
               ))}
           </Section>
           <SectionHeader
-            title="INFRA-PROVIDERS"
-            description="Infrastructure and backend services enabling stablecoin operations"
+            title="INFRASTRUCTURE"
+            description="Blockchain networks, stablecoin issuers, and backend protocol providers that power the stablecoin ecosystem"
             gradientStart="#667eea"
             gradientEnd="#764ba2"
           />
@@ -86,16 +86,17 @@ const MarketMap = async () => {
               ))}
           </Section>
           <SectionHeader
-            title="LAST MILE"
-            description="User-facing applications and consumer touchpoints"
-            gradientStart="#f093fb"
-            gradientEnd="#f5576c"
+            title="ONCHAIN FINANCIAL SERVICES"
+            description="Applications and services where users manage, spend, and earn with their stablecoins"
+            gradientStart="#4FACFE"
+            gradientEnd="#00F2FE"
           />
-          <Section layout="full">
+          <Section layout="grid">
             {categories
               .filter(category =>
-                LAST_MILE_CATEGORIES.includes(category.category)
+                ONCHAIN_CATEGORIES.includes(category.category)
               )
+              .sort((a, b) => b.protocols.length - a.protocols.length)
               .map(category => (
                 <CategoryCard key={category.category} category={category} />
               ))}
