@@ -13,7 +13,7 @@ export type Quote = {
 export const QUOTES: Quote[] = [
   {
     quote:
-      'Stablecoins are being used not just for crypto trading, but increasingly feature in the ordinary economic lives of these individuals.',
+      'Stablecoins are being used not just for crypto trading, but increasingly feature in the ordinary economic lives of millions of individuals around the world.',
     author: 'Nic Carter, General Partner at Castle Island Ventures',
     image: NicCarterImage,
     website: 'https://x.com/nic__carter'
