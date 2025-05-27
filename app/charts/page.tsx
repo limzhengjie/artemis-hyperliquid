@@ -57,7 +57,7 @@ const Charts = () => {
   return (
     <div className="w-full max-w-6xl mx-auto p-12 flex flex-col items-center gap-8 font-[family-name:var(--font-geist-sans)]">
       <Chart
-        title="Stablecoin Activity by Type"
+        title="Stablecoin Payments by Type"
         data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
         dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
@@ -67,7 +67,7 @@ const Charts = () => {
         chartHeight={320}
       />
       <Chart
-        title="Stablecoin Business Activity by Type"
+        title="Stablecoin Business Payments by Type"
         data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
         dataConfig={STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
@@ -76,7 +76,7 @@ const Charts = () => {
         hidePoweredBy
       />
       <Chart
-        title="Stablecoin Consumer Activity by Type"
+        title="Stablecoin Consumer Payments by Type"
         data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
         dataConfig={STABLECOIN_CONSUMER_ACTIVITY_BY_TYPE_CONFIG}
         valueFormat={VALUE_FORMAT.currency}

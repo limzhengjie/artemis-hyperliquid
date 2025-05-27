@@ -104,7 +104,7 @@ export default async function Overview() {
           />
           <div className="w-full max-w-[800px]">
             <Chart
-              title="Stablecoin Activity by Type"
+              title="Stablecoin Payments by Type"
               data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
               dataConfig={STABLECOIN_ACTIVITY_BY_TYPE_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
