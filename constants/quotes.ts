@@ -20,7 +20,7 @@ export const QUOTES: Quote[] = [
   },
   {
     quote:
-      'Stablecoins fulfill the vision that 15 years worth of fintech entrepreneurs having been building towards - collapsing the  gap between antiquated financial rails and our digitally native lives through the use of fully programmable internet money.',
+      'Stablecoins fulfill the vision that a generation worth of fintech entrepreneurs having been building towards - collapsing the gap between antiquated financial rails and our digitally native lives through the use of fully programmable internet money.',
     author: 'Rob Hadick, General Partner at Dragonfly',
     image: RobHadickImage,
     website: 'https://x.com/HadickM'
