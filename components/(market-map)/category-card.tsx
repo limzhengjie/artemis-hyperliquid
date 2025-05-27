@@ -131,7 +131,11 @@ export default function CategoryCard({ category }: Props) {
                     </Link>
                   )}
                   {protocol.artemisProjectPage && (
-                    <div className="mt-3 flex gap-1 items-center">
+                    <Link
+                      href={protocol.artemisProjectPage as string}
+                      target="_blank"
+                      className="mt-3 flex gap-1 items-center p-2 rounded-md bg-[#AFAAFE] border-2 border-[#EFEDED] text-black shadow-md w-fit"
+                    >
                       <Image
                         src="/artemis-icon.svg"
                         alt="Artemis Icon"
@@ -142,7 +146,8 @@ export default function CategoryCard({ category }: Props) {
                       <span className="font-bold">
                         Click to view on Artemis
                       </span>
-                    </div>
+                      <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+                    </Link>
                   )}
                 </div>
               </HoverCardContent>
