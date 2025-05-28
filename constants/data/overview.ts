@@ -264,8 +264,8 @@ export const STABLECOIN_BUSINESS_ACTIVITY_BY_TYPE_CONFIG = {
     type: CHART_TYPES.bar,
     stackId: 'a'
   },
-  Loans: {
-    label: 'Loans',
+  Prefunding: {
+    label: 'Prefunding',
     color: '#E5A1C5',
     type: CHART_TYPES.bar,
     stackId: 'a'
