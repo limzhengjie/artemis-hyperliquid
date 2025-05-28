@@ -95,6 +95,7 @@ export default async function Overview() {
         <LogoMarquee />
       </div>
 
+      <div id="stablecoin-payments-by-type" />
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
@@ -125,6 +126,7 @@ export default async function Overview() {
         </ContentWrapper>
       </div>
 
+      <div id="stablecoin-volume-by-blockchain" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-2">
@@ -145,6 +147,7 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
 
+      <div id="stablecoin-payments-by-token" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
@@ -153,7 +156,7 @@ export default async function Overview() {
           />
           <div className="col-span-2">
             <Chart
-              title="Stablecoin Volume by Token"
+              title="Stablecoin Payments by Token"
               data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
               dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
@@ -163,6 +166,7 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
 
+      <div id="percent-of-stablecoin-flows-by-country" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-2">
