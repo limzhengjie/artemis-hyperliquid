@@ -24,7 +24,7 @@ import {
 } from '@/constants/data/regions'
 
 const REGIONS: Tab[] = [
-  { id: 'latin', label: 'Latin America' },
+  { id: 'latin-america', label: 'Latin America' },
   { id: 'africa', label: 'Africa' },
   { id: 'americas', label: 'Americas' },
   { id: 'europe', label: 'Europe' },
@@ -44,17 +44,9 @@ const Regions = () => {
     // scroll to the section corresponding to the active tab
     const element = document.getElementById(activeTab)
     if (element) {
-      // Get the height of the sticky header
-      const stickyHeader = document.querySelector('.sticky')
-      const headerHeight = stickyHeader
-        ? stickyHeader.getBoundingClientRect().height
-        : 0
-
-      // Calculate the element's position accounting for the header height
       const elementPosition =
-        element.getBoundingClientRect().top + window.pageYOffset - headerHeight
+        element.getBoundingClientRect().top + window.pageYOffset
 
-      // Scroll to the adjusted position
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
@@ -64,15 +56,14 @@ const Regions = () => {
 
   return (
     <div className="w-full flex flex-col items-center font-[family-name:var(--font-geist-sans)]">
-      {/* Sticky header section */}
-      <div className="sticky top-0 z-10 w-full bg-white pt-6 lg:pt-12 pb-4 flex flex-col items-center gap-3 lg:gap-6">
+      {/* Header section */}
+      <div className="w-full bg-white pt-6 lg:pt-12 pb-4 flex flex-col items-center gap-3 lg:gap-6">
         <ContentWrapper>
           <Blurb
             title="Stablecoin Volume by Region"
             description="Of the companies included in the broader study, 52% provided geographic-level reporting, enabling analysis of stablecoin usage patterns across both regional and national contexts. These insights shed light on how stablecoin-powered companies, including fintechs, exchanges, payment platforms, and on/off-ramp providers, operate across markets. By examining regional behavior, we can identify that USDT and Tron are the most popular Stablecoin and Chain used around the world."
           />
         </ContentWrapper>
-
         <ContentWrapper>
           <div className="w-full flex justify-center">
             <AnimatedTabs
@@ -84,10 +75,10 @@ const Regions = () => {
         </ContentWrapper>
       </div>
 
-      {/* Scrollable content section */}
+      {/* Content section */}
       <div className="w-full pb-12 flex flex-col items-center gap-12">
         <ContentWrapper>
-          <h3 className="text-2xl font-bold mb-4" id="latin">
+          <h3 className="text-2xl font-bold mb-4" id="latin-america">
             Latin America
           </h3>
           <div className="w-full flex flex-col lg:flex-row gap-4">
