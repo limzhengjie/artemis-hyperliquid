@@ -15,7 +15,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-const REPORT_LINK = 'https://artemis.xyz/stablecoin-report-2025' // Replace with actual report link
+const REPORT_LINK =
+  'https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up.pdf'
 
 const formSchema = z.object({
   email: z
