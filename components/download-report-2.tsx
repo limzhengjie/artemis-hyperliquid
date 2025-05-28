@@ -101,7 +101,7 @@ export default function DownloadReportForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem className="w-full relative">
+            <FormItem className="w-full max-w-[320px] relative">
               <FormControl>
                 <Input
                   {...field}
@@ -118,11 +118,7 @@ export default function DownloadReportForm() {
           )}
         />
         <Button variant="cta" type="submit" disabled={isLoading || isSuccess}>
-          {isSuccess
-            ? 'Success!'
-            : isLoading
-            ? 'Processing...'
-            : 'Download Report'}
+          Download
         </Button>
       </form>
     </Form>
