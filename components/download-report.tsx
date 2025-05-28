@@ -53,24 +53,24 @@ export default function DownloadReport() {
    * Rate limit the number of submissions allowed
    * @returns {boolean} true if the form has been successfully submitted in the past minute
    */
-  const hasRecentSubmission = () => {
-    const time = new Date()
-    const timestamp = time.valueOf()
-    const previousTimestamp = localStorage.getItem('loops-form-timestamp')
+  // const hasRecentSubmission = () => {
+  //   const time = new Date()
+  //   const timestamp = time.valueOf()
+  //   const previousTimestamp = localStorage.getItem('loops-form-timestamp')
 
-    // Indicate if the last sign up was less than a minute ago
-    if (
-      previousTimestamp &&
-      Number(previousTimestamp) + 60 * 1000 > timestamp
-    ) {
-      setFormState(ERROR)
-      setErrorMessage('Too many signups, please try again in a little while')
-      return true
-    }
+  //   // Indicate if the last sign up was less than a minute ago
+  //   if (
+  //     previousTimestamp &&
+  //     Number(previousTimestamp) + 60 * 1000 > timestamp
+  //   ) {
+  //     setFormState(ERROR)
+  //     setErrorMessage('Too many signups, please try again in a little while')
+  //     return true
+  //   }
 
-    localStorage.setItem('loops-form-timestamp', timestamp.toString())
-    return false
-  }
+  //   localStorage.setItem('loops-form-timestamp', timestamp.toString())
+  //   return false
+  // }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     // Prevent the default form submission
@@ -83,7 +83,7 @@ export default function DownloadReport() {
       setErrorMessage('Please enter a valid email')
       return
     }
-    if (hasRecentSubmission()) return
+    // if (hasRecentSubmission()) return
     setFormState(SUBMITTING)
 
     // build additional fields
