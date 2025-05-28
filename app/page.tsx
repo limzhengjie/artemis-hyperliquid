@@ -19,7 +19,7 @@ import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
 import LogoGrid from '@/components/logo-grid'
-import DownloadReport from '@/components/download-report'
+import DownloadReportForm from '@/components/download-report-2'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
@@ -66,7 +66,7 @@ export default async function Overview() {
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-8">
             <div className="flex flex-col gap-6">
               <BlurbHero />
-              <DownloadReport />
+              <DownloadReportForm />
             </div>
             <StatSummaryTile
               mainStatLabel="ISSUED STABLECOINS"
@@ -230,7 +230,7 @@ export default async function Overview() {
                 description="Discover the latest stablecoin trends, data, and insights shaping 2025. Download your copy today."
                 textAlignment="left"
               />
-              <DownloadReport />
+              <DownloadReportForm />
             </div>
           </div>
         </ContentWrapper>
