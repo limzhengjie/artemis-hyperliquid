@@ -33,13 +33,28 @@ export const metadata: Metadata = {
       'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
     url: 'https://stablecoin.fyi',
     siteName: 'Stablecoin Payments from the Ground Up | Artemis',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: '/report.png',
+        width: 1200,
+        height: 630,
+        alt: 'Stablecoin Payments from the Ground Up | Artemis'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Stablecoin Payments from the Ground Up | Artemis',
     description:
-      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.'
+      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
+    images: ['/report.png']
+  },
+  other: {
+    'og:image': '/report.png',
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:image:alt': 'Stablecoin Payments from the Ground Up | Artemis'
   }
 }
 
