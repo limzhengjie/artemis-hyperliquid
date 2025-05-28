@@ -66,10 +66,7 @@ export default function DownloadReportForm() {
       }
 
       setIsSuccess(true)
-
-      setTimeout(() => {
-        window.open(REPORT_LINK, '_blank')
-      }, 2000)
+      window.open(REPORT_LINK, '_blank')
     } catch (err) {
       console.error(err)
       form.setError('email', {
