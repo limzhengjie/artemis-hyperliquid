@@ -34,7 +34,8 @@ const formStyles = {
   mailingLists: 'cmapovue005770iwve0e19b2l' // https://app.loops.so/settings?page=lists
 }
 const domain = 'app.loops.so'
-const reportLink = `${ARTEMIS_TERMINAL_URL}/stablecoins-2025-report` // TODO: change to the report link
+const reportLink =
+  'https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up.pdf'
 
 export default function DownloadReport() {
   const [email, setEmail] = useState('')
