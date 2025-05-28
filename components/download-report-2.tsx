@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,7 +9,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage
 } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
@@ -40,7 +38,6 @@ type FormData = z.infer<typeof formSchema>
 export default function DownloadReportForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const router = useRouter()
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -73,6 +70,7 @@ export default function DownloadReportForm() {
         window.open(REPORT_LINK, '_blank')
       }, 1000)
     } catch (err) {
+      console.error(err)
       form.setError('email', {
         type: 'manual',
         message: 'Something went wrong. Please try again.'
