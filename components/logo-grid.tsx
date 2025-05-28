@@ -10,7 +10,7 @@ interface Props {
 
 const LogoGrid = ({ dataPartners }: Props) => {
   return (
-    <div className="relative w-full max-w-[550px] border border-solid border-[var(--color-pluto-purple-100)] rounded-xl px-8 py-10 pb-12">
+    <div className="relative w-full max-w-[750px] border border-solid border-[var(--color-pluto-purple-100)] rounded-xl px-8 py-10 pb-12">
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-10">
         {dataPartners.map(dataPartner => (
           <div
@@ -20,8 +20,8 @@ const LogoGrid = ({ dataPartners }: Props) => {
             <Image
               src={dataPartner.image}
               alt={dataPartner.name}
-              width={70}
-              height={70}
+              width={100}
+              height={100}
               className="grayscale-100 brightness-75 transition-all duration-500"
             />
           </div>
