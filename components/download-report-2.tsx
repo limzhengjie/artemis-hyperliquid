@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -37,6 +38,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 export default function DownloadReportForm() {
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -66,7 +68,7 @@ export default function DownloadReportForm() {
       }
 
       setIsSuccess(true)
-      window.open(REPORT_LINK, '_blank')
+      router.push(REPORT_LINK)
     } catch (err) {
       console.error(err)
       form.setError('email', {
