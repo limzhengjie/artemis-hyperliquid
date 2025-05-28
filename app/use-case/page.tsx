@@ -26,6 +26,7 @@ const UseCase = () => {
         />
       </ContentWrapper>
 
+      <div id="b2b-stablecoin-volumes" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
@@ -48,6 +49,7 @@ const UseCase = () => {
         </div>
       </ContentWrapper>
 
+      <div id="crypto-card-linked-volumes" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
@@ -70,6 +72,7 @@ const UseCase = () => {
         </div>
       </ContentWrapper>
 
+      <div id="p2p-stablecoin-volumes" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
@@ -92,6 +95,7 @@ const UseCase = () => {
         </div>
       </ContentWrapper>
 
+      <div id="b2c-stablecoin-volumes" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
@@ -114,6 +118,7 @@ const UseCase = () => {
         </div>
       </ContentWrapper>
 
+      <div id="stablecoin-prefunding" />
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <div className="md:order-1">
