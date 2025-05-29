@@ -81,6 +81,14 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="latin-america">
             Latin America
           </h3>
+          <p className="text-muted-foreground text-md mb-4">
+            Across Latin America, Tron dominates as the primary blockchain for
+            stablecoin settlement, especially in Colombia, Ecuador, and Brazil,
+            where it accounts for the vast majority of observed activity. USDT
+            is the primary stablecoin across the region, though Argentina stands
+            out for its relatively high USDC usage, likely driven by local
+            startups responding to chronic currency instability.
+          </p>
           <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Latin America"
@@ -103,6 +111,13 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="africa">
             Africa
           </h3>
+          <p className="text-muted-foreground text-md mb-4">
+            In Africa, Tron and Ethereum dominate stablecoin settlement, with
+            Tron leading in North and West African markets, while Ethereum sees
+            more use in Kenya, Nigeria, South Africa, and Uganda. USDT remains
+            the primary stablecoin across the continent, though USDC has gained
+            notable traction in select countries like Nigeria and South Africa.
+          </p>
           <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Africa"
@@ -125,6 +140,13 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="americas">
             Americas
           </h3>
+          <p className="text-muted-foreground text-md mb-4">
+            In the Americas, Tron leads stablecoin settlement across most
+            markets, with Ethereum showing stronger presence in the U.S. and
+            Jamaica. USDT overwhelmingly dominates stablecoin volume
+            region-wide, though USDC sees meaningful adoption in the U.S. and
+            modest presence in countries like Mexico and Jamaica.
+          </p>
           <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Americas"
@@ -147,6 +169,12 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="europe">
             Europe
           </h3>
+          <p className="text-muted-foreground text-md mb-4">
+            In Europe, Tron dominates stablecoin settlement across nearly all
+            markets, with Ethereum playing a secondary role and leading only in
+            Spain. USDT accounts for over 90% of stablecoin volume throughout
+            the region, while USDC and other stablecoins see minimal usage.
+          </p>
           <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Europe"
@@ -169,6 +197,13 @@ const Regions = () => {
           <h3 className="text-2xl font-bold mb-4" id="asia">
             Asia
           </h3>
+          <p className="text-muted-foreground text-md mb-4">
+            Asia shows the most diverse network landscape, with Tron leading in
+            many markets but Ethereum, BSC, and Polygon (notably in India) also
+            seeing meaningful adoption. USDT dominates stablecoin usage across
+            the region, though India stands out with USDC capturing nearly half
+            of local volume.
+          </p>
           <div className="w-full flex flex-col lg:flex-row gap-4">
             <Chart
               title="Stablecoin Volume by Blockchain in Asia"
