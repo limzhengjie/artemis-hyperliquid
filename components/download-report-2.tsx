@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -38,7 +38,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 export default function DownloadReportForm() {
-  const router = useRouter()
+  // const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -68,12 +68,26 @@ export default function DownloadReportForm() {
       }
 
       setIsSuccess(true)
-      router.push(REPORT_LINK)
+
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+
+      if (isMobile) {
+        window.location.href = REPORT_LINK
+      } else {
+        const anchor = document.createElement('a')
+        anchor.href = REPORT_LINK
+        anchor.target = '_blank'
+        anchor.rel = 'noopener noreferrer'
+        anchor.click()
+      }
     } catch (err) {
       console.error(err)
       form.setError('email', {
         type: 'manual',
-        message: 'Something went wrong. Please try again.'
+        message: 'Something went wrong. Please refresh the page and try again.'
       })
     } finally {
       setIsLoading(false)
