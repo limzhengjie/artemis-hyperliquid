@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
 import { ThemeProvider } from '@/contexts/theme-provider'
@@ -86,6 +87,7 @@ export default function RootLayout({
             </PostHogProvider>
           </TooltipProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
