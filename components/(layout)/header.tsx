@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 
 import ArtemisStablecoinLogo from '@/public/artemis-stablecoin-logo.svg'
 
-import { DatabaseIcon } from 'lucide-react'
+import { MessageCircleMoreIcon } from 'lucide-react'
 
 // hamburger menu button
 const MenuButton = ({
@@ -214,7 +214,7 @@ const Header = () => {
               target="_blank"
             >
               <Button variant="outline" className="flex items-center gap-1">
-                <DatabaseIcon />
+                <MessageCircleMoreIcon />
                 <span>Contact Us</span>
               </Button>
             </Link>
@@ -274,7 +274,7 @@ const Header = () => {
                   variant="outline"
                   className="w-full flex items-center justify-center gap-1 mb-4 bg-white"
                 >
-                  <DatabaseIcon />
+                  <MessageCircleMoreIcon />
                   <span>Need Stablecoin Data?</span>
                 </Button>
               </Link>
