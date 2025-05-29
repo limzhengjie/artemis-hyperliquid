@@ -31,7 +31,7 @@ const BlurbHero = () => {
         grown from under $10 billion to over $240 billion. To better understand
         how stablecoins are actually used, we spoke with 20 companies across a
         range of use cases and collected estimates from 11 more. This report
-        offers a rare, bottom-ups look at how stablecoins are being used in the
+        offers a rare, bottoms-up look at how stablecoins are being used in the
         real world.
       </p>
     </div>
