@@ -18,7 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const REPORT_LINK =
-  'https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up.pdf'
+  'https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up-2025.pdf'
 
 const formSchema = z.object({
   email: z
