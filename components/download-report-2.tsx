@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 // import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
@@ -98,6 +99,16 @@ export default function DownloadReportForm() {
     return (
       <div className="flex flex-col gap-2 text-[var(--color-pluto-purple-500)] font-medium">
         <p>Thank you for downloading the report!</p>
+        <p className="text-sm text-muted-foreground">
+          If you're not redirected to the report in 5 seconds, please{' '}
+          <Link
+            href={REPORT_LINK}
+            target="_blank"
+            className="underline hover:opacity-80"
+          >
+            click here to download the report
+          </Link>
+        </p>
       </div>
     )
   }
