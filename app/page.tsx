@@ -100,7 +100,7 @@ export default async function Overview() {
         <div className="flex flex-col gap-8 items-center">
           <Blurb
             title="How Big are Stablecoin Payments, Really?"
-            description="Based on the data provided by contributing firms and the additional onchain estimates, we were able to specifically attribute $92.4 billion of stablecoin payment settled for various payment types between January 2020 and January 2023, with the vast majority of these settling on blockchains directly. The annual run rate pace for these settlements totalled approximately $72.3 billion in February 2025."
+            description="Based on the data provided by contributing firms and the additional onchain estimates, we were able to specifically attribute $92.4 billion of stablecoin payment settled for various payment types between January 2023 and February 2025, with the vast majority of these settling on blockchains directly. The annual run rate pace for these settlements totalled approximately $72.3 billion in February 2025."
             textAlignment="center"
           />
           <div className="w-full max-w-[800px]">
