@@ -215,7 +215,7 @@ const Header = () => {
             >
               <Button variant="outline" className="flex items-center gap-1">
                 <DatabaseIcon />
-                <span>Need Stablecoin Data?</span>
+                <span>Contact Us</span>
               </Button>
             </Link>
             <Button
