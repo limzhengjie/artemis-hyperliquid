@@ -100,7 +100,7 @@ export default function DownloadReportForm() {
       <div className="flex flex-col gap-2 text-[var(--color-pluto-purple-500)] font-medium">
         <p>Thank you for downloading the report!</p>
         <p className="text-sm text-muted-foreground">
-          If you're not redirected to the report in 5 seconds, please{' '}
+          If you&apos;re not redirected to the report in 5 seconds, please{' '}
           <Link
             href={REPORT_LINK}
             target="_blank"
