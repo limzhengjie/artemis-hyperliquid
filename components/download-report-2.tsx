@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-// import { useRouter } from 'next/navigation'
+import posthog from 'posthog-js'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -39,7 +39,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 export default function DownloadReportForm() {
-  // const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -75,6 +74,12 @@ export default function DownloadReportForm() {
           navigator.userAgent
         )
 
+      // Track successful download
+      posthog.capture('report_downloaded', {
+        email: data.email,
+        device: isMobile ? 'mobile' : 'desktop'
+      })
+
       if (isMobile) {
         window.location.href = REPORT_LINK
       } else {
@@ -86,6 +91,11 @@ export default function DownloadReportForm() {
       }
     } catch (err) {
       console.error(err)
+      // Track download error
+      posthog.capture('report_download_error', {
+        email: data.email,
+        error: err instanceof Error ? err.message : 'Unknown error'
+      })
       form.setError('email', {
         type: 'manual',
         message: 'Something went wrong. Please refresh the page and try again.'
