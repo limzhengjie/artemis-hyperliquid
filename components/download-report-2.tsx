@@ -76,8 +76,11 @@ export default function DownloadReportForm() {
 
       // Track successful download
       posthog.capture('report_downloaded', {
-        email: data.email,
-        device: isMobile ? 'mobile' : 'desktop'
+        $set: {
+          last_report_download: new Date().toISOString(),
+          device_type: isMobile ? 'mobile' : 'desktop',
+          user_email: data.email
+        }
       })
 
       if (isMobile) {
@@ -91,11 +94,6 @@ export default function DownloadReportForm() {
       }
     } catch (err) {
       console.error(err)
-      // Track download error
-      posthog.capture('report_download_error', {
-        email: data.email,
-        error: err instanceof Error ? err.message : 'Unknown error'
-      })
       form.setError('email', {
         type: 'manual',
         message: 'Something went wrong. Please refresh the page and try again.'
