@@ -8,6 +8,68 @@ export const supabase = createClient(
   supabaseKey as string
 )
 
+// function to trigger revalidation when data changes
+export async function triggerRevalidation() {
+  const response = await fetch('/api/revalidate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      path: '/market-map',
+      secret: process.env.REVALIDATION_SECRET
+    })
+  })
+
+  if (!response.ok) {
+    console.error('Failed to revalidate')
+  }
+}
+
+// set up realtime subscription
+export function setupRealtimeSubscription() {
+  const channel = supabase
+    .channel('market_map_changes')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'protocols_categories'
+      },
+      () => {
+        triggerRevalidation()
+      }
+    )
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'protocols_metadata'
+      },
+      () => {
+        triggerRevalidation()
+      }
+    )
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'categories'
+      },
+      () => {
+        triggerRevalidation()
+      }
+    )
+    .subscribe()
+
+  return () => {
+    supabase.removeChannel(channel)
+  }
+}
+
 export async function getMarketMapCategoriesAndProtocols() {
   const { data, error } = await supabase.from('categories').select(`
       *,

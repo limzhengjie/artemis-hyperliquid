@@ -1,10 +1,16 @@
-import { getMarketMapCategoriesAndProtocols } from '@/lib/supabase'
+import {
+  getMarketMapCategoriesAndProtocols,
+  setupRealtimeSubscription
+} from '@/lib/supabase'
 
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import CategoryCard from '@/components/(market-map)/category-card'
 
 const MarketMap = async () => {
   const categories = await getMarketMapCategoriesAndProtocols()
+
+  // set up realtime subscription
+  setupRealtimeSubscription()
 
   const ANALYTICS_AND_RATINGS_CATEGORIES = ['analytics', 'rating_agencies']
 
