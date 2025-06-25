@@ -16,6 +16,7 @@ import {
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { ArrowRightIcon } from 'lucide-react'
 
 const REPORT_LINK =
   'https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up-2025.pdf'
@@ -38,7 +39,11 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
-export default function DownloadReportForm() {
+interface Props {
+  disableForm?: boolean
+}
+
+export default function DownloadReportForm({ disableForm = false }: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -118,6 +123,17 @@ export default function DownloadReportForm() {
           </Link>
         </p>
       </div>
+    )
+  }
+
+  if (disableForm) {
+    return (
+      <Button variant="cta" asChild className="w-fit">
+        <Link href={REPORT_LINK} target="_blank" className="flex items-center">
+          Download the Report
+          <ArrowRightIcon className="w-4 h-4" />
+        </Link>
+      </Button>
     )
   }
 

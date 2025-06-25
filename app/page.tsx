@@ -66,7 +66,7 @@ export default async function Overview() {
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-8">
             <div className="flex flex-col gap-6">
               <BlurbHero />
-              <DownloadReportForm />
+              <DownloadReportForm disableForm />
             </div>
             <StatSummaryTile
               mainStatLabel="ISSUED STABLECOINS"
@@ -230,7 +230,7 @@ export default async function Overview() {
                 description="Discover the latest stablecoin trends, data, and insights shaping 2025. Download your copy today."
                 textAlignment="left"
               />
-              <DownloadReportForm />
+              <DownloadReportForm disableForm />
             </div>
           </div>
         </ContentWrapper>
