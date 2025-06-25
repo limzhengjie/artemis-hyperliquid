@@ -19,7 +19,7 @@ import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Quotes from '@/components/quotes'
 import LogoMarquee from '@/components/logo-marquee'
 import LogoGrid from '@/components/logo-grid'
-import DownloadReportForm from '@/components/download-report-2'
+import DownloadReportForm from '@/components/download-report'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
