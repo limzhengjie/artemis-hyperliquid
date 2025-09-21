@@ -155,25 +155,26 @@ const Header = () => {
       active: isActive('/')
     },
     {
-      label: 'By Region',
-      href: '/regions',
-      active: isActive('/regions')
+      label: 'Binance vs Hyperliquid',
+      href: '/binance-hyperliquid',
+      active: isActive('/binance-hyperliquid')
     },
     {
-      label: 'By Use Case',
-      href: '/use-case',
-      active: isActive('/use-case')
+      label: 'Stablecoins',
+      href: '/stablecoins',
+      active: isActive('/stablecoins')
     },
     {
-      label: 'Partners',
-      href: '/partners',
-      active: isActive('/partners')
+      label: 'Tokenomics and Community',
+      href: '/tokenomics-and-community',
+      active: isActive('/tokenomics-and-community')
     },
     {
-      label: 'Market Map',
-      href: '/market-map',
-      active: isActive('/market-map')
-    }
+      label: 'Feedback',
+      href: '/feedback',
+      active: isActive('/feedback')
+    },
+    
   ]
 
   return (

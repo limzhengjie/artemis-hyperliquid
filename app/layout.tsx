@@ -23,17 +23,17 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Stablecoin Payments from the Ground Up | Artemis',
+  title: 'Hyperliquid For All | Artemis',
   description:
     'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
   keywords:
-    'stablecoin payments from the ground up, Artemis, stablecoin, stablecoin analytics, USDC, USDT, Tether, market data, blockchain, payments, stablecoin payments, stablecoin b2b, stablecoin p2p',
+    'hyperliquid for all, Artemis, hyperliquid, hyperliquid analytics, hyperliquid market data, hyperliquid blockchain, hyperliquid payments, hyperliquid b2b, hyperliquid p2p',
   openGraph: {
-    title: 'Stablecoin Payments from the Ground Up | Artemis',
+    title: 'Hyperliquid For All | Artemis',
     description:
       'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
     url: 'https://stablecoin.fyi',
-    siteName: 'Stablecoin Payments from the Ground Up | Artemis',
+    siteName: 'Hyperliquid For All | Artemis',
     type: 'website',
     images: [
       {

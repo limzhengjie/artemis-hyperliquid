@@ -1,5 +1,7 @@
 import Chart from '@/components/chart'
-import { VALUE_FORMAT } from '@/constants/chart'
+import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
+import { getCurrentDate, getStartDate } from '@/lib/dates'
+import { fetchHyperliquidPerpVolumeBySymbol } from '@/lib/fetchStablecoinsData'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
@@ -16,21 +18,7 @@ import {
   STABLECOIN_COMPANIES_BY_CHAIN_CONFIG
 } from '@/constants/data/overview'
 
-import {
-  REGION_BY_CURRENCY_CONFIG,
-  REGION_BY_CHAIN_CONFIG,
-  REGION_BY_CHAIN_CONFIG_WITH_XRP,
-  LATIN_AMERICA_BY_CHAIN_DATA,
-  LATIN_AMERICA_BY_CURRENCY_DATA,
-  AFRICA_BY_CHAIN_DATA,
-  AFRICA_BY_CURRENCY_DATA,
-  AMERICAS_BY_CHAIN_DATA,
-  AMERICAS_BY_CURRENCY_DATA,
-  ASIA_BY_CHAIN_DATA,
-  ASIA_BY_CURRENCY_DATA,
-  EUROPE_BY_CHAIN_DATA,
-  EUROPE_BY_CURRENCY_DATA
-} from '@/constants/data/regions'
+import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_HYPERLIQUID_SPOT_CONFIG } from '@/constants/data/binance-hyperliquid'
 
 import {
   USE_CASE_BY_CURRENCY_CONFIG,
@@ -53,9 +41,46 @@ import {
   PREFUNDING_CONFIG
 } from '@/constants/data/use-case'
 
-const Charts = () => {
+const Charts = async () => {
+  const endDate = getCurrentDate()
+  const startDate = getStartDate(180) as string
+
+  const PERP_VOLUME_BY_SYMBOL_DATA = await fetchHyperliquidPerpVolumeBySymbol(
+    startDate,
+    endDate as string
+  )
+
+  const PERP_VOLUME_BY_SYMBOL_CONFIG = {
+    aevo: { label: 'Aevo', color: '#8C7CF7', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    apex: { label: 'Apex', color: '#70A9FF', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    avantis: { label: 'Avantis', color: '#51B495', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    blue: { label: 'Bluefin', color: '#F7BD5F', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    drift: { label: 'Drift', color: '#FF8A65', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    dydx: { label: 'dYdX', color: '#4DB6AC', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    gns: { label: 'Gains', color: '#BA68C8', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    gmx: { label: 'GMX', color: '#FFD54F', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    hold: { label: 'Hold', color: '#90A4AE', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    hype: { label: 'Hyperliquid', color: '#EF5350', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    jup: { label: 'Jupiter', color: '#66BB6A', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    ktc: { label: 'KTX', color: '#26C6DA', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    mcb: { label: 'MCB', color: '#D4E157', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    perp: { label: 'Perpetual', color: '#9575CD', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    // snx intentionally omitted: "Metric not available for asset."
+    vrtx: { label: 'Vertex', color: '#FFB74D', type: CHART_TYPES.stacked100, stackId: 'perps' },
+    lighter: { label: 'Lighter', color: '#26A69A', type: CHART_TYPES.stacked100, stackId: 'perps' }
+  } as const
+
   return (
     <div className="w-full max-w-6xl mx-auto p-12 flex flex-col items-center gap-8 font-[family-name:var(--font-geist-sans)]">
+      <Chart
+        title="Perp Volume Share by Venue"
+        data={PERP_VOLUME_BY_SYMBOL_DATA}
+        dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG as any}
+        valueFormat={VALUE_FORMAT.percentage}
+        isTimeSeries
+        hidePoweredBy
+        chartHeight={320}
+      />
       <Chart
         title="Stablecoin Payments by Type"
         data={STABLECOIN_ACTIVITY_BY_TYPE_DATA}
@@ -116,78 +141,15 @@ const Charts = () => {
         hidePoweredBy
       />
 
-      <h1 className="text-2xl font-bold">
-        B2B Stablecoin Volume by Region (of our Data Partners)
-      </h1>
+      <h1 className="text-2xl font-bold">Binance vs Hyperliquid</h1>
       <Chart
-        title="Stablecoin Volume by Blockchain in Latin America"
-        data={LATIN_AMERICA_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
+        title="Binance vs Hyperliquid Spot Volume (Weekly)"
+        data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
+        dataConfig={BINANCE_HYPERLIQUID_SPOT_CONFIG as any}
+        valueFormat={VALUE_FORMAT.currency}
+        isTimeSeries
         hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Token in Latin America"
-        data={LATIN_AMERICA_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Blockchain in Africa"
-        data={AFRICA_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Token in Africa"
-        data={AFRICA_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Blockchain in Americas"
-        data={AMERICAS_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Token in Americas"
-        data={AMERICAS_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Blockchain in Europe"
-        data={EUROPE_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Token in Europe"
-        data={EUROPE_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Blockchain in Asia"
-        data={ASIA_BY_CHAIN_DATA}
-        dataConfig={REGION_BY_CHAIN_CONFIG_WITH_XRP}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
-      />
-      <Chart
-        title="Stablecoin Volume by Token in Asia"
-        data={ASIA_BY_CURRENCY_DATA}
-        dataConfig={REGION_BY_CURRENCY_CONFIG}
-        valueFormat={VALUE_FORMAT.percentage}
-        hidePoweredBy
+        chartHeight={320}
       />
 
       <h1 className="text-2xl font-bold">Use Case Breakdowns</h1>

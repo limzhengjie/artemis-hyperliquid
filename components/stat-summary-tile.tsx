@@ -8,6 +8,8 @@ import { formatValue } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 
 import Sparkline from '@/components/sparkline'
+import Chart from '@/components/chart'
+import type { ChartConfig } from '@/components/ui/chart'
 
 import { ArrowUpIcon, ArrowDownIcon } from 'lucide-react'
 
@@ -17,6 +19,8 @@ interface StatSummaryTileProps {
   mainStatChange: { value: number; type: ValueFormat; label: string }
   sparklineData: { date: string; value: number }[]
   miniStatsData: { date: string; value: number }[]
+  stackedPercentData?: Array<{ date: string; [k: string]: number | string }>
+  stackedPercentConfig?: ChartConfig
 }
 
 const StatSummaryTile = ({
@@ -24,7 +28,9 @@ const StatSummaryTile = ({
   mainStat,
   mainStatChange,
   sparklineData,
-  miniStatsData
+  miniStatsData,
+  stackedPercentData,
+  stackedPercentConfig
 }: StatSummaryTileProps) => {
   const PERIODS = [
     { daysBack: 30, label: 'Last Month' },
@@ -104,7 +110,22 @@ const StatSummaryTile = ({
             </div>
           </div>
         </div>
-        <Sparkline data={sparklineData} valueFormat={VALUE_FORMAT.currency} />
+        {stackedPercentData && stackedPercentConfig ? (
+          <div className="px-4 pb-2">
+            <Chart
+              title=""
+              data={stackedPercentData}
+              dataConfig={stackedPercentConfig}
+              valueFormat={VALUE_FORMAT.percentage}
+              isTimeSeries
+              bare
+              chartHeight={180}
+              hidePoweredBy
+            />
+          </div>
+        ) : (
+          <Sparkline data={sparklineData} valueFormat={VALUE_FORMAT.currency} />
+        )}
         <Image
           src="/watermark.svg"
           alt="Artemis Logo"

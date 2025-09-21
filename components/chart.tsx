@@ -51,6 +51,7 @@ interface Props {
   hideLegend?: boolean
   hidePoweredBy?: boolean
   yAxisDomainToMax?: boolean
+  bare?: boolean
 }
 
 const Chart = ({
@@ -63,7 +64,8 @@ const Chart = ({
   chartHeight = 260,
   hideLegend = false,
   hidePoweredBy = false,
-  yAxisDomainToMax = false
+  yAxisDomainToMax = false,
+  bare = false
 }: Props) => {
   const [legendProps, setLegendProps] = useState(
     Object.keys(dataConfig)
@@ -370,8 +372,8 @@ const Chart = ({
                 keyMapping={keyToPercentageKeyMap}
               />
             }
-            verticalAlign="top"
-            className="mb-4 select-none"
+            verticalAlign="bottom"
+            className="mt-4 select-none"
           />
         )}
 
@@ -408,6 +410,18 @@ const Chart = ({
           })}
         </defs>
       </ComposedChart>
+    )
+  }
+
+  if (bare) {
+    return (
+      <ChartContainer
+        config={dataConfig}
+        className="w-full"
+        style={{ height: `${chartHeight}px` }}
+      >
+        {renderChart()}
+      </ChartContainer>
     )
   }
 
