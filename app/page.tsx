@@ -10,7 +10,7 @@ import { DATA_PARTNERS } from '@/constants/data-partners'
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 
-import { fetchHyperliquidPerpVolume, fetchAllPerpsVolume, fetchPerpVolumeByVenue } from '@/lib/fetchStablecoinsData'
+import { fetchHyperliquidPerpVolume, fetchAllPerpsVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume } from '@/lib/fetchHyperliquidData'
 import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
 import { TVL_DATA } from '@/constants/data/overview'
 
@@ -84,6 +84,11 @@ export default async function Overview() {
     endDate as string
   )
 
+  const allSpotDEXVolumeData = await fetchAllSpotDEXVolume(
+    getStartDate(365) as string,
+    endDate as string
+  )
+
   // Build Binance vs Hyperliquid Weekly Perp Comparison (reuse logic from /binance-hyperliquid)
   function getWeekStart(dateStr: string) {
     const d = new Date(dateStr)
@@ -143,6 +148,28 @@ export default async function Overview() {
     perp: { label: 'Perpetual', color: '#9575CD', type: CHART_TYPES.stacked100, stackId: 'perps' },
     vrtx: { label: 'Vertex', color: '#FFB74D', type: CHART_TYPES.stacked100, stackId: 'perps' },
     lighter: { label: 'Lighter', color: '#26A69A', type: CHART_TYPES.stacked100, stackId: 'perps' }
+  }
+
+  // Remap Spot DEX keys to match config and guard empty
+  const remapSpotRow = (row: any) => ({
+    date: row.date,
+    ray: Number(row.ray ?? row.raydium ?? 0),
+    cake: Number(row.cake ?? row.pancakeswap ?? 0),
+    hype: Number(row.hype ?? 0),
+    orca: Number(row.orca ?? 0),
+    uni: Number(row.uni ?? row.uniswap ?? 0)
+  })
+  const spotDEXSeries = Array.isArray(allSpotDEXVolumeData)
+    ? (allSpotDEXVolumeData as any[]).map(remapSpotRow)
+    : []
+
+
+  const SPOT_VOLUME_BY_SYMBOL_CONFIG: ChartConfig = {
+    ray: { label: 'Raydium', color: '#8C7CF7', type: CHART_TYPES.stacked100, stackId: 'spot' },
+    cake: { label: 'PancakeSwap', color: '#70A9FF', type: CHART_TYPES.stacked100, stackId: 'spot' },
+    hype: { label: 'Hyperliquid', color: '#EF5350', type: CHART_TYPES.stacked100, stackId: 'spot' },
+    orca: { label: 'Orca', color: '#51B495', type: CHART_TYPES.stacked100, stackId: 'spot' },
+    uni: { label: 'Uniswap', color: '#FF8A65', type: CHART_TYPES.stacked100, stackId: 'spot' }
   }
 
   // Build stacked-only series for the chart (HLP, SPOT, APPS only)
@@ -257,6 +284,31 @@ export default async function Overview() {
             chartHeight={360}
             hidePoweredBy
           />
+        </div>
+      </ContentWrapper>
+
+      <ContentWrapper>
+        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
+          <Blurb
+            title="Spot DEX Volume (Daily)"
+            description="Daily spot volume for DEXs."
+            textAlignment="center"
+          />
+          {spotDEXSeries && spotDEXSeries.length > 0 ? (
+            <Chart
+              title="Spot DEX Volume (Daily)"
+              data={spotDEXSeries as any}
+              dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={360}
+              hidePoweredBy
+            />
+          ) : (
+            <div className="w-full h-[360px] flex items-center justify-center text-muted-foreground">
+              Unable to load spot DEX data right now.
+            </div>
+          )}
         </div>
       </ContentWrapper>
 

@@ -1,21 +1,3 @@
-export async function getStablecoinSupplyData(
-  startDate: string,
-  endDate: string,
-  granularity: 'daily' | 'weekly' | 'monthly'
-) {
-  let url = `https://api.artemisxyz.com/stablecoins-v2/chart/?groupBy=chain&metric=STABLECOIN_SUPPLY`
-  url += `&startDate=${startDate}&endDate=${endDate}`
-  url += `&granularity=${granularity}`
-  url += `&filter=all&chains=all&symbols=all`
-  const res = await fetch(url)
-  const data = await res.json()
-
-  // Format data by summing values for the same dates
-  const formattedData = formatStablecoinData(data)
-
-  return formattedData
-}
-
 export async function fetchAllPerpsVolume(
   startDate: string,
   endDate: string,
@@ -63,6 +45,60 @@ export async function fetchAllPerpsVolume(
     lastIdx--
   }
   return lastIdx < formatted.length - 1 ? formatted.slice(0, lastIdx + 1) : formatted
+}
+
+
+
+export async function fetchAllSpotDEXVolume(
+  startDate: string,
+  endDate: string,
+  _granularity?: 'daily' | 'weekly' | 'monthly'
+): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
+  const symbols = 'ray,cake,hype,orca,uni'
+  const url = `https://data-svc.artemisxyz.com/data/SPOT_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10000)
+  let json: any
+  try {
+    const res = await fetch(url, { signal: controller.signal })
+    if (!res.ok) {
+      throw new Error(`Failed to fetch SPOT_VOLUME data: ${res.status} ${res.statusText}`)
+    }
+    json = await res.json()
+  } catch (err) {
+    clearTimeout(timeout)
+    return []
+  }
+  clearTimeout(timeout)
+
+  // Expected shape: { data: { symbols: { [symbol]: { SPOT_VOLUME: [{ date, val }] } } } }
+  const symbolsObj = json?.data?.symbols ?? {}
+  const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
+
+  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+    const seriesRaw = symbolRecord?.SPOT_VOLUME
+    const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
+    series.forEach(point => {
+      const d = point.date
+      const v = point.val ?? 0
+      if (!dateToRow[d]) dateToRow[d] = { date: d }
+      dateToRow[d][symbol] = typeof v === 'number' ? v : 0
+    })
+  })
+
+  const rows = Object.values(dateToRow).sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  )
+
+  // Trim trailing rows where all symbol values are 0 or missing
+  const symbolKeys = Object.keys(symbolsObj)
+  let lastIdx = rows.length - 1
+  const isRowZero = (row: { [k: string]: number | string }) =>
+    symbolKeys.every(key => typeof row[key] !== 'number' || (row[key] as number) === 0)
+  while (lastIdx >= 0 && isRowZero(rows[lastIdx])) lastIdx--
+
+  return lastIdx < rows.length - 1 ? rows.slice(0, lastIdx + 1) : rows
 }
 
 export async function fetchHyperliquidPerpVolume(

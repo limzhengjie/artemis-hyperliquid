@@ -1,7 +1,7 @@
 import Chart from '@/components/chart'
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 import { getCurrentDate, getStartDate } from '@/lib/dates'
-import { fetchAllPerpsVolume } from '@/lib/fetchStablecoinsData'
+import { fetchAllPerpsVolume } from '@/lib/fetchHyperliquidData'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
