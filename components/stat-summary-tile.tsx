@@ -33,9 +33,9 @@ const StatSummaryTile = ({
   stackedPercentConfig
 }: StatSummaryTileProps) => {
   const PERIODS = [
-    { daysBack: 30, label: 'Last Month' },
-    { daysBack: 365, label: 'Last Year' },
-    { daysBack: 365 * 3, label: 'Last 3 Years' }
+    { daysBack: 7, label: 'Last Week' },
+    { daysBack: 31, label: 'Last Month' },
+    { daysBack: 90, label: 'Last 3 Months' }
   ]
 
   const createMiniStatsData = () => {

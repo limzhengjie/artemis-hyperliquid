@@ -4,14 +4,14 @@ import Blurb from '@/components/blurb'
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_HYPERLIQUID_SPOT_CONFIG, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
 import { getCurrentDate, getStartDate } from '@/lib/dates'
-import { fetchHyperliquidPerpVolumeBySymbol } from '@/lib/fetchStablecoinsData'
+import { fetchAllPerpsVolume } from '@/lib/fetchStablecoinsData'
 
 const BinanceHyperliquid = async () => {
   const endDate = getCurrentDate()
   const startDate = getStartDate(1000) as string
 
   // Build perps comparison dataset (Binance from provided weekly series; Hyperliquid from endpoint aggregated weekly)
-  const perpsBySymbol = await fetchHyperliquidPerpVolumeBySymbol(
+  const perpsBySymbol = await fetchAllPerpsVolume(
     startDate,
     endDate as string
   )

@@ -24,7 +24,11 @@ const Sparkline = ({ data, valueFormat }: Props) => {
     }
   } satisfies ChartConfig
 
-  const isNegative = data[data.length - 1].value < data[0].value
+  const hasEnough = Array.isArray(data) && data.length >= 2
+  const safeData = Array.isArray(data) ? data.filter(d => Number.isFinite(d.value)) : []
+  const isNegative = hasEnough
+    ? safeData[safeData.length - 1]?.value < safeData[0]?.value
+    : false
 
   const color = isNegative ? 'var(--color-negative)' : 'var(--color-positive)'
 
@@ -32,7 +36,7 @@ const Sparkline = ({ data, valueFormat }: Props) => {
     <ChartContainer config={chartConfig} className="w-full h-[180px]">
       <AreaChart
         accessibilityLayer
-        data={data}
+        data={safeData}
         margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
       >
         <ChartTooltip

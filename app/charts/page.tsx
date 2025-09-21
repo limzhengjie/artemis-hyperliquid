@@ -1,7 +1,7 @@
 import Chart from '@/components/chart'
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 import { getCurrentDate, getStartDate } from '@/lib/dates'
-import { fetchHyperliquidPerpVolumeBySymbol } from '@/lib/fetchStablecoinsData'
+import { fetchAllPerpsVolume } from '@/lib/fetchStablecoinsData'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
@@ -45,7 +45,7 @@ const Charts = async () => {
   const endDate = getCurrentDate()
   const startDate = getStartDate(180) as string
 
-  const PERP_VOLUME_BY_SYMBOL_DATA = await fetchHyperliquidPerpVolumeBySymbol(
+  const PERP_VOLUME_BY_SYMBOL_DATA = await fetchAllPerpsVolume(
     startDate,
     endDate as string
   )
