@@ -132,12 +132,12 @@ export default async function Overview() {
 
   const PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG = {
     Hyperliquid: { label: 'Hyperliquid Perps', color: '#00D4AA', type: CHART_TYPES.stacked100, stackId: 'perpsBH' },
-    Binance: { label: 'Binance Perps', color: '#5E9EFD', type: CHART_TYPES.stacked100, stackId: 'perpsBH' }
+    Binance: { label: 'Binance Perps', color: '#FF8C00', type: CHART_TYPES.stacked100, stackId: 'perpsBH' }
   } as const
 
   const SPOT_PERCENT_CONFIG = {
     Hyperliquid: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.stacked100, stackId: 'spot' },
-    Binance: { label: 'Binance', color: '#5E9EFD', type: CHART_TYPES.stacked100, stackId: 'spot' }
+    Binance: { label: 'Binance', color: '#FF8C00', type: CHART_TYPES.stacked100, stackId: 'spot' }
   } as const
 
   // Removed unused ALL_PERPS_CONFIG
@@ -198,7 +198,7 @@ export default async function Overview() {
   }
 
   const SPOT_VOLUME_BINANCE_HYPERLIQUID_CONFIG: ChartConfig = {
-    Binance: { label: 'Binance', color: '#5E9EFD', type: CHART_TYPES.bar, stackId: 'spot' },
+    Binance: { label: 'Binance', color: '#FF8C00', type: CHART_TYPES.bar, stackId: 'spot' },
     Hyperliquid: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.bar, stackId: 'spot' }
   }
 
