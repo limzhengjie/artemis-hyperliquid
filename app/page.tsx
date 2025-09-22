@@ -216,33 +216,33 @@ export default async function Overview() {
   }
 
   return (
-    <div className="w-full pb-12 flex flex-col items-center gap-18 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full pb-16 flex flex-col items-center font-[family-name:var(--font-geist-sans)]">
       {/* Hero: Thesis + KPI + CTA */}
       <div
-        className="w-full flex items-center justify-center gap-12 pt-16 pb-16"
+        className="w-full flex items-center justify-center pt-20 pb-24"
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-12">
-            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-5">
-              <p className="text-[var(--color-hyperliquid-teal-500)] text-sm font-medium tracking-wide font-[family-name:var(--font-geist-mono)]">
+          <div className="flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-16">
+            <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-2xl">
+              <p className="text-[var(--color-hyperliquid-teal-500)] text-sm font-medium tracking-wide font-[family-name:var(--font-geist-mono)] uppercase">
                 The Hyperliquid Thesis
               </p>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight">
                 DeFi's Premier Operating System
               </h1>
-              <p className="text-muted-foreground max-w-2xl">
-              Hyperliquid isn’t just another chain. It begins with the fastest, most liquid perp markets in crypto, layers on unified spot settlement, and opens the door to a full stack of financial applications built directly on top. Each layer amplifies the next, creating a self-reinforcing system where capital flows in, finds deep liquidity, and sticks around.
-
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
+                Hyperliquid's gameplan is simple: <strong className="text-foreground">Win Perps. Own Spot. Grow Apps.</strong>
+                <br className="hidden sm:block" />
+                The flywheel has already started spinning: Ready to see the evidence?
               </p>
-              <div className="flex flex-wrap items-center gap-3">
-                
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link href="#layer-1-derivatives">
-                  <Button variant="cta">See the data</Button>
+                  <Button variant="cta" size="lg">See the data</Button>
                 </Link>
               </div>
             </div>
-            <div className="flex-1 w-full">
+            <div className="flex-1 w-full max-w-lg">
               <StatSummaryTile
                 mainStatLabel="PERP VOLUME"
                 mainStat={{
@@ -264,30 +264,30 @@ export default async function Overview() {
 
       {/* Powered by Artemis */}
       <ContentWrapper>
-        <div className="w-full flex items-center justify-center gap-3 py-2">
+        <div className="w-full flex items-center justify-center gap-3 py-8">
           <ArtemisLogo poweredBy />
         </div>
       </ContentWrapper>
 
       {/* Table of Contents */}
       <ContentWrapper>
-        <div className="w-full max-w-[900px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-4 border border-[var(--color-background-light-outline)] rounded-lg px-4 py-4">
-          <div className="text-sm text-muted-foreground">On this page</div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="#layer-1-derivatives"><Button variant="ghost" size="sm">Perps: Execution</Button></Link>
-            <Link href="#layer-2-spot"><Button variant="ghost" size="sm">Spot: Unified Settlement</Button></Link>
-            <Link href="#layer-3-infrastructure"><Button variant="ghost" size="sm">HyperEVM: Monetizing Liquidity</Button></Link>
+        <div className="w-full max-w-4xl mx-auto flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 border border-[var(--color-background-light-outline)] rounded-xl px-6 py-6 mb-8">
+          <div className="text-sm text-muted-foreground font-medium">On this page</div>
+          <div className="flex flex-wrap justify-center lg:justify-end gap-3">
+            <Link href="#layer-1-derivatives"><Button variant="ghost" size="sm" className="font-medium">Perps: Execution</Button></Link>
+            <Link href="#layer-2-spot"><Button variant="ghost" size="sm" className="font-medium">Spot: Unified Settlement</Button></Link>
+            <Link href="#layer-3-infrastructure"><Button variant="ghost" size="sm" className="font-medium">HyperEVM: Monetizing Liquidity</Button></Link>
           </div>
         </div>
       </ContentWrapper>
 
       {/* Layer 1: Derivatives Dominance */}
-      <div id="layer-1-derivatives" />
+      <div id="layer-1-derivatives" className="pt-16" />
       <ContentWrapper>
-        <div className="w-full flex flex-col items-center gap-6">
+        <div className="w-full flex flex-col items-center gap-8 mb-16">
           <Blurb
             title="Perps: The Execution Engine"
-            description="Perpetual futures are where Hyperliquid first proved its edge. Better execution brings more traders. More traders create deeper liquidity. Deeper liquidity enables even better execution. It's a simple flywheel that becomes incredibly powerful over time. What started as gradual market share gains is now looking like something much bigger: a fundamental shift in where serious traders choose to execute."
+            description="Perps attract leverage, hedging, and market makers: whoever wins perps wins depth first. On Hyperliquid, orders match on-chain by price then time, and margin/funding/liquidations settle in the same step, so fills are predictable and liquidations don't spiral. That reliability keeps size at the top of the book, spreads stay tight, and HL's perp price becomes the reference. As depth grows, the futures-spot gap tightens and hedging gets cheaper, pulling more collateral on-chain. With perps setting price and absorbing risk, spot flow and new apps can plug directly into that depth."
             textAlignment="center"
           />
         </div>
@@ -295,19 +295,21 @@ export default async function Overview() {
       
       {/* Chart 1: Binance comparison - Left-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="The Gravity Well Forms"
-            description="Every percentage point of market share that Hyperliquid takes from Binance represents billions in trading volume making a choice. Sophisticated traders are picking execution quality over brand recognition. They're choosing transparent orderbooks over black box matching. Once you've experienced the difference, it's hard to go back. This looks less like temporary disruption and more like permanent migration."
-          />
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-1">
+            <Blurb
+              title="The Gravity Well Forms"
+              description="HL's share rises because fills are better, not because of incentives. Pros want predictable queueing, tiny slippage on 1–5 bps moves, and liquidations that clear instantly on-chain (not via slow keepers). HLP helps stabilize books during spikes, so fills and liquidation slippage stay orderly. An uptick here basically says market makers prefer HL's on-chain engine and risk model over CEX/AMM setups."
+            />
+          </div>
+          <div className="lg:col-span-2">
             <Chart
               title="Binance vs Hyperliquid Perp Volume (Weekly)"
               data={PERP_VOLUME_BINANCE_HYPERLIQUID_DATA as any}
               dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG as any}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
-              chartHeight={360}
+              chartHeight={380}
               hidePoweredBy
             />
           </div>
@@ -315,98 +317,102 @@ export default async function Overview() {
       </ContentWrapper>
       
       {/* Chart 2: Asset diversification - Full width with centered text */}
-      <ContentWrapper className="max-w-none px-8 md:px-32">
-        <div className="w-full flex flex-col items-center gap-6 mb-4">
+      <ContentWrapper className="max-w-none px-4 sm:px-8 lg:px-16 xl:px-32">
+        <div className="w-full flex flex-col items-center gap-8 mb-12">
           <Blurb
-            title="Liquidity Consolidation Accelerates"
-            description="The perp landscape is consolidating fast. Early players like dYdX and GMX built solid businesses, but Hyperliquid is redefining what's possible. The numbers tell the story: this is more than just another exchange gaining share. It's capital flowing toward the venue that consistently delivers the best execution. When billions of dollars are on the line, small execution improvements compound into massive advantages."
+            title="Perp DEX Volume by Venue — why Hyperliquid dominates"
+            description="The perp landscape is consolidating into Hyperliquid because execution and risk are better where it matters. Early players like dYdX and GMX built solid businesses, but Hyperliquid's on-chain price-time order book + deterministic liquidations keep top-of-book thick and spreads tight when others thin out. HLP standardizes market-making/liquidation flow, so books stay supported in volatility."
             textAlignment="center"
           />
         </div>
-        {allPerpsVolumeData && allPerpsVolumeData.length > 0 ? (
-          <Chart
-            title="Perpetual Futures Volume by Venue"
-            data={allPerpsVolumeData}
-            dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
-            valueFormat={VALUE_FORMAT.percentage}
-            isTimeSeries
-            bare
-            chartHeight={480}
-            hidePoweredBy
-          />
-        ) : (
-          <div className="w-full h-[480px] flex items-center justify-center text-muted-foreground">
-            Unable to load data right now.
-          </div>
-        )}
+        <div className="mb-20">
+          {allPerpsVolumeData && allPerpsVolumeData.length > 0 ? (
+            <Chart
+              title="Perp DEX Volume by Venue — why Hyperliquid dominates"
+              data={allPerpsVolumeData}
+              dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              isTimeSeries
+              bare
+              chartHeight={500}
+              hidePoweredBy
+            />
+          ) : (
+            <div className="w-full h-[500px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-xl border border-border">
+              Unable to load data right now.
+            </div>
+          )}
+        </div>
       </ContentWrapper>
 
-      {/* Chart 2: Asset diversification - Full width with centered text */}
+      {/* Chart 3: Open Interest by Protocol - Right-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="Open Interest by Protocol"
-              description="Open interest is a measure of the total number of contracts outstanding in a market. It's a measure of the total number of contracts outstanding in a market."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="Open Interest by Protocol"
               data={allOpenInterestData as any}
               dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={360}
+              chartHeight={380}
               hidePoweredBy
+            />
+          </div>
+          <div className="lg:col-span-1 lg:order-2">
+            <Blurb
+              title="Open Interest by Protocol"
+              description="Open interest shows where traders warehouse risk, so price discovery happens here. Rising HL OI means confidence and stickiness."
             />
           </div>
         </div>
       </ContentWrapper>
 
       {/* Layer 2: Spot Settlement */}
-      <div id="layer-2-spot" />
+      <div id="layer-2-spot" className="pt-16" />
       <ContentWrapper>
-        <div className="w-full flex flex-col items-center gap-6">
+        <div className="w-full flex flex-col items-center gap-8 mb-16">
           <Blurb
             title="Spot: Unified Settlement & Collateral"
-            description="Spot trading is where Hyperliquid's unified architecture really shines. When you can move seamlessly between perps and spot within the same venue, your capital works harder. No more bridging between exchanges. No more fragmented liquidity. It's not just convenient - it's a completely different way to think about trading. As more of finance moves onchain, this unified approach becomes table stakes."
+            description="Spot is how we own settlement. With spot orderbooks and perps on the same stack, collateral and PnL move instantly without bridges or fragmentation. Basis compresses, hedges get cheaper, and every dollar does double duty. Native USD rails make working capital sticky, turning trading flow into durable liquidity. As more markets go on-chain, this unified model becomes the default."
             textAlignment="center"
           />
         </div>
       </ContentWrapper>
       
-      {/* Chart 3: Binance vs HL Spot - Right-aligned text */}
+      {/* Chart 4: Binance vs HL Spot - Right-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-            title="The Capital Efficiency Play"
-            description="Spot markets are tougher than perps. Binance has massive network effects: more pairs, more volume, more habit. But Hyperliquid is making a different bet. Instead of trying to match Binance's breadth, they're focusing on depth and execution quality. For traders who need to move between spot and derivatives quickly, the unified architecture is a game changer. It's early, but the signs are promising."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="Binance vs Hyperliquid Spot Volume (Weekly)"
               data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
               dataConfig={SPOT_PERCENT_CONFIG as any}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
-              chartHeight={360}
+              chartHeight={380}
               hidePoweredBy
+            />
+          </div>
+          <div className="lg:col-span-1 lg:order-2">
+            <Blurb
+              title="The Capital Efficiency Play"
+              description="Spot markets are tougher than perps. Binance has massive network effects: more pairs, more volume, more habit. But Hyperliquid is making a different bet. Instead of trying to match Binance's breadth, they're focusing on depth and execution quality. Hyperliquid converts perps flow → spot turnover on the same stack. As traders hedge and settle inside HL, share ticks up on core pairs first"
             />
           </div>
         </div>
       </ContentWrapper>
       
-      {/* Chart 4: DEX comparison - Left-aligned text */}
+      {/* Chart 5: DEX comparison - Left-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="The Execution Model Wars"
-            description="The battle for onchain spot volume comes down to a simple choice: do you want easy or do you want good? AMMs like Uniswap made trading accessible to everyone, but they're not built for size. Professional traders need better execution, tighter spreads, deeper liquidity. Hyperliquid brings traditional orderbook precision to onchain settlement. As more institutional money moves onchain, execution quality becomes the deciding factor."
-          />
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-1">
+            <Blurb
+              title="The Execution Model Wars"
+              description="The battle for onchain spot volume comes down to a simple choice: do you want easy or do you want good? AMMs like Uniswap made trading accessible to everyone, but they're not built for size. Professional traders need better execution, tighter spreads, deeper liquidity. Hyperliquid brings traditional orderbook precision to onchain settlement. As more institutional money moves onchain, execution quality becomes the deciding factor: one that Hyperliquid is primed to win."
+            />
+          </div>
+          <div className="lg:col-span-2">
             {spotDEXSeries && spotDEXSeries.length > 0 ? (
               <Chart
                 title="Spot DEX Volume (Daily)"
@@ -414,11 +420,11 @@ export default async function Overview() {
                 dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
                 valueFormat={VALUE_FORMAT.currency}
                 isTimeSeries
-                chartHeight={360}
+                chartHeight={380}
                 hidePoweredBy
               />
             ) : (
-              <div className="w-full h-[360px] flex items-center justify-center text-muted-foreground">
+              <div className="w-full h-[380px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-xl border border-border">
                 Unable to load spot DEX data right now.
               </div>
             )}
@@ -427,98 +433,100 @@ export default async function Overview() {
       </ContentWrapper>
 
       {/* Layer 3: Infrastructure Scale */}
-      <div id="layer-3-infrastructure" />
+      <div id="layer-3-infrastructure" className="pt-16" />
       <ContentWrapper>
-        <div className="w-full flex flex-col items-center gap-6">
+        <div className="w-full flex flex-col items-center gap-8 mb-16">
           <Blurb
             title="HyperEVM: Apps that Monetize Liquidity"
-            description="This is where things get really interesting. HyperEVM isn't just another smart contract platform. It's built specifically for financial applications that need the performance and liquidity of Hyperliquid's core exchange. Every new app that launches makes the underlying platform more valuable. More apps attract more users. More users create more liquidity. More liquidity attracts more apps. The flywheel is just getting started."
+            description="This is where things get really interesting. HyperEVM isn't just another smart contract platform. It plugs straight into Hyperliquid’s execution layer so apps can borrow, stake, and hedge against the same liquidity that powers perps and spot. Each new app increases return on capital, which attracts more deposits, which deepens the books."
             textAlignment="center"
           />
         </div>
       </ContentWrapper>
       
-      {/* Chart 5: TVL Breakdown - Centered text */}
+      {/* Chart 6: TVL Breakdown - Centered text */}
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
+        <div className="flex flex-col gap-12 items-center mb-20">
           <Blurb
             title="The Three-Layer Capital Stack"
-            description="The TVL breakdown tells the whole story. HLP tokens are the engine room - the market making pool that powers the perp exchange. Spot TVL is working capital parked for cross-market opportunities. Apps TVL shows the ecosystem building on top. What's beautiful is how they all reinforce each other. Better HLP liquidity improves spot execution. Better spot execution attracts more applications. More applications bring more HLP deposits. It's a three-layer flywheel that's just hitting its stride."
+            description="The TVL breakdown shows the flywheel in balance. HLP is the market-making engine that keeps perps tight. Spot TVL is working capital parked for basis/hedging. Apps TVL turns idle dollars into lending, staking, and basis yield. More HLP → better execution → more spot turnover → more collateral for apps → More HLP "
             textAlignment="center"
           />
-          <div className="w-full max-w-[1000px]">
+          <div className="w-full max-w-5xl">
             <Chart
               title="TVL Breakdown (Stacked)"
               data={TVL_STACKED}
               dataConfig={TVL_STACKED_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={375}
+              chartHeight={400}
             />
           </div>
         </div>
       </ContentWrapper>
       
-      {/* Chart 6: HyperEVM Stablecoins - Right-aligned text */}
+      {/* Chart 7: HyperEVM Stablecoins - Right-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="The Stablecoin Settlement Layer"
-              description="HyperEVM's stablecoin growth shows something bigger happening. USDC flows in for institutional strategies. USDT brings retail volume. New stablecoins find their home here for specialized use cases. It's not just about having multiple tokens - it's about becoming the place where stablecoins naturally settle. As digital dollars become the backbone of crypto, the platform that handles their settlement becomes incredibly powerful."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="HyperEVM Stablecoin Balances"
               data={HYPEREVM_STABLECOIN_STACKED as any}
               dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={360}
+              chartHeight={380}
               hidePoweredBy
+            />
+          </div>
+          <div className="lg:col-span-1 lg:order-2">
+            <Blurb
+              title="The Stablecoin Settlement Layer"
+              description="Think of this as the pulse of DeFi on HYPE.Stablecoins are the system’s cash and margin. On HyperEVM, a mix of USDC/USDT (clean rails), over-collateralized/synthetic dollars (USDe, feUSD, USDH, etc.), and yield-bearing dollars (e.g., T-bill tokens) sits right next to perps and spot. Funds rotate in one stack—wallet → money markets → perps/spot—so LSDFi loops (stake LST/kHYPE → borrow USD → hedge) run natively. As these balances grow, basis tightens, hedge costs fall, and each dollar does more work."
             />
           </div>
         </div>
       </ContentWrapper>
       
-      {/* Chart 7: USDC TVL - Centered text */}
+      {/* Chart 8: USDC TVL - Centered text */}
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
+        <div className="flex flex-col gap-12 items-center mb-20">
           <Blurb
             title="The Institutional Capital Magnet"
-            description="Whether you’re a trader, LP, or builder, you need USDC to participate. That’s why rising USDC TVL isn’t market noise; it’s the base liquidity fueling perps, spot, and the entire Hyperliquid ecosystem."
+            description="USDC TVL is the clean signal. Traders, LPs, and builders all need dollar rails to participate. Rising USDC on Hyperliquid means increased base liquidity to fund perps margin, settle spot, and underwrite HyperEVM credit."
             textAlignment="center"
           />
-          <div className="w-full max-w-[1000px]">
+          <div className="w-full max-w-5xl">
             <Chart
               title="Hyperliquid USDC TVL"
               data={HYPERLIQUID_USDC_TVL_DATA as any}
               dataConfig={HYPERLIQUID_USDC_TVL_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={400}
+              chartHeight={420}
               hidePoweredBy
             />
           </div>
         </div>
       </ContentWrapper>
       
-      {/* Chart 8: USDC Flows - Left-aligned text */}
+      {/* Chart 9: USDC Flows - Left-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="The Capital Flow Pulse"
-            description="The daily USDC flows are fascinating to watch. Massive inflows when opportunities arise. Quick outflows when risks spike. This isn't random: billions moving in and out based on market conditions shows that Hyperliquid has become the place where serious money makes serious decisions. The volatility isn't chaos, it's efficiency."
-          />
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-1">
+            <Blurb
+              title="The Capital Flow Pulse"
+              description="Daily net flows are the heartbeat of the stack. Sustained positive streaks often line up with listings, funding dislocations, or new app releases. Quick outflows after events are healthy too, it means people are taking profits as well. The point is that real money can enter, rotate, and redeploy inside the same venue."
+            />
+          </div>
+          <div className="lg:col-span-2">
             <Chart
               title="Hyperliquid USDC Net Flows (Daily)"
               data={HYPERLIQUID_USDC_FLOWS_DATA as any}
               dataConfig={HYPERLIQUID_USDC_FLOWS_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={400}
+              chartHeight={420}
               hidePoweredBy
               yAxisDomainToMax={true}
             />
@@ -526,44 +534,46 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
       
-      {/* Chart 9: HyperUnit Total TVL - Right-aligned text */}
+      {/* Chart 10: HyperUnit Total TVL - Right-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="HyperUnit: Total Capital Capture"
-              description="HyperUnit's total TVL shows the full picture of multi-asset adoption. Every token that gets deposited is essentially a vote of confidence in the unified architecture. Market cycles create ups and downs, but the trend is clear: capital is finding its home here. As crypto matures, money flows toward the platforms that offer the best combination of execution, efficiency, and ecosystem depth. HyperUnit is becoming that destination."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="HyperUnit Total TVL"
               data={HYPERUNIT_TVL_DATA as any}
               dataConfig={HYPERUNIT_TVL_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={400}
+              chartHeight={420}
               hidePoweredBy
+            />
+          </div>
+          <div className="lg:col-span-1 lg:order-2">
+            <Blurb
+              title="HyperUnit: Total Capital Capture"
+              description="HyperUnit TVL is the import meter, marking how much outside capital chooses to live on Hyperliquid. When it rises, collateral sits next to the perps engine and spot books, cutting frictions and lifting turnover. This is Own Spot → Grow Apps in one number: more imports → deeper books → larger credit/yield capacity for apps"
             />
           </div>
         </div>
       </ContentWrapper>
       
-      {/* Chart 10: Capital Flows - Left-aligned text */}
+      {/* Chart 11: Capital Flows - Left-aligned text */}
       <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="HyperUnit: The Multi-Asset Gravity Well"
-            description="The diversity of tokens flowing into HyperUnit tells an interesting story.  Whales selling off their BTC, or BONK from retail traders. Each deposit represents someone choosing unified architecture over the fragmented mess of bridges and multiple exchanges. It's early, but the pattern is clear: as more assets get support, more capital follows."
-          />
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-20">
+          <div className="lg:col-span-1">
+            <Blurb
+              title="HyperUnit: The Multi-Asset Gravity Well"
+              description="Token-level inflows show breadth of collateral. BTC/ETH whales opting into one-stack settlement means Hyperliquid is trusted to handle spot settlement with precision rivaling the best CEXes."
+            />
+          </div>
+          <div className="lg:col-span-2">
             <Chart
               title="HyperUnit Token Net Inflows"
               data={HYPERLIQUID_INCLUDES_HYPERUNIT_DATA as any}
               dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG as any}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
-              chartHeight={400}
+              chartHeight={420}
               hidePoweredBy
               yAxisDomainToMax={true}
             />
@@ -573,10 +583,10 @@ export default async function Overview() {
 
       {/* Conclusion */}
       <ContentWrapper>
-        <div className="w-full flex flex-col items-center gap-6 pt-8">
+        <div className="w-full flex flex-col items-center gap-10 pt-16 pb-8">
           <Blurb
             title="The Flywheel is Spinning"
-            description="Three layers. One unified system. Each making the others stronger. Hyperliquid started with the best perp trading experience and used that to attract serious capital. That capital enabled unified spot settlement, which attracted more capital and more sophisticated use cases. Now the ecosystem layer is emerging, and each new application makes the entire platform more valuable. This is not a simple  exchange or blockchain. It's a financial operating system where every component amplifies the others. The data shows the flywheel is already spinning. The question isn't whether it will continue: it's how fast it will accelerate."
+            description="Win Perps. Own Spot. Grow Apps. One stack handles execution, settlement, and utility. Perps depth pulls flow; that flow anchors USD collateral; anchored collateral powers apps that create hedging and leverage demand—feeding back into perps. Hyperliquid being a simple perp dex is a fundamental misuderstanding of the platform: In reality it’s a financial operating system where every layer amplifies the next. The data shows the flywheel is already spinning. The question isn't whether it will continue: it's how fast it will accelerate."
             textAlignment="center"
           />
         </div>
