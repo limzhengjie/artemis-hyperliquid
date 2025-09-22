@@ -2,12 +2,10 @@ import Chart from '@/components/chart'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Blurb from '@/components/blurb'
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
-import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_HYPERLIQUID_SPOT_CONFIG, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
-import { getCurrentDate, getStartDate } from '@/lib/dates'
+import { BINANCE_HYPERLIQUID_SPOT_DATA } from '@/constants/data/binance-hyperliquid'
 
 const BinanceHyperliquid = async () => {
-  const endDate = getCurrentDate()
-  const startDate = getStartDate(1000) as string
+  // no dynamic dates needed here
 
   // Override spot config locally to stacked percentage (do not change shared constant)
   const SPOT_PERCENT_CONFIG = {
@@ -43,8 +41,8 @@ const BinanceHyperliquid = async () => {
             />
             <Chart
               title="Binance vs Hyperliquid Spot Volume (Weekly)"
-              data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
-              dataConfig={SPOT_PERCENT_CONFIG as any}
+              data={[...BINANCE_HYPERLIQUID_SPOT_DATA]}
+              dataConfig={SPOT_PERCENT_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               hidePoweredBy

@@ -184,7 +184,7 @@ export default async function Overview() {
     uni: Number(row.uni ?? row.uniswap ?? 0)
   })
   const spotDEXSeries = Array.isArray(allSpotDEXVolumeData)
-    ? (allSpotDEXVolumeData as any[]).map(remapSpotRow)
+    ? (allSpotDEXVolumeData as Array<{ date: string; [k: string]: number | string }>).map(remapSpotRow)
     : []
 
 

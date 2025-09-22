@@ -107,11 +107,23 @@ export default function FeedbackPage() {
       })
       const json = await res.json()
       if (json?.ok && json?.data) {
-        setSuggestions(prev => [json.data, ...prev])
+                      setSuggestions(prev => [json.data as {
+                        id: string
+                        chartIdea: string
+                        presentation: string
+                        telegramHandle: string
+                        votes: number
+                      }, ...prev])
       } else {
         // fallback optimistic
-        const fallback = { id: `${Date.now()}`, votes: 0, ...payload }
-        setSuggestions(prev => [fallback as any, ...prev])
+        const fallback: {
+          id: string
+          chartIdea: string
+          presentation: string
+          telegramHandle: string
+          votes: number
+        } = { id: `${Date.now()}`, votes: 0, ...payload }
+        setSuggestions(prev => [fallback, ...prev])
       }
       setSubmitted(true)
       setForm({ chartIdea: '', presentation: '', telegramHandle: '' })

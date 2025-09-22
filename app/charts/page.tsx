@@ -75,7 +75,7 @@ const Charts = async () => {
       <Chart
         title="Perp Volume Share by Venue"
         data={PERP_VOLUME_BY_SYMBOL_DATA}
-        dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG as any}
+        dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
         isTimeSeries
         hidePoweredBy

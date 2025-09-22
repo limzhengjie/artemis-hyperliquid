@@ -50,7 +50,7 @@ export async function GET() {
     } catch {
       return NextResponse.json({ ok: true, data: fallbackList() })
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json({ ok: false, error: 'fetch_failed' }, { status: 500 })
   }
 }
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
         }
       })
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json({ ok: false }, { status: 400 })
   }
 }
@@ -141,7 +141,7 @@ export async function PATCH(req: Request) {
       MEMORY_STORE[idx].votes = (MEMORY_STORE[idx].votes || 0) + delta
       return NextResponse.json({ ok: true, votes: MEMORY_STORE[idx].votes })
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json({ ok: false }, { status: 400 })
   }
 }
