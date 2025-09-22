@@ -261,9 +261,9 @@ export default async function Overview() {
         <div className="w-full max-w-[900px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-4 border border-[var(--color-background-light-outline)] rounded-lg px-4 py-4">
           <div className="text-sm text-muted-foreground">On this page</div>
           <div className="flex flex-wrap gap-3">
-            <Link href="#layer-1-derivatives"><Button variant="ghost" size="sm">Layer 1: Liquidity Gravity</Button></Link>
-            <Link href="#layer-2-spot"><Button variant="ghost" size="sm">Layer 2: Capital Efficiency</Button></Link>
-            <Link href="#layer-3-infrastructure"><Button variant="ghost" size="sm">Layer 3: Ecosystem Scale</Button></Link>
+            <Link href="#layer-1-derivatives"><Button variant="ghost" size="sm">Perps: Execution</Button></Link>
+            <Link href="#layer-2-spot"><Button variant="ghost" size="sm">Spot: Unified Settlement</Button></Link>
+            <Link href="#layer-3-infrastructure"><Button variant="ghost" size="sm">HyperEVM: Monetizing Liquidity</Button></Link>
           </div>
         </div>
       </ContentWrapper>
@@ -273,7 +273,7 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="w-full flex flex-col items-center gap-6">
           <Blurb
-            title="Layer 1: Liquidity Gravity"
+            title="Perps: The Execution Engine"
             description="Perpetual futures are where Hyperliquid first proved its edge. Better execution brings more traders. More traders create deeper liquidity. Deeper liquidity enables even better execution. It's a simple flywheel that becomes incredibly powerful over time. What started as gradual market share gains is now looking like something much bigger: a fundamental shift in where serious traders choose to execute."
             textAlignment="center"
           />
@@ -333,7 +333,7 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="w-full flex flex-col items-center gap-6">
           <Blurb
-            title="Layer 2: Capital Efficiency"
+            title="Spot: Unified Settlement & Collateral"
             description="Spot trading is where Hyperliquid's unified architecture really shines. When you can move seamlessly between perps and spot within the same venue, your capital works harder. No more bridging between exchanges. No more fragmented liquidity. It's not just convenient - it's a completely different way to think about trading. As more of finance moves onchain, this unified approach becomes table stakes."
             textAlignment="center"
           />
@@ -395,7 +395,7 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="w-full flex flex-col items-center gap-6">
           <Blurb
-            title="Layer 3: Ecosystem Scale"
+            title="HyperEVM: Apps that Monetize Liquidity"
             description="This is where things get really interesting. HyperEVM isn't just another smart contract platform. It's built specifically for financial applications that need the performance and liquidity of Hyperliquid's core exchange. Every new app that launches makes the underlying platform more valuable. More apps attract more users. More users create more liquidity. More liquidity attracts more apps. The flywheel is just getting started."
             textAlignment="center"
           />
