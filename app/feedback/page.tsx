@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import ContentWrapper from '@/components/(layout)/content-wrapper'
 import Blurb from '@/components/blurb'
 import { Button } from '@/components/ui/button'
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from '@/components/ui/drawer'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -133,58 +132,56 @@ export default function FeedbackPage() {
             description="Tell us what you'd like to see. Your suggestions help shape our roadmap."
             textAlignment="center"
           />
-          <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger asChild>
-              <Button variant="cta">Add Suggestion</Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="px-4">
-                <DrawerTitle>Share your suggestion</DrawerTitle>
-              </DrawerHeader>
-              <div className="px-4 pb-2 flex flex-col gap-5">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="chartIdea">What charts do you think will be important?</Label>
-                  <Input
-                    id="chartIdea"
-                    placeholder="e.g., Perp volume vs funding rates over time"
-                    value={form.chartIdea}
-                    onChange={e => setForm(prev => ({ ...prev, chartIdea: e.target.value }))}
-                  />
+          <Button variant="cta" onClick={() => setOpen(true)}>Add Suggestion</Button>
+
+          {open && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
+              <div className="relative bg-background w-full max-w-[560px] rounded-lg border shadow-xl">
+                <div className="px-5 pt-4 pb-3 border-b">
+                  <div className="text-foreground font-semibold">Share your suggestion</div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="presentation">How should the chart be presented?</Label>
-                  <Input
-                    id="presentation"
-                    placeholder="e.g., Line with 7d MA, stacked bar %, dual-axis"
-                    value={form.presentation}
-                    onChange={e => setForm(prev => ({ ...prev, presentation: e.target.value }))}
-                  />
+                <div className="px-5 py-4 flex flex-col gap-5">
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="chartIdea">What charts do you think will be important?</Label>
+                    <Input
+                      id="chartIdea"
+                      placeholder="e.g., Perp volume vs funding rates over time"
+                      value={form.chartIdea}
+                      onChange={e => setForm(prev => ({ ...prev, chartIdea: e.target.value }))}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="presentation">How should the chart be presented?</Label>
+                    <Input
+                      id="presentation"
+                      placeholder="e.g., Line with 7d MA, stacked bar %, dual-axis"
+                      value={form.presentation}
+                      onChange={e => setForm(prev => ({ ...prev, presentation: e.target.value }))}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="telegramHandle">Your Telegram handle (optional)</Label>
+                    <Input
+                      id="telegramHandle"
+                      placeholder="e.g., @yourhandle"
+                      value={form.telegramHandle}
+                      onChange={e => setForm(prev => ({ ...prev, telegramHandle: e.target.value }))}
+                    />
+                  </div>
+                  {submitted && (
+                    <div className="text-green-600 text-sm">Thanks! Your suggestion was sent.</div>
+                  )}
                 </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="telegramHandle">Your Telegram handle (optional)</Label>
-                  <Input
-                    id="telegramHandle"
-                    placeholder="e.g., @yourhandle"
-                    value={form.telegramHandle}
-                    onChange={e => setForm(prev => ({ ...prev, telegramHandle: e.target.value }))}
-                  />
-                </div>
-                {submitted && (
-                  <div className="text-green-600 text-sm">Thanks! Your suggestion was sent.</div>
-                )}
-              </div>
-              <DrawerFooter>
-                <div className="flex items-center gap-3">
+                <div className="px-5 pb-5 pt-1 flex items-center gap-3 justify-end">
                   <Button onClick={onSubmit} disabled={loading || !form.chartIdea.trim()}>
                     {loading ? 'Sending…' : 'Submit'}
                   </Button>
-                  <DrawerClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                  </DrawerClose>
+                  <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
                 </div>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
+              </div>
+            </div>
+          )}
         </div>
       </ContentWrapper>
 

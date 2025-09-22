@@ -155,19 +155,9 @@ const Header = () => {
       active: isActive('/')
     },
     {
-      label: 'Binance vs Hyperliquid',
-      href: '/binance-hyperliquid',
-      active: isActive('/binance-hyperliquid')
-    },
-    {
-      label: 'Stablecoins',
-      href: '/stablecoins',
-      active: isActive('/stablecoins')
-    },
-    {
-      label: 'Tokenomics and Community',
-      href: '/tokenomics-and-community',
-      active: isActive('/tokenomics-and-community')
+      label: 'Why Public Goods?',
+      href: '/why-public-good',
+      active: isActive('/why-public-good')
     },
     {
       label: 'Feedback',
