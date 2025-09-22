@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: 'Hyperliquid For All | Artemis',
     description:
       'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
-    url: 'https://stablecoin.fyi',
+    url: 'https://whyhyperliquid.com',
     siteName: 'Hyperliquid For All | Artemis',
     type: 'website',
     images: [
