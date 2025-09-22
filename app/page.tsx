@@ -517,7 +517,7 @@ export default async function Overview() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
             title="HyperUnit: The Multi-Asset Gravity Well"
-            description="The diversity of tokens flowing into HyperUnit tells an interesting story. SOL from institutions. BONK from retail traders. Emerging tokens finding their trading home. Each deposit represents someone choosing unified architecture over the fragmented mess of bridges and multiple exchanges. It's early, but the pattern is clear: as more assets get support, more capital follows. HyperUnit is becoming the natural destination for multi-asset trading."
+            description="The diversity of tokens flowing into HyperUnit tells an interesting story.  Whales selling off their BTC, or BONK from retail traders. Each deposit represents someone choosing unified architecture over the fragmented mess of bridges and multiple exchanges. It's early, but the pattern is clear: as more assets get support, more capital follows."
           />
           <div className="col-span-2">
             <Chart
