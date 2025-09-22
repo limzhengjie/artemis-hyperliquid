@@ -92,6 +92,8 @@
   --color-moongray-100: oklch(0.79 0.01 0);
   --color-hyperliquid-teal-100: oklch(0.88 0.08 180);
   --color-hyperliquid-teal-500: oklch(0.65 0.15 180);
+  /* Alias used by CTA buttons */
+  --color-pluto-purple-500: var(--color-hyperliquid-teal-500);
   --color-background-light-outline: oklch(0.87 0.005 0);
   --color-positive: oklch(0.63 0.154 149.58);
   --color-negative: oklch(0.61 0.2042 28.26);

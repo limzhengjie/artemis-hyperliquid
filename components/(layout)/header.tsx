@@ -200,15 +200,6 @@ const Header = () => {
         <div className="flex items-center gap-2 relative z-[51]">
           <MenuButton open={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
           <div className="hidden lg:flex items-center gap-2">
-            <Link
-              href="https://ry0v9n8oa4l.typeform.com/to/pn9GQfzu"
-              target="_blank"
-            >
-              <Button variant="outline" className="flex items-center gap-1">
-                <MessageCircleMoreIcon />
-                <span>Contact Us</span>
-              </Button>
-            </Link>
             <Button
               variant="cta"
               asChild
