@@ -116,19 +116,13 @@ export default function FeedbackPage() {
                       }, ...prev])
       } else {
         // fallback optimistic
-        const fallback: {
-          id: string
-          chartIdea: string
-          presentation: string
-          telegramHandle: string
-          votes: number
-        } = { id: `${Date.now()}`, votes: 0, ...payload }
-        setSuggestions(prev => [fallback, ...prev])
+        const fallback = { id: `${Date.now()}`, votes: 0, ...payload }
+        setSuggestions(prev => [fallback as { id: string; chartIdea: string; presentation: string; telegramHandle: string; votes: number }, ...prev])
       }
       setSubmitted(true)
       setForm({ chartIdea: '', presentation: '', telegramHandle: '' })
       setTimeout(() => setOpen(false), 1000)
-    } catch (e) {
+    } catch {
       // noop for now
     } finally {
       setLoading(false)

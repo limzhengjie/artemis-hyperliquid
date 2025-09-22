@@ -1,31 +1,30 @@
 export async function fetchAllPerpsVolume(
   startDate: string,
-  endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; value: number }>> {
   const symbols = 'aevo,apex,avantis,blue,drift,dydx,gns,gmx,hold,hype,jup,ktc,mcb,perp,snx,vrtx,lighter'
   const url = `https://data-svc.artemisxyz.com/data/PERP_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { PERP_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToValueSum: Record<string, number> = {}
 
-  Object.values<any>(symbolsObj).forEach((symbolRecord: any) => {
+  Object.values(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach((symbolRecord) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -51,32 +50,31 @@ export async function fetchAllPerpsVolume(
 
 export async function fetchAllSpotDEXVolume(
   startDate: string,
-  endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
   const symbols = 'ray,cake,hype,orca,uni'
   const url = `https://data-svc.artemisxyz.com/data/SPOT_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch SPOT_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { SPOT_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { SPOT_VOLUME?: Array<{ date: string; val: number | null }> }>).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.SPOT_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -103,31 +101,30 @@ export async function fetchAllSpotDEXVolume(
 
 export async function fetchHyperliquidPerpVolume(
   startDate: string,
-  endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
   const symbols = 'hype'
   const url = `https://data-svc.artemisxyz.com/data/PERP_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -163,23 +160,23 @@ export async function fetchPerpVolumeByVenue(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -204,8 +201,7 @@ export async function fetchPerpVolumeByVenue(
 }
 
 export async function fetchOpenInterestByVenue(
-  startDate: string,
-  endDate: string
+  startDate: string
 ): Promise<Array<{ date: string;[symbol: string]: number | string }>> {
   const symbols = 'hype,drift,polymarket,lighter,kalshi'
   const endDateOI = '2025-09-18'
@@ -213,23 +209,23 @@ export async function fetchOpenInterestByVenue(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch OPEN_INTEREST data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string;[k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { OPEN_INTEREST?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.OPEN_INTEREST
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {

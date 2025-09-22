@@ -127,7 +127,6 @@ function ChartTooltipContent({
   indicator = 'dot',
   hideLabel = false,
   hideIndicator = false,
-  label,
   labelFormatter,
   labelClassName,
   formatter,
@@ -182,6 +181,7 @@ function ChartTooltipContent({
     const [item] = payload
     const key = `${labelKey || item?.dataKey || item?.name || 'value'}`
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
+    const label = item?.name || item?.dataKey
     const value =
       !labelKey && typeof label === 'string'
         ? config[label as keyof typeof config]?.label || label
@@ -201,7 +201,6 @@ function ChartTooltipContent({
 
     return <div className={cn('font-medium', labelClassName)}>{value}</div>
   }, [
-    label,
     labelFormatter,
     payload,
     hideLabel,
@@ -343,22 +342,19 @@ function ChartTooltipContentSparkline({
   indicator = 'dot',
   hideLabel = false,
   hideIndicator = false,
-  label,
   labelFormatter,
   labelClassName,
   formatter,
   valueFormatter,
   valueFormat,
   color,
-  nameKey,
-  labelKey
+  nameKey
 }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
   React.ComponentProps<'div'> & {
     hideLabel?: boolean
     hideIndicator?: boolean
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
-    labelKey?: string
     valueFormatter?: (value: number, format: ValueFormat) => string
     valueFormat?: ValueFormat
   }) {
@@ -397,13 +393,10 @@ function ChartTooltipContentSparkline({
       </div>
     )
   }, [
-    label,
     labelFormatter,
     payload,
     hideLabel,
-    labelClassName,
-    config,
-    labelKey
+    labelClassName
   ])
 
   if (!active || !payload?.length) {

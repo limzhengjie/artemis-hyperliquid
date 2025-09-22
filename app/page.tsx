@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 
- 
+
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 
@@ -34,23 +34,21 @@ export default async function Overview() {
   const hyperliquidPerpVolume2YearData = await fetchHyperliquidPerpVolume(
     getStartDate(365 * 2) as string,
     endDate as string,
-    'daily' // API only supports daily, we'll aggregate to weekly client-side
   )
 
   const hyperliquidPerpVolume1YearData = await fetchHyperliquidPerpVolume(
     getStartDate(365 * 1 + 10) as string, // 10 days to buffer extra days to ensure we have data for the last 365 days
-    endDate as string,
-    'daily'
+    endDate as string
   )
 
   // Map Hype-only keyed rows -> { date, value } series for sparkline/tiles
-  const hyperliquidPerpVolume2YearDailySeries = (hyperliquidPerpVolume2YearData as any[]).map(row => ({
-    date: row.date,
-    value: Number((row as any).hype ?? (row as any).HYPE ?? 0)
+  const hyperliquidPerpVolume2YearDailySeries = (hyperliquidPerpVolume2YearData as Array<Record<string, unknown>>).map(row => ({
+    date: row.date as string,
+    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
   }))
-  const hyperliquidPerpVolume1YearSeries = (hyperliquidPerpVolume1YearData as any[]).map(row => ({
-    date: row.date,
-    value: Number((row as any).hype ?? (row as any).HYPE ?? 0)
+  const hyperliquidPerpVolume1YearSeries = (hyperliquidPerpVolume1YearData as Array<Record<string, unknown>>).map(row => ({
+    date: row.date as string,
+    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
   }))
 
   // Helper function to get week start (Monday)
@@ -86,7 +84,6 @@ export default async function Overview() {
     (hyperliquidPerpVolume1YearSeries?.[hyperliquidPerpVolume1YearSeries.length - 2]?.value || 0)
 
   // Alias for clarity with current hero label
-  const latestPerpVolume = latestHyperliquidPerpVolume
   const latestPerpVolumeChange = latestHyperliquidPerpVolumeChange
 
   const allPerpsVolumeData = await fetchPerpVolumeByVenue(
@@ -100,8 +97,7 @@ export default async function Overview() {
   )
 
   const allOpenInterestData = await fetchOpenInterestByVenue(
-    getStartDate(365) as string,
-    endDate as string
+    getStartDate(365) as string
   )
 
   // HyperEVM Stablecoin balances from CSV, aggregated by token
@@ -121,10 +117,10 @@ export default async function Overview() {
   }
 
   const weeklyHypeMap: Record<string, number> = {}
-  ;(allPerpsVolumeData || []).forEach((row: any) => {
+  ;(allPerpsVolumeData || []).forEach((row: Record<string, unknown>) => {
     const v = Number(row.hype || 0)
     if (!isNaN(v)) {
-      const wk = getWeekStart(row.date)
+      const wk = getWeekStart(row.date as string)
       weeklyHypeMap[wk] = (weeklyHypeMap[wk] || 0) + v
     }
   })
@@ -175,8 +171,8 @@ export default async function Overview() {
   }
 
   // Remap Spot DEX keys to match config and guard empty
-  const remapSpotRow = (row: any) => ({
-    date: row.date,
+  const remapSpotRow = (row: Record<string, unknown>) => ({
+    date: row.date as string,
     ray: Number(row.ray ?? row.raydium ?? 0),
     cake: Number(row.cake ?? row.pancakeswap ?? 0),
     hype: Number(row.hype ?? 0),
@@ -197,11 +193,11 @@ export default async function Overview() {
   }
 
   // Build stacked-only series for the chart (HLP, SPOT, APPS only)
-  const TVL_STACKED = (TVL_DATA as any[]).map(d => ({
-    date: d.DATE,
-    TVL_HLP: Number.isFinite(d.TVL_HLP) ? d.TVL_HLP : 0,
-    TVL_SPOT: Number.isFinite(d.TVL_SPOT) ? d.TVL_SPOT : 0,
-    TVL_APPS: Number.isFinite(d.TVL_APPS) ? d.TVL_APPS : 0
+  const TVL_STACKED = (TVL_DATA as Array<Record<string, unknown>>).map(d => ({
+    date: d.DATE as string,
+    TVL_HLP: Number.isFinite(Number(d.TVL_HLP)) ? Number(d.TVL_HLP) : 0,
+    TVL_SPOT: Number.isFinite(Number(d.TVL_SPOT)) ? Number(d.TVL_SPOT) : 0,
+    TVL_APPS: Number.isFinite(Number(d.TVL_APPS)) ? Number(d.TVL_APPS) : 0
   }))
 
   const TVL_STACKED_CONFIG: ChartConfig = {
@@ -210,10 +206,6 @@ export default async function Overview() {
     TVL_APPS: { label: 'TVL_APPS', color: '#5E9EFD', type: CHART_TYPES.bar, stackId: 'tvl' }
   }
 
-  const SPOT_VOLUME_BINANCE_HYPERLIQUID_CONFIG: ChartConfig = {
-    Binance: { label: 'Binance', color: '#FF8C00', type: CHART_TYPES.bar, stackId: 'spot' },
-    Hyperliquid: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.bar, stackId: 'spot' }
-  }
 
   return (
     <div className="w-full pb-16 flex flex-col items-center font-[family-name:var(--font-geist-sans)]">
@@ -245,18 +237,18 @@ export default async function Overview() {
             <div className="flex-1 w-full max-w-lg">
               <StatSummaryTile
                 mainStatLabel="PERP VOLUME"
-                mainStat={{
+              mainStat={{
                   value: latestHyperliquidPerpVolume,
-                  type: VALUE_FORMAT.currency
-                }}
-                mainStatChange={{
+                type: VALUE_FORMAT.currency
+              }}
+              mainStatChange={{
                   value: latestPerpVolumeChange,
-                  type: VALUE_FORMAT.currency,
-                  label: 'over the last day'
-                }}
+                type: VALUE_FORMAT.currency,
+                label: 'over the last day'
+              }}
                 sparklineData={hyperliquidPerpVolume2YearSeries}
                 miniStatsData={hyperliquidPerpVolume1YearSeries}
-              />
+            />
             </div>
           </div>
         </ContentWrapper>
@@ -305,8 +297,8 @@ export default async function Overview() {
           <div className="lg:col-span-2">
             <Chart
               title="Binance vs Hyperliquid Perp Volume (Weekly)"
-              data={PERP_VOLUME_BINANCE_HYPERLIQUID_DATA as any}
-              dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG as any}
+              data={[...PERP_VOLUME_BINANCE_HYPERLIQUID_DATA]}
+              dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={380}
@@ -351,8 +343,8 @@ export default async function Overview() {
           <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="Open Interest by Protocol"
-              data={allOpenInterestData as any}
-              dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG as any}
+              data={[...allOpenInterestData]}
+              dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={380}
@@ -386,8 +378,8 @@ export default async function Overview() {
           <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="Binance vs Hyperliquid Spot Volume (Weekly)"
-              data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
-              dataConfig={SPOT_PERCENT_CONFIG as any}
+              data={[...BINANCE_HYPERLIQUID_SPOT_DATA]}
+              dataConfig={SPOT_PERCENT_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={380}
@@ -416,8 +408,8 @@ export default async function Overview() {
             {spotDEXSeries && spotDEXSeries.length > 0 ? (
               <Chart
                 title="Spot DEX Volume (Daily)"
-                data={spotDEXSeries as any}
-                dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
+                data={spotDEXSeries}
+                dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG}
                 valueFormat={VALUE_FORMAT.currency}
                 isTimeSeries
                 chartHeight={380}
@@ -441,7 +433,7 @@ export default async function Overview() {
             description="This is where things get really interesting. HyperEVM isn't just another smart contract platform. It plugs straight into Hyperliquid’s execution layer so apps can borrow, stake, and hedge against the same liquidity that powers perps and spot. Each new app increases return on capital, which attracts more deposits, which deepens the books."
             textAlignment="center"
           />
-        </div>
+      </div>
       </ContentWrapper>
       
       {/* Chart 6: TVL Breakdown - Centered text */}
@@ -455,7 +447,7 @@ export default async function Overview() {
           <div className="w-full max-w-5xl">
             <Chart
               title="TVL Breakdown (Stacked)"
-              data={TVL_STACKED}
+              data={[...TVL_STACKED]}
               dataConfig={TVL_STACKED_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
@@ -471,8 +463,8 @@ export default async function Overview() {
           <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="HyperEVM Stablecoin Balances"
-              data={HYPEREVM_STABLECOIN_STACKED as any}
-              dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG as any}
+              data={[...HYPEREVM_STABLECOIN_STACKED]}
+              dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={380}
@@ -499,8 +491,8 @@ export default async function Overview() {
           <div className="w-full max-w-5xl">
             <Chart
               title="Hyperliquid USDC TVL"
-              data={HYPERLIQUID_USDC_TVL_DATA as any}
-              dataConfig={HYPERLIQUID_USDC_TVL_CONFIG as any}
+              data={[...HYPERLIQUID_USDC_TVL_DATA]}
+              dataConfig={HYPERLIQUID_USDC_TVL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={420}
@@ -522,8 +514,8 @@ export default async function Overview() {
           <div className="lg:col-span-2">
             <Chart
               title="Hyperliquid USDC Net Flows (Daily)"
-              data={HYPERLIQUID_USDC_FLOWS_DATA as any}
-              dataConfig={HYPERLIQUID_USDC_FLOWS_CONFIG as any}
+              data={[...HYPERLIQUID_USDC_FLOWS_DATA]}
+              dataConfig={HYPERLIQUID_USDC_FLOWS_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={420}
@@ -540,8 +532,8 @@ export default async function Overview() {
           <div className="lg:col-span-2 lg:order-1">
             <Chart
               title="HyperUnit Total TVL"
-              data={HYPERUNIT_TVL_DATA as any}
-              dataConfig={HYPERUNIT_TVL_CONFIG as any}
+              data={[...HYPERUNIT_TVL_DATA]}
+              dataConfig={HYPERUNIT_TVL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={420}
@@ -569,17 +561,17 @@ export default async function Overview() {
           <div className="lg:col-span-2">
             <Chart
               title="HyperUnit Token Net Inflows"
-              data={HYPERLIQUID_INCLUDES_HYPERUNIT_DATA as any}
-              dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG as any}
+              data={[...HYPERLIQUID_INCLUDES_HYPERUNIT_DATA]}
+              dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={420}
               hidePoweredBy
               yAxisDomainToMax={true}
             />
+            </div>
           </div>
-        </div>
-      </ContentWrapper>
+        </ContentWrapper>
 
       {/* Conclusion */}
       <ContentWrapper>
