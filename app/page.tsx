@@ -450,7 +450,7 @@ export default async function Overview() {
         <div className="flex flex-col gap-8 items-center">
           <Blurb
             title="The Institutional Capital Magnet"
-            description="USDC deposits tell a different story than volatile crypto. When institutions park stablecoins, they're making a calculated decision about where to keep their working capital. Every uptick represents someone choosing Hyperliquid over the alternatives. It's sticky capital that enables everything else. Without this foundation of institutional money, neither the spot markets nor the ecosystem applications would be possible."
+            description="Whether you’re a trader, LP, or builder, you need USDC to participate. That’s why rising USDC TVL isn’t market noise; it’s the base liquidity fueling perps, spot, and the entire Hyperliquid ecosystem."
             textAlignment="center"
           />
           <div className="w-full max-w-[1000px]">
