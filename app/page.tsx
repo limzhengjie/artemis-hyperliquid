@@ -224,8 +224,12 @@ export default async function Overview() {
                 DeFi Premier Operating System
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
-                Hyperliquid gameplan is simple: <strong className="text-foreground">Win Perps. Own Spot. Grow Apps.</strong>
+                Hyperliquid's gameplan is simple:  
+                <p>
+                <strong className="text-foreground">
+                  Win Perps. Own Spot. Grow Apps.</strong></p>
                 <br className="hidden sm:block" />
+
                 The flywheel has already started spinning: Ready to see the evidence?
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
