@@ -8,7 +8,7 @@ import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 
-import { fetchHyperliquidPerpVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume } from '@/lib/fetchHyperliquidData'
+import { fetchHyperliquidPerpVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume, fetchOpenInterestByVenue } from '@/lib/fetchHyperliquidData'
 import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
 import { HYPERLIQUID_INCLUDES_HYPERUNIT_DATA, HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG } from '@/constants/data/hyperunit-flows'
 import { HYPERLIQUID_USDC_TVL_DATA, HYPERLIQUID_USDC_TVL_CONFIG } from '@/constants/data/hyperliquid-usdc-tvl'
@@ -99,6 +99,11 @@ export default async function Overview() {
     endDate as string
   )
 
+  const allOpenInterestData = await fetchOpenInterestByVenue(
+    getStartDate(365) as string,
+    endDate as string
+  )
+
   // HyperEVM Stablecoin balances from CSV, aggregated by token
   const HYPEREVM_STABLECOIN_STACKED = await loadHyperevmStablecoinsStackedData()
 
@@ -139,6 +144,14 @@ export default async function Overview() {
     Hyperliquid: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.stacked100, stackId: 'spot' },
     Binance: { label: 'Binance', color: '#FF8C00', type: CHART_TYPES.stacked100, stackId: 'spot' }
   } as const
+
+  const OPEN_INTEREST_BY_SYMBOL_CONFIG: ChartConfig = {
+    hype: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.stacked100, stackId: 'openInterest' },
+    drift: { label: 'Drift', color: '#8B5A2B', type: CHART_TYPES.stacked100, stackId: 'openInterest' },
+    polymarket: { label: 'Polymarket', color: '#3B82F6', type: CHART_TYPES.stacked100, stackId: 'openInterest' },
+    lighter: { label: 'Lighter', color: '#06B6D4', type: CHART_TYPES.stacked100, stackId: 'openInterest' },
+    kalshi: { label: 'Kalshi', color: '#0891B2', type: CHART_TYPES.stacked100, stackId: 'openInterest' }
+  }
 
   // Removed unused ALL_PERPS_CONFIG
 
@@ -326,6 +339,29 @@ export default async function Overview() {
             Unable to load data right now.
           </div>
         )}
+      </ContentWrapper>
+
+      {/* Chart 2: Asset diversification - Full width with centered text */}
+      <ContentWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="Open Interest by Protocol"
+              description="Open interest is a measure of the total number of contracts outstanding in a market. It's a measure of the total number of contracts outstanding in a market."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
+            <Chart
+              title="Open Interest by Protocol"
+              data={allOpenInterestData as any}
+              dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={360}
+              hidePoweredBy
+            />
+          </div>
+        </div>
       </ContentWrapper>
 
       {/* Layer 2: Spot Settlement */}
