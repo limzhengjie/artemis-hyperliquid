@@ -10,9 +10,13 @@ import { DATA_PARTNERS } from '@/constants/data-partners'
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 
-import { fetchHyperliquidPerpVolume, fetchAllPerpsVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume } from '@/lib/fetchHyperliquidData'
+import { fetchHyperliquidPerpVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume } from '@/lib/fetchHyperliquidData'
 import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
+import { HYPERLIQUID_INCLUDES_HYPERUNIT_DATA, HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG } from '@/constants/data/hyperunit-flows'
+import { HYPERLIQUID_USDC_TVL_DATA, HYPERLIQUID_USDC_TVL_CONFIG } from '@/constants/data/hyperliquid-usdc-tvl'
+import { HYPERUNIT_TVL_DATA, HYPERUNIT_TVL_CONFIG } from '@/constants/data/hyperunit-tvl'
 import { TVL_DATA } from '@/constants/data/overview'
+import { loadHyperevmStablecoinsStackedData, HYPEREVM_STABLECOIN_STACKED_CONFIG } from '@/constants/data/hyperevm-stablecoins'
 
 import type { ChartConfig } from '@/components/ui/chart'
 
@@ -35,7 +39,7 @@ import {
 
 import ReportImage from '@/public/report.png'
 import StatSummaryTile from '@/components/stat-summary-tile'
-import BlurbHero from '@/components/blurb-hero'
+// Removed unused BlurbHero
 
 export default async function Overview() {
   const endDate = getCurrentDate()
@@ -73,12 +77,6 @@ export default async function Overview() {
   const latestPerpVolume = latestHyperliquidPerpVolume
   const latestPerpVolumeChange = latestHyperliquidPerpVolumeChange
 
-  // Fetch symbol breakdown for stacked-percent chart in hero
-  const hyperliquidPerpVolumeData = await fetchHyperliquidPerpVolume(
-    getStartDate(365) as string,
-    endDate as string
-  )
-
   const allPerpsVolumeData = await fetchPerpVolumeByVenue(
     getStartDate(365) as string,
     endDate as string
@@ -88,6 +86,9 @@ export default async function Overview() {
     getStartDate(365) as string,
     endDate as string
   )
+
+  // HyperEVM Stablecoin balances from CSV, aggregated by token
+  const HYPEREVM_STABLECOIN_STACKED = await loadHyperevmStablecoinsStackedData()
 
   // Build Binance vs Hyperliquid Weekly Perp Comparison (reuse logic from /binance-hyperliquid)
   function getWeekStart(dateStr: string) {
@@ -127,9 +128,7 @@ export default async function Overview() {
     Binance: { label: 'Binance', color: '#5E9EFD', type: CHART_TYPES.stacked100, stackId: 'spot' }
   } as const
 
-  const ALL_PERPS_CONFIG: ChartConfig = {
-    value: { label: 'All Perps Volume', color: '#5E9EFD', type: CHART_TYPES.line }
-  }
+  // Removed unused ALL_PERPS_CONFIG
 
   const PERP_VOLUME_BY_SYMBOL_CONFIG: ChartConfig = {
     aevo: { label: 'Aevo', color: '#8C7CF7', type: CHART_TYPES.stacked100, stackId: 'perps' },
@@ -193,33 +192,81 @@ export default async function Overview() {
 
   return (
     <div className="w-full pb-12 flex flex-col items-center gap-18 font-[family-name:var(--font-geist-sans)]">
+      {/* Hero: Thesis + KPI + CTA */}
       <div
-        className="w-full flex items-center justify-center gap-12 pt-12 pb-12"
+        className="w-full flex items-center justify-center gap-12 pt-16 pb-16"
         style={{ background: 'var(--gradient-background)' }}
       >
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-8">
-            <StatSummaryTile
-              mainStatLabel="PERP VOLUME"
-              mainStat={{
-                value: latestHyperliquidPerpVolume,
-                type: VALUE_FORMAT.currency
-              }}
-              mainStatChange={{
-                value: latestPerpVolumeChange,
-                type: VALUE_FORMAT.currency,
-                label: 'over the last day'
-              }}
-              sparklineData={hyperliquidPerpVolume2YearSeries}
-              miniStatsData={hyperliquidPerpVolume1YearSeries}
-            />
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-12">
+            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-5">
+              <p className="text-[var(--color-pluto-purple-500)] text-sm font-medium tracking-wide font-[family-name:var(--font-geist-mono)]">
+                The Hyperliquid Thesis
+              </p>
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                Hyperliquid is the house of finance
+              </h1>
+              <p className="text-muted-foreground max-w-2xl">
+                Hyperliquid unifies perps, spot, and settlement rails into a single
+                liquidity fabric. This report lays out the thesis and backs it with data across
+                market structure, onchain volumes, and capital formation.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                
+                <Link href="#level-1-perps">
+                  <Button variant="cta">Explore the data</Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex-1 w-full">
+              <StatSummaryTile
+                mainStatLabel="PERP VOLUME"
+                mainStat={{
+                  value: latestHyperliquidPerpVolume,
+                  type: VALUE_FORMAT.currency
+                }}
+                mainStatChange={{
+                  value: latestPerpVolumeChange,
+                  type: VALUE_FORMAT.currency,
+                  label: 'over the last day'
+                }}
+                sparklineData={hyperliquidPerpVolume2YearSeries}
+                miniStatsData={hyperliquidPerpVolume1YearSeries}
+              />
+            </div>
           </div>
         </ContentWrapper>
       </div>
 
+      {/* Powered by Artemis */}
       <ContentWrapper>
         <div className="w-full flex items-center justify-center gap-3 py-2">
           <ArtemisLogo poweredBy />
+        </div>
+      </ContentWrapper>
+
+      {/* Table of Contents */}
+      <ContentWrapper>
+        <div className="w-full max-w-[900px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-4 border border-[var(--color-background-light-outline)] rounded-lg px-4 py-4">
+          <div className="text-sm text-muted-foreground">On this page</div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="#level-1-perps"><Button variant="ghost" size="sm">Level 1: Perps</Button></Link>
+            <Link href="#level-2-spot"><Button variant="ghost" size="sm">Level 2: Spot</Button></Link>
+            <Link href="#level-3-hypercore"><Button variant="ghost" size="sm">Level 3: Hypercore + HyperEVM</Button></Link>
+            <Link href="#appendix"><Button variant="ghost" size="sm">Appendix</Button></Link>
+          </div>
+        </div>
+      </ContentWrapper>
+
+      {/* Level 1: Perps */}
+      <div id="level-1-perps" />
+      <ContentWrapper>
+        <div className="w-full flex flex-col items-center gap-6">
+          <Blurb
+            title="Level 1: Perps"
+            description="Placeholder: Perps are the heartbeat of Hyperliquid. Depth, spreads, and venue share demonstrate durable leadership across market cycles."
+            textAlignment="center"
+          />
         </div>
       </ContentWrapper>
       <ContentWrapper className="max-w-none px-4 md:px-8">
@@ -247,7 +294,6 @@ export default async function Overview() {
           </div>
         )}
       </ContentWrapper>
-
       <ContentWrapper>
         <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
           <Blurb
@@ -267,12 +313,13 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
 
-      <div id="binance-hyperliquid" />
+      {/* Level 2: Spot */}
+      <div id="level-2-spot" />
       <ContentWrapper>
         <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
           <Blurb
-            title="Binance vs Hyperliquid Spot Volume (Weekly)"
-            description="Stacked share view comparing Binance vs Hyperliquid spot volume by week."
+            title="Level 2: Spot"
+            description="Placeholder: Spot is the settlement layer for liquidity to orbit. We track share against centralized and decentralized venues as flows migrate onchain."
             textAlignment="center"
           />
           <Chart
@@ -286,7 +333,6 @@ export default async function Overview() {
           />
         </div>
       </ContentWrapper>
-
       <ContentWrapper>
         <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
           <Blurb
@@ -312,14 +358,13 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
 
-     
-
-      <div id="stablecoin-payments-by-type" />
+      {/* Level 3: Hypercore + HyperEVM */}
+      <div id="level-3-hypercore" />
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
-            title="Hyperliquid TVL (Daily)"
-            description="Daily TVL for Hyperliquid (and total chain apps) showing growth from late 2024 into 2025."
+            title="Level 3: Hypercore + HyperEVM"
+            description="Placeholder: Hypercore powers intent settlement; HyperEVM scales application liquidity. Together they anchor TVL growth and token flows across the stack."
             textAlignment="center"
           />
           <div className="w-full max-w-[1000px]">
@@ -334,7 +379,88 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
+      <ContentWrapper>
+        <div className="flex flex-col gap-8 items-center">
+          <Blurb
+            title="HyperEVM Stablecoin Balances (Daily)"
+            description="Total supply of stablecoins issued on HyperEVM, broken out by token."
+            textAlignment="center"
+          />
+          <div className="w-full max-w-[1000px]">
+            <Chart
+              title="HyperEVM Stablecoin Balances"
+              data={HYPEREVM_STABLECOIN_STACKED as any}
+              dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={360}
+              hidePoweredBy
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="flex flex-col gap-8 items-center">
+          <Blurb
+            title="HyperUnit Token Net Inflows (Daily)"
+            description="Daily net inflows across SOL, FART, PUMP, SPX, BONK, ETH, BTC, and USDC. Positive values indicate net deposits; negatives indicate withdrawals."
+            textAlignment="center"
+          />
+          <div className="w-full max-w-[1000px]">
+            <Chart
+              title="HyperUnit Token Net Inflows"
+              data={HYPERLIQUID_INCLUDES_HYPERUNIT_DATA as any}
+              dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={400}
+              hidePoweredBy
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="flex flex-col gap-8 items-center">
+          <Blurb
+            title="Hyperliquid USDC TVL (Weekly)"
+            description="Weekly USDC deposits held on-platform, aggregated by week."
+            textAlignment="center"
+          />
+          <div className="w-full max-w-[1000px]">
+            <Chart
+              title="Hyperliquid USDC TVL"
+              data={HYPERLIQUID_USDC_TVL_DATA as any}
+              dataConfig={HYPERLIQUID_USDC_TVL_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={400}
+              hidePoweredBy
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="flex flex-col gap-8 items-center">
+          <Blurb
+            title="HyperUnit Total TVL (Weekly)"
+            description="Combined TVL across all assets on HyperUnit over time."
+            textAlignment="center"
+          />
+          <div className="w-full max-w-[1000px]">
+            <Chart
+              title="HyperUnit Total TVL"
+              data={HYPERUNIT_TVL_DATA as any}
+              dataConfig={HYPERUNIT_TVL_CONFIG as any}
+              valueFormat={VALUE_FORMAT.currency}
+              isTimeSeries
+              chartHeight={400}
+              hidePoweredBy
+            />
+          </div>
+        </div>
+      </ContentWrapper>
 
+      {/* Social proof */}
       <div
         className="w-full flex items-center justify-center gap-12 pt-18 pb-18"
         style={{ background: 'var(--gradient-background)' }}
@@ -344,72 +470,12 @@ export default async function Overview() {
         </ContentWrapper>
       </div>
 
-      <div id="stablecoin-volume-by-blockchain" />
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="Top Blockchains Used for Stablecoin Transactions in 2024"
-              description="The most popular blockchains employed to settle customer flows, as a share of value sent, were Tron, followed by Ethereum, Polygon (Ethereum L2), and Binance Smart Chain. This mirrors survey findings from our 2024 report which found that users preferentially used those same five blockchains, albeit with Ethereum being the most popular network."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
-            <Chart
-              title="Stablecoin Volume by Blockchain"
-              data={STABLECOIN_VOLUME_BY_CHAIN_DATA}
-              dataConfig={STABLECOIN_VOLUME_BY_CHAIN_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              isTimeSeries
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-
-      <div id="stablecoin-payments-by-token" />
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="The Most Used Stablecoins for Global Transactions"
-            description="Tether's USDT was by far the most popular stablecoin used to settle flows for firms in the study. We explore the breakdown of USDT versus Circle's USDC on a country-by-country basis later in the report."
-          />
-          <div className="col-span-2">
-            <Chart
-              title="Stablecoin Payments by Token"
-              data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
-              dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              isTimeSeries
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-
-      <div id="percent-of-stablecoin-flows-by-country" />
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="Which Countries Send the Most Stablecoins?"
-              description="Based on the geographic data provided by firms for the study, combined with additional geographic attribution estimates obtained by looking at IP addresses and timezones of on-chain entities as their transactions reach blockchain nodes, we were able to identify countries originating the bulk of stablecoin transactions. The USA, Singapore, Hong Kong, Japan, and the UK were the top stablecoin sending countries."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
-            <Chart
-              title="Percent of Stablecoin Flows by Country"
-              data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
-              dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              hideLegend
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-
+      {/* Download CTA */}
       <div
         className="w-full flex items-center justify-center pt-24 pb-24"
         style={{ background: 'var(--gradient-background-download)' }}
       >
-        <ContentWrapper>
+        <ContentWrapper id="download-report">
           <div className="flex flex-col md:flex-row items-center gap-8 relative">
             <div
               className="absolute left-0 top-1/2 -translate-x-1/2"
@@ -454,6 +520,74 @@ export default async function Overview() {
         </ContentWrapper>
       </div>
 
+      {/* Appendix */}
+      <div id="appendix" />
+      <ContentWrapper>
+        <div className="w-full flex flex-col items-center gap-6">
+          <Blurb
+            title="Appendix: Stablecoin Context"
+            description="Background readings on broader stablecoin flows to contextualize Hyperliquid’s growth."
+            textAlignment="center"
+          />
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="Top Blockchains Used for Stablecoin Transactions in 2024"
+              description="The most popular blockchains by share of value sent: Tron, Ethereum, Polygon (L2), and BSC."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
+            <Chart
+              title="Stablecoin Volume by Blockchain"
+              data={STABLECOIN_VOLUME_BY_CHAIN_DATA}
+              dataConfig={STABLECOIN_VOLUME_BY_CHAIN_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              isTimeSeries
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <Blurb
+            title="The Most Used Stablecoins for Global Transactions"
+            description="USDT dominates global settlement volumes, followed by USDC."
+          />
+          <div className="col-span-2">
+            <Chart
+              title="Stablecoin Payments by Token"
+              data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
+              dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              isTimeSeries
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+      <ContentWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="Which Countries Send the Most Stablecoins?"
+              description="Geographic breakdown of stablecoin originators across the US, Singapore, Hong Kong, Japan, the UK and more."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
+            <Chart
+              title="Percent of Stablecoin Flows by Country"
+              data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
+              dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
+              valueFormat={VALUE_FORMAT.percentage}
+              hideLegend
+            />
+          </div>
+        </div>
+      </ContentWrapper>
+
+      {/* Partners */}
       <ContentWrapper>
         <div className="flex flex-col items-center justify-center gap-8">
           <p className="text-4xl font-bold">Artemis Data Partners</p>
