@@ -216,10 +216,11 @@ export default async function Overview() {
                 The Hyperliquid Thesis
               </p>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                The central nervous system of DeFi
+                DeFi's Premier Operating System
               </h1>
               <p className="text-muted-foreground max-w-2xl">
-                Hyperliquid is building something different. It starts with the best perp trading experience in crypto, then adds unified spot settlement, then enables a whole ecosystem of financial applications on top. Each layer makes the others more powerful. The result is a platform where capital naturally wants to be, and once it arrives, it tends to stay.
+              Hyperliquid isn’t just another chain. It begins with the fastest, most liquid perp markets in crypto, layers on unified spot settlement, and opens the door to a full stack of financial applications built directly on top. Each layer amplifies the next, creating a self-reinforcing system where capital flows in, finds deep liquidity, and sticks around.
+
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 
