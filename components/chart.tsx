@@ -52,6 +52,7 @@ interface Props {
   hidePoweredBy?: boolean
   yAxisDomainToMax?: boolean
   bare?: boolean
+  tickCount?: number
 }
 
 const Chart = ({
@@ -65,7 +66,8 @@ const Chart = ({
   hideLegend = false,
   hidePoweredBy = false,
   yAxisDomainToMax = false,
-  bare = false
+  bare = false,
+  tickCount
 }: Props) => {
   const [legendProps, setLegendProps] = useState(
     Object.keys(dataConfig)
@@ -163,6 +165,47 @@ const Chart = ({
   // process data for stacked100 chart types
   const chartData = processDataForStacked100(data)
 
+  // Helper function to determine date range and appropriate formatting
+  const getDateRangeInfo = () => {
+    if (!isTimeSeries || !chartData.length) return { isLongRange: false, totalDays: 0 }
+    
+    const dates = chartData
+      .map((item: ChartData) => new Date(item.date as string))
+      .filter((date: Date) => !isNaN(date.getTime()))
+      .sort((a: Date, b: Date) => a.getTime() - b.getTime())
+    
+    if (dates.length < 2) return { isLongRange: false, totalDays: 0 }
+    
+    const firstDate = dates[0]
+    const lastDate = dates[dates.length - 1]
+    const totalDays = Math.abs((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24))
+    const isLongRange = totalDays > 365 || chartData.length > 24
+    
+    return { isLongRange, totalDays, firstDate, lastDate }
+  }
+
+  const dateRangeInfo = getDateRangeInfo()
+
+  // Calculate optimal tick interval based on data range and chart width
+  const getOptimalTickInterval = () => {
+    if (!isTimeSeries || !chartData.length) return 'preserveStartEnd'
+    
+    const dataPointCount = chartData.length
+    const estimatedChartWidth = chartHeight * 2 // Rough estimate
+    const availableSpace = Math.max(estimatedChartWidth - 100, 400) // Account for margins
+    const optimalTickCount = Math.floor(availableSpace / 80) // ~80px per tick for readability
+    
+    if (dataPointCount <= optimalTickCount) {
+      return 0 // Show all ticks
+    } else if (dateRangeInfo.isLongRange) {
+      // For long ranges, show fewer ticks
+      return Math.ceil(dataPointCount / Math.min(optimalTickCount, 8))
+    } else {
+      // For shorter ranges, show more ticks but still respect spacing
+      return Math.ceil(dataPointCount / Math.min(optimalTickCount, 12))
+    }
+  }
+
   // create a mapping of original keys to percentage keys for stacked100 charts
   const keyToPercentageKeyMap: Record<string, string> = {}
   Object.entries(dataConfig).forEach(([key, config]) => {
@@ -192,18 +235,29 @@ const Chart = ({
           tickLine={false}
           axisLine={false}
           tickMargin={4}
-          minTickGap={isTimeSeries ? 12 : 0}
-          interval={isTimeSeries ? 'preserveEnd' : 0}
+          minTickGap={isTimeSeries ? 20 : 0}
+          interval={isTimeSeries ? getOptimalTickInterval() : 0}
           angle={isTimeSeries ? 0 : -45}
           textAnchor={isTimeSeries ? 'middle' : 'end'}
           height={xAxisHeight}
           tickFormatter={value => {
             if (isTimeSeries) {
               const date = new Date(value)
-              return date.toLocaleDateString('en-US', {
-                month: 'short',
-                year: 'numeric'
-              })
+              
+              // For data spanning more than 1 year or many data points, show month + year
+              if (dateRangeInfo.isLongRange) {
+                return date.toLocaleDateString('en-US', {
+                  month: 'short',
+                  year: '2-digit'
+                })
+              }
+              // For shorter time ranges, show month + day
+              else {
+                return date.toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric'
+                })
+              }
             }
             return value
           }}
@@ -225,6 +279,7 @@ const Chart = ({
               ? ['dataMin', 'dataMax']
               : undefined
           }
+          tickCount={tickCount}
         />
         <ChartTooltip
           cursor={true}
@@ -233,9 +288,11 @@ const Chart = ({
               hideLabel={!isTimeSeries}
               labelFormatter={label => {
                 if (isTimeSeries) {
-                  return new Date(label).toLocaleDateString('en-US', {
+                  const date = new Date(label)
+                  // Tooltips always show full date for clarity
+                  return date.toLocaleDateString('en-US', {
                     month: 'short',
-                    // day: 'numeric',
+                    day: 'numeric',
                     year: 'numeric'
                   })
                 }

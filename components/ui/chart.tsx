@@ -374,7 +374,7 @@ function ChartTooltipContentSparkline({
     const value = item.payload.date
 
     const formattedDate = new Date(value).toLocaleDateString('en-US', {
-      month: 'long',
+      month: 'short',
       day: 'numeric',
       year: 'numeric'
     })
