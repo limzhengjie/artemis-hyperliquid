@@ -484,7 +484,7 @@ export default async function Overview() {
       <ContentWrapper>
         <div className="flex flex-col gap-12 items-center mb-20">
           <Blurb
-            title="The Institutional Capital Magnet"
+            title="The Main Capital Indicator"
             description="USDC TVL is the clean signal. Traders, LPs, and builders all need dollar rails to participate. Rising USDC on Hyperliquid means increased base liquidity to fund perps margin, settle spot, and underwrite HyperEVM credit."
             textAlignment="center"
           />
