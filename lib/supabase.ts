@@ -1,15 +1,42 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+function resolveEnv(): { url: string | null; key: string | null } {
+  const serverUrl = process.env.SUPABASE_URL || null
+  const serverServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || null
+  const serverAnonKey = process.env.SUPABASE_ANON_KEY || null
+  const publicUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || null
+  const publicKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || null
 
-export const supabase = createClient(
-  supabaseUrl as string,
-  supabaseKey as string
-)
+  // Prefer server-side credentials if available
+  if (serverUrl && (serverServiceKey || serverAnonKey)) {
+    return { url: serverUrl, key: serverServiceKey || serverAnonKey }
+  }
+  if (publicUrl && publicKey) {
+    return { url: publicUrl, key: publicKey }
+  }
+  return { url: null, key: null }
+}
+
+function createSafeClient(): SupabaseClient | null {
+  const { url, key } = resolveEnv()
+  if (!url || !key) return null
+  return createClient(url, key)
+}
+
+// Lazily created client; may be null if env is not configured
+export const supabase: SupabaseClient | null = createSafeClient()
+
+export function getSupabase(): SupabaseClient {
+  const client = supabase ?? createSafeClient()
+  if (!client) {
+    throw new Error('Supabase is not configured. Set SUPABASE_URL and a key in env.')
+  }
+  return client
+}
 
 export async function getMarketMapCategoriesAndProtocols() {
-  const { data, error } = await supabase.from('categories').select(`
+  const client = getSupabase()
+  const { data, error } = await client.from('categories').select(`
       *,
       protocols_categories(
         protocols_metadata(*)
