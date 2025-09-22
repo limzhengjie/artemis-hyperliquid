@@ -1,7 +1,6 @@
 export async function fetchAllPerpsVolume(
   startDate: string,
-  endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; value: number }>> {
   const symbols = 'aevo,apex,avantis,blue,drift,dydx,gns,gmx,hold,hype,jup,ktc,mcb,perp,snx,vrtx,lighter'
   const url = `https://data-svc.artemisxyz.com/data/PERP_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
@@ -22,7 +21,7 @@ export async function fetchAllPerpsVolume(
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { PERP_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = (json as any)?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToValueSum: Record<string, number> = {}
 
   Object.values(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach((symbolRecord) => {
@@ -51,8 +50,7 @@ export async function fetchAllPerpsVolume(
 
 export async function fetchAllSpotDEXVolume(
   startDate: string,
-  endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
   const symbols = 'ray,cake,hype,orca,uni'
   const url = `https://data-svc.artemisxyz.com/data/SPOT_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
@@ -73,7 +71,7 @@ export async function fetchAllSpotDEXVolume(
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { SPOT_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = (json as any)?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
   Object.entries(symbolsObj as Record<string, { SPOT_VOLUME?: Array<{ date: string; val: number | null }> }>).forEach(([symbol, symbolRecord]) => {
@@ -104,7 +102,7 @@ export async function fetchAllSpotDEXVolume(
 export async function fetchHyperliquidPerpVolume(
   startDate: string,
   endDate: string,
-  _granularity?: 'daily' | 'weekly' | 'monthly'
+  granularity?: 'daily' | 'weekly' | 'monthly'
 ): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
   const symbols = 'hype'
   const url = `https://data-svc.artemisxyz.com/data/PERP_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
@@ -124,7 +122,7 @@ export async function fetchHyperliquidPerpVolume(
   }
   clearTimeout(timeout)
 
-  const symbolsObj = (json as any)?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
   Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
@@ -176,7 +174,7 @@ export async function fetchPerpVolumeByVenue(
   }
   clearTimeout(timeout)
 
-  const symbolsObj = (json as any)?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
   Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
@@ -226,7 +224,7 @@ export async function fetchOpenInterestByVenue(
   }
   clearTimeout(timeout)
 
-  const symbolsObj = (json as any)?.data?.symbols ?? {}
+  const symbolsObj = (json as { data?: { symbols?: Record<string, unknown> } })?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string;[k: string]: number | string }> = {}
 
   Object.entries(symbolsObj as Record<string, { OPEN_INTEREST?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {

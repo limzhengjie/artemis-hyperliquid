@@ -401,9 +401,7 @@ function ChartTooltipContentSparkline({
     labelFormatter,
     payload,
     hideLabel,
-    labelClassName,
-    config,
-    labelKey
+    labelClassName
   ])
 
   if (!active || !payload?.length) {

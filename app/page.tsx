@@ -44,13 +44,13 @@ export default async function Overview() {
   )
 
   // Map Hype-only keyed rows -> { date, value } series for sparkline/tiles
-  const hyperliquidPerpVolume2YearDailySeries = (hyperliquidPerpVolume2YearData as any[]).map(row => ({
-    date: row.date,
-    value: Number((row as any).hype ?? (row as any).HYPE ?? 0)
+  const hyperliquidPerpVolume2YearDailySeries = (hyperliquidPerpVolume2YearData as Array<Record<string, unknown>>).map(row => ({
+    date: row.date as string,
+    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
   }))
-  const hyperliquidPerpVolume1YearSeries = (hyperliquidPerpVolume1YearData as any[]).map(row => ({
-    date: row.date,
-    value: Number((row as any).hype ?? (row as any).HYPE ?? 0)
+  const hyperliquidPerpVolume1YearSeries = (hyperliquidPerpVolume1YearData as Array<Record<string, unknown>>).map(row => ({
+    date: row.date as string,
+    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
   }))
 
   // Helper function to get week start (Monday)
@@ -209,10 +209,6 @@ export default async function Overview() {
     TVL_APPS: { label: 'TVL_APPS', color: '#5E9EFD', type: CHART_TYPES.bar, stackId: 'tvl' }
   }
 
-  const SPOT_VOLUME_BINANCE_HYPERLIQUID_CONFIG: ChartConfig = {
-    Binance: { label: 'Binance', color: '#FF8C00', type: CHART_TYPES.bar, stackId: 'spot' },
-    Hyperliquid: { label: 'Hyperliquid', color: '#00D4AA', type: CHART_TYPES.bar, stackId: 'spot' }
-  }
 
   return (
     <div className="w-full pb-12 flex flex-col items-center gap-18 font-[family-name:var(--font-geist-sans)]">
@@ -352,8 +348,8 @@ export default async function Overview() {
           <div className="col-span-2 md:order-1">
             <Chart
               title="Open Interest by Protocol"
-              data={allOpenInterestData as any}
-              dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG as any}
+              data={[...allOpenInterestData]}
+              dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={360}
