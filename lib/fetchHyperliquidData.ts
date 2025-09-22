@@ -101,8 +101,7 @@ export async function fetchAllSpotDEXVolume(
 
 export async function fetchHyperliquidPerpVolume(
   startDate: string,
-  endDate: string,
-  granularity?: 'daily' | 'weekly' | 'monthly'
+  endDate: string
 ): Promise<Array<{ date: string; [symbol: string]: number | string }>> {
   const symbols = 'hype'
   const url = `https://data-svc.artemisxyz.com/data/PERP_VOLUME?symbols=${symbols}&startDate=${startDate}&endDate=${endDate}`
@@ -202,8 +201,7 @@ export async function fetchPerpVolumeByVenue(
 }
 
 export async function fetchOpenInterestByVenue(
-  startDate: string,
-  endDate: string
+  startDate: string
 ): Promise<Array<{ date: string;[symbol: string]: number | string }>> {
   const symbols = 'hype,drift,polymarket,lighter,kalshi'
   const endDateOI = '2025-09-18'

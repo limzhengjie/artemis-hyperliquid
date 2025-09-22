@@ -34,13 +34,11 @@ export default async function Overview() {
   const hyperliquidPerpVolume2YearData = await fetchHyperliquidPerpVolume(
     getStartDate(365 * 2) as string,
     endDate as string,
-    'daily' // API only supports daily, we'll aggregate to weekly client-side
   )
 
   const hyperliquidPerpVolume1YearData = await fetchHyperliquidPerpVolume(
     getStartDate(365 * 1 + 10) as string, // 10 days to buffer extra days to ensure we have data for the last 365 days
-    endDate as string,
-    'daily'
+    endDate as string
   )
 
   // Map Hype-only keyed rows -> { date, value } series for sparkline/tiles
@@ -99,8 +97,7 @@ export default async function Overview() {
   )
 
   const allOpenInterestData = await fetchOpenInterestByVenue(
-    getStartDate(365) as string,
-    endDate as string
+    getStartDate(365) as string
   )
 
   // HyperEVM Stablecoin balances from CSV, aggregated by token
@@ -120,10 +117,10 @@ export default async function Overview() {
   }
 
   const weeklyHypeMap: Record<string, number> = {}
-  ;(allPerpsVolumeData || []).forEach((row: any) => {
+  ;(allPerpsVolumeData || []).forEach((row: Record<string, unknown>) => {
     const v = Number(row.hype || 0)
     if (!isNaN(v)) {
-      const wk = getWeekStart(row.date)
+      const wk = getWeekStart(row.date as string)
       weeklyHypeMap[wk] = (weeklyHypeMap[wk] || 0) + v
     }
   })
@@ -174,8 +171,8 @@ export default async function Overview() {
   }
 
   // Remap Spot DEX keys to match config and guard empty
-  const remapSpotRow = (row: any) => ({
-    date: row.date,
+  const remapSpotRow = (row: Record<string, unknown>) => ({
+    date: row.date as string,
     ray: Number(row.ray ?? row.raydium ?? 0),
     cake: Number(row.cake ?? row.pancakeswap ?? 0),
     hype: Number(row.hype ?? 0),
@@ -196,11 +193,11 @@ export default async function Overview() {
   }
 
   // Build stacked-only series for the chart (HLP, SPOT, APPS only)
-  const TVL_STACKED = (TVL_DATA as Array<any>).map(d => ({
-    date: d.DATE,
-    TVL_HLP: Number.isFinite(d.TVL_HLP) ? d.TVL_HLP : 0,
-    TVL_SPOT: Number.isFinite(d.TVL_SPOT) ? d.TVL_SPOT : 0,
-    TVL_APPS: Number.isFinite(d.TVL_APPS) ? d.TVL_APPS : 0
+  const TVL_STACKED = (TVL_DATA as Array<Record<string, unknown>>).map(d => ({
+    date: d.DATE as string,
+    TVL_HLP: Number.isFinite(Number(d.TVL_HLP)) ? Number(d.TVL_HLP) : 0,
+    TVL_SPOT: Number.isFinite(Number(d.TVL_SPOT)) ? Number(d.TVL_SPOT) : 0,
+    TVL_APPS: Number.isFinite(Number(d.TVL_APPS)) ? Number(d.TVL_APPS) : 0
   }))
 
   const TVL_STACKED_CONFIG: ChartConfig = {
