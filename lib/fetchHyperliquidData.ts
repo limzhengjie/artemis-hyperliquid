@@ -8,24 +8,24 @@ export async function fetchAllPerpsVolume(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { PERP_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as any)?.data?.symbols ?? {}
   const dateToValueSum: Record<string, number> = {}
 
-  Object.values<any>(symbolsObj).forEach((symbolRecord: any) => {
+  Object.values(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach((symbolRecord) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -59,24 +59,24 @@ export async function fetchAllSpotDEXVolume(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch SPOT_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
   // Expected shape: { data: { symbols: { [symbol]: { SPOT_VOLUME: [{ date, val }] } } } }
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as any)?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { SPOT_VOLUME?: Array<{ date: string; val: number | null }> }>).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.SPOT_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -111,23 +111,23 @@ export async function fetchHyperliquidPerpVolume(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as any)?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -163,23 +163,23 @@ export async function fetchPerpVolumeByVenue(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch PERP_VOLUME data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as any)?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string; [k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { PERP_VOLUME?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.PERP_VOLUME
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {
@@ -213,23 +213,23 @@ export async function fetchOpenInterestByVenue(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-  let json: any
+  let json: unknown
   try {
     const res = await fetch(url, { signal: controller.signal })
     if (!res.ok) {
       throw new Error(`Failed to fetch OPEN_INTEREST data: ${res.status} ${res.statusText}`)
     }
     json = await res.json()
-  } catch (err) {
+  } catch {
     clearTimeout(timeout)
     return []
   }
   clearTimeout(timeout)
 
-  const symbolsObj = json?.data?.symbols ?? {}
+  const symbolsObj = (json as any)?.data?.symbols ?? {}
   const dateToRow: Record<string, { date: string;[k: string]: number | string }> = {}
 
-  Object.entries<any>(symbolsObj).forEach(([symbol, symbolRecord]) => {
+  Object.entries(symbolsObj as Record<string, { OPEN_INTEREST?: Array<{ date: string; val: number | null }> }> ).forEach(([symbol, symbolRecord]) => {
     const seriesRaw = symbolRecord?.OPEN_INTEREST
     const series: Array<{ date: string; val: number | null }> = Array.isArray(seriesRaw) ? seriesRaw : []
     series.forEach(point => {

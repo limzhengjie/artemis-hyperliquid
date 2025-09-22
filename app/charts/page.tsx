@@ -74,7 +74,7 @@ const Charts = async () => {
     <div className="w-full max-w-6xl mx-auto p-12 flex flex-col items-center gap-8 font-[family-name:var(--font-geist-sans)]">
       <Chart
         title="Perp Volume Share by Venue"
-        data={PERP_VOLUME_BY_SYMBOL_DATA}
+        data={[...PERP_VOLUME_BY_SYMBOL_DATA]}
         dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
         isTimeSeries
@@ -144,8 +144,8 @@ const Charts = async () => {
       <h1 className="text-2xl font-bold">Binance vs Hyperliquid</h1>
       <Chart
         title="Binance vs Hyperliquid Spot Volume (Weekly)"
-        data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
-        dataConfig={BINANCE_HYPERLIQUID_SPOT_CONFIG as any}
+        data={[...BINANCE_HYPERLIQUID_SPOT_DATA]}
+        dataConfig={BINANCE_HYPERLIQUID_SPOT_CONFIG}
         valueFormat={VALUE_FORMAT.currency}
         isTimeSeries
         hidePoweredBy

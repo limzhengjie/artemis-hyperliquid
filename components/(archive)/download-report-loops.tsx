@@ -4,8 +4,6 @@
 
 import { useState } from 'react'
 
-import { ARTEMIS_TERMINAL_URL } from '@/constants/general'
-
 import { ArrowLeftIcon } from 'lucide-react'
 
 const INIT = 'INIT'

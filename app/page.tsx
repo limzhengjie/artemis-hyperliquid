@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 
- 
+
 
 import { getCurrentDate, getStartDate } from '@/lib/dates'
 
@@ -86,7 +86,6 @@ export default async function Overview() {
     (hyperliquidPerpVolume1YearSeries?.[hyperliquidPerpVolume1YearSeries.length - 2]?.value || 0)
 
   // Alias for clarity with current hero label
-  const latestPerpVolume = latestHyperliquidPerpVolume
   const latestPerpVolumeChange = latestHyperliquidPerpVolumeChange
 
   const allPerpsVolumeData = await fetchPerpVolumeByVenue(
@@ -197,7 +196,7 @@ export default async function Overview() {
   }
 
   // Build stacked-only series for the chart (HLP, SPOT, APPS only)
-  const TVL_STACKED = (TVL_DATA as any[]).map(d => ({
+  const TVL_STACKED = (TVL_DATA as Array<any>).map(d => ({
     date: d.DATE,
     TVL_HLP: Number.isFinite(d.TVL_HLP) ? d.TVL_HLP : 0,
     TVL_SPOT: Number.isFinite(d.TVL_SPOT) ? d.TVL_SPOT : 0,
@@ -229,7 +228,7 @@ export default async function Overview() {
                 The Hyperliquid Thesis
               </p>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                DeFi's Premier Operating System
+                DeFi&#39;s Premier Operating System
               </h1>
               <p className="text-muted-foreground max-w-2xl">
               Hyperliquid isn’t just another chain. It begins with the fastest, most liquid perp markets in crypto, layers on unified spot settlement, and opens the door to a full stack of financial applications built directly on top. Each layer amplifies the next, creating a self-reinforcing system where capital flows in, finds deep liquidity, and sticks around.
@@ -243,20 +242,20 @@ export default async function Overview() {
               </div>
             </div>
             <div className="flex-1 w-full">
-              <StatSummaryTile
+            <StatSummaryTile
                 mainStatLabel="PERP VOLUME"
-                mainStat={{
+              mainStat={{
                   value: latestHyperliquidPerpVolume,
-                  type: VALUE_FORMAT.currency
-                }}
-                mainStatChange={{
+                type: VALUE_FORMAT.currency
+              }}
+              mainStatChange={{
                   value: latestPerpVolumeChange,
-                  type: VALUE_FORMAT.currency,
-                  label: 'over the last day'
-                }}
+                type: VALUE_FORMAT.currency,
+                label: 'over the last day'
+              }}
                 sparklineData={hyperliquidPerpVolume2YearSeries}
                 miniStatsData={hyperliquidPerpVolume1YearSeries}
-              />
+            />
             </div>
           </div>
         </ContentWrapper>
@@ -303,8 +302,8 @@ export default async function Overview() {
           <div className="col-span-2">
             <Chart
               title="Binance vs Hyperliquid Perp Volume (Weekly)"
-              data={PERP_VOLUME_BINANCE_HYPERLIQUID_DATA as any}
-              dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG as any}
+              data={[...PERP_VOLUME_BINANCE_HYPERLIQUID_DATA]}
+              dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={360}
@@ -326,7 +325,7 @@ export default async function Overview() {
         {allPerpsVolumeData && allPerpsVolumeData.length > 0 ? (
           <Chart
             title="Perpetual Futures Volume by Venue"
-            data={allPerpsVolumeData}
+            data={[...allPerpsVolumeData]}
             dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
             valueFormat={VALUE_FORMAT.percentage}
             isTimeSeries
@@ -388,8 +387,8 @@ export default async function Overview() {
           <div className="col-span-2 md:order-1">
             <Chart
               title="Binance vs Hyperliquid Spot Volume (Weekly)"
-              data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
-              dataConfig={SPOT_PERCENT_CONFIG as any}
+              data={[...BINANCE_HYPERLIQUID_SPOT_DATA]}
+              dataConfig={SPOT_PERCENT_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={360}
@@ -410,8 +409,8 @@ export default async function Overview() {
             {spotDEXSeries && spotDEXSeries.length > 0 ? (
               <Chart
                 title="Spot DEX Volume (Daily)"
-                data={spotDEXSeries as any}
-                dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
+                data={spotDEXSeries}
+                dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG}
                 valueFormat={VALUE_FORMAT.currency}
                 isTimeSeries
                 chartHeight={360}
@@ -435,9 +434,9 @@ export default async function Overview() {
             description="This is where things get really interesting. HyperEVM isn't just another smart contract platform. It's built specifically for financial applications that need the performance and liquidity of Hyperliquid's core exchange. Every new app that launches makes the underlying platform more valuable. More apps attract more users. More users create more liquidity. More liquidity attracts more apps. The flywheel is just getting started."
             textAlignment="center"
           />
-        </div>
+      </div>
       </ContentWrapper>
-      
+
       {/* Chart 5: TVL Breakdown - Centered text */}
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
@@ -449,7 +448,7 @@ export default async function Overview() {
           <div className="w-full max-w-[1000px]">
             <Chart
               title="TVL Breakdown (Stacked)"
-              data={TVL_STACKED}
+              data={[...TVL_STACKED]}
               dataConfig={TVL_STACKED_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
@@ -458,7 +457,7 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
-      
+
       {/* Chart 6: HyperEVM Stablecoins - Right-aligned text */}
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
@@ -471,8 +470,8 @@ export default async function Overview() {
           <div className="col-span-2 md:order-1">
             <Chart
               title="HyperEVM Stablecoin Balances"
-              data={HYPEREVM_STABLECOIN_STACKED as any}
-              dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG as any}
+              data={[...HYPEREVM_STABLECOIN_STACKED]}
+              dataConfig={HYPEREVM_STABLECOIN_STACKED_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={360}
@@ -493,8 +492,8 @@ export default async function Overview() {
           <div className="w-full max-w-[1000px]">
             <Chart
               title="Hyperliquid USDC TVL"
-              data={HYPERLIQUID_USDC_TVL_DATA as any}
-              dataConfig={HYPERLIQUID_USDC_TVL_CONFIG as any}
+              data={[...HYPERLIQUID_USDC_TVL_DATA]}
+              dataConfig={HYPERLIQUID_USDC_TVL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={400}
@@ -503,7 +502,7 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
-      
+
       {/* Chart 8: USDC Flows - Left-aligned text */}
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
@@ -514,8 +513,8 @@ export default async function Overview() {
           <div className="col-span-2">
             <Chart
               title="Hyperliquid USDC Net Flows (Daily)"
-              data={HYPERLIQUID_USDC_FLOWS_DATA as any}
-              dataConfig={HYPERLIQUID_USDC_FLOWS_CONFIG as any}
+              data={[...HYPERLIQUID_USDC_FLOWS_DATA]}
+              dataConfig={HYPERLIQUID_USDC_FLOWS_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={400}
@@ -525,7 +524,7 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
-      
+
       {/* Chart 9: HyperUnit Total TVL - Right-aligned text */}
       <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
@@ -538,8 +537,8 @@ export default async function Overview() {
           <div className="col-span-2 md:order-1">
             <Chart
               title="HyperUnit Total TVL"
-              data={HYPERUNIT_TVL_DATA as any}
-              dataConfig={HYPERUNIT_TVL_CONFIG as any}
+              data={[...HYPERUNIT_TVL_DATA]}
+              dataConfig={HYPERUNIT_TVL_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={400}
@@ -548,9 +547,9 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
-      
+
       {/* Chart 10: Capital Flows - Left-aligned text */}
-      <ContentWrapper>
+        <ContentWrapper>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
             title="HyperUnit: The Multi-Asset Gravity Well"
@@ -559,8 +558,8 @@ export default async function Overview() {
           <div className="col-span-2">
             <Chart
               title="HyperUnit Token Net Inflows"
-              data={HYPERLIQUID_INCLUDES_HYPERUNIT_DATA as any}
-              dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG as any}
+              data={[...HYPERLIQUID_INCLUDES_HYPERUNIT_DATA]}
+              dataConfig={HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG}
               valueFormat={VALUE_FORMAT.currency}
               isTimeSeries
               chartHeight={400}
@@ -568,8 +567,8 @@ export default async function Overview() {
               yAxisDomainToMax={true}
             />
           </div>
-        </div>
-      </ContentWrapper>
+          </div>
+        </ContentWrapper>
 
       {/* Conclusion */}
       <ContentWrapper>
