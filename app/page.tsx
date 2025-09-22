@@ -473,7 +473,7 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
-      
+
       {/* Chart 7: USDC TVL - Centered text */}
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
@@ -559,7 +559,7 @@ export default async function Overview() {
               hidePoweredBy
               yAxisDomainToMax={true}
             />
-          </div>
+            </div>
           </div>
         </ContentWrapper>
 

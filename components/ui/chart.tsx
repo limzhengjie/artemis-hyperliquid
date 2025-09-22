@@ -181,6 +181,7 @@ function ChartTooltipContent({
     const [item] = payload
     const key = `${labelKey || item?.dataKey || item?.name || 'value'}`
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
+    const label = item?.name || item?.dataKey
     const value =
       !labelKey && typeof label === 'string'
         ? config[label as keyof typeof config]?.label || label
