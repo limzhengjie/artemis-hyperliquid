@@ -13,7 +13,7 @@ import { ARTEMIS_TERMINAL_URL } from '@/constants/general'
 
 import { Button } from '@/components/ui/button'
 
-import ArtemisStablecoinLogo from '@/public/artemis-stablecoin-logo.svg'
+import whyHyperliquidLogo from '@/public/why-hyperliquid-logo.svg'
 
 import { MessageCircleMoreIcon } from 'lucide-react'
 
@@ -173,8 +173,8 @@ const Header = () => {
         <div className="flex items-center gap-6 xl:gap-10">
           <Link href="/">
             <Image
-              src={ArtemisStablecoinLogo}
-              alt="Artemis Stablecoin Logo"
+              src={whyHyperliquidLogo}
+              alt="Why Hyperliquid Logo"
               className="w-[160px] md:w-[180px]"
             />
           </Link>
