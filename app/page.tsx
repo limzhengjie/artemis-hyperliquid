@@ -253,7 +253,6 @@ export default async function Overview() {
             <Link href="#level-1-perps"><Button variant="ghost" size="sm">Level 1: Perps</Button></Link>
             <Link href="#level-2-spot"><Button variant="ghost" size="sm">Level 2: Spot</Button></Link>
             <Link href="#level-3-hypercore"><Button variant="ghost" size="sm">Level 3: Hypercore + HyperEVM</Button></Link>
-            <Link href="#appendix"><Button variant="ghost" size="sm">Appendix</Button></Link>
           </div>
         </div>
       </ContentWrapper>
@@ -264,16 +263,18 @@ export default async function Overview() {
         <div className="w-full flex flex-col items-center gap-6">
           <Blurb
             title="Level 1: Perps"
-            description="Placeholder: Perps are the heartbeat of Hyperliquid. Depth, spreads, and venue share demonstrate durable leadership across market cycles."
+            description="Perps are the heartbeat of Hyperliquid. Depth, spreads, and venue share demonstrate durable leadership across market cycles."
             textAlignment="center"
           />
         </div>
       </ContentWrapper>
-      <ContentWrapper className="max-w-none px-4 md:px-8">
+      
+      {/* Chart 1: Asset breakdown - Full width with centered text */}
+      <ContentWrapper className="max-w-none px-8 md:px-32">
         <div className="w-full flex flex-col items-center gap-6 mb-4">
           <Blurb
             title="Perp Volume Share by Assets"
-            description="Daily percentage share of perp volume across supported assets."
+            description="Hyperliquid's asset diversification tells the story of institutional adoption. While Bitcoin and Ethereum maintain their dominance, the long tail of altcoin perps demonstrates sophisticated trader demand. The platform's ability to bootstrap liquidity across 200+ assets speaks to both market-making efficiency and organic user growth. Notice how meme coins and AI tokens surge during narrative cycles, while blue chips provide the stable base load that keeps the engine running."
             textAlignment="center"
           />
         </div>
@@ -294,77 +295,108 @@ export default async function Overview() {
           </div>
         )}
       </ContentWrapper>
+      
+      {/* Chart 2: Binance comparison - Left-aligned text */}
       <ContentWrapper>
-        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
-            title="Binance vs Hyperliquid Perp Volume (Weekly)"
-            description="Stacked share view comparing Binance vs Hyperliquid perp volume by week (HL aggregated from daily)."
-            textAlignment="center"
+            title="Binance vs Hyperliquid Perp Volume"
+            description="The David vs Goliath story plays out in weekly volume share. Hyperliquid's climb from single digits to meaningful market share reflects more than just growth—it signals a structural shift. While Binance remains the incumbent, Hyperliquid's transparent orderbook and onchain settlement attract sophisticated flow. The inflection point comes when institutional traders prioritize composability over raw size."
           />
-          <Chart
-            title="Binance vs Hyperliquid Perp Volume (Weekly)"
-            data={PERP_VOLUME_BINANCE_HYPERLIQUID_DATA as any}
-            dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG as any}
-            valueFormat={VALUE_FORMAT.percentage}
-            isTimeSeries
-            chartHeight={360}
-            hidePoweredBy
-          />
+          <div className="col-span-2">
+            <Chart
+              title="Binance vs Hyperliquid Perp Volume (Weekly)"
+              data={PERP_VOLUME_BINANCE_HYPERLIQUID_DATA as any}
+              dataConfig={PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG as any}
+              valueFormat={VALUE_FORMAT.percentage}
+              isTimeSeries
+              chartHeight={360}
+              hidePoweredBy
+            />
+          </div>
         </div>
       </ContentWrapper>
 
       {/* Level 2: Spot */}
       <div id="level-2-spot" />
       <ContentWrapper>
-        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
+        <div className="w-full flex flex-col items-center gap-6">
           <Blurb
             title="Level 2: Spot"
-            description="Placeholder: Spot is the settlement layer for liquidity to orbit. We track share against centralized and decentralized venues as flows migrate onchain."
+            description="Spot is the settlement layer for liquidity to orbit. We track share against centralized and decentralized venues as flows migrate onchain."
             textAlignment="center"
-          />
-          <Chart
-            title="Binance vs Hyperliquid Spot Volume (Weekly)"
-            data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
-            dataConfig={SPOT_PERCENT_CONFIG as any}
-            valueFormat={VALUE_FORMAT.percentage}
-            isTimeSeries
-            chartHeight={360}
-            hidePoweredBy
           />
         </div>
       </ContentWrapper>
+      
+      {/* Chart 3: Binance vs HL Spot - Right-aligned text */}
       <ContentWrapper>
-        <div className="w-full max-w-[1100px] mx-auto flex flex-col gap-6 items-center">
-          <Blurb
-            title="Spot DEX Volume (Daily)"
-            description="Daily spot volume for DEXs."
-            textAlignment="center"
-          />
-          {spotDEXSeries && spotDEXSeries.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="Binance vs Hyperliquid Spot Volume"
+              description="Spot trading reveals the platform's maturation from derivatives-first to full-stack exchange. Unlike perps where Hyperliquid carved out meaningful share, spot remains Binance's fortress. The challenge isn't just liquidity—it's network effects. Retail traders follow where their coins are listed, and institutions need deep books for size. Hyperliquid's spot growth story is about quality over quantity: fewer pairs, better execution, onchain transparency."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
             <Chart
-              title="Spot DEX Volume (Daily)"
-              data={spotDEXSeries as any}
-              dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
-              valueFormat={VALUE_FORMAT.currency}
+              title="Binance vs Hyperliquid Spot Volume (Weekly)"
+              data={BINANCE_HYPERLIQUID_SPOT_DATA as any}
+              dataConfig={SPOT_PERCENT_CONFIG as any}
+              valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={360}
               hidePoweredBy
             />
-          ) : (
-            <div className="w-full h-[360px] flex items-center justify-center text-muted-foreground">
-              Unable to load spot DEX data right now.
-            </div>
-          )}
+          </div>
+        </div>
+      </ContentWrapper>
+      
+      {/* Chart 4: DEX comparison - Left-aligned text */}
+      <ContentWrapper>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <Blurb
+            title="Spot DEX Volume Landscape"
+            description="The DEX wars play out differently than CEX competition. Uniswap's AMM model democratized market making but sacrificed efficiency. Hyperliquid brings orderbook precision to onchain settlement—the best of both worlds. While Raydium rides Solana's momentum and PancakeSwap dominates BSC, Hyperliquid's differentiation lies in professional-grade tools. The question isn't whether DEXs will eat CEX lunch, but which model wins the institutional flow."
+          />
+          <div className="col-span-2">
+            {spotDEXSeries && spotDEXSeries.length > 0 ? (
+              <Chart
+                title="Spot DEX Volume (Daily)"
+                data={spotDEXSeries as any}
+                dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG as any}
+                valueFormat={VALUE_FORMAT.currency}
+                isTimeSeries
+                chartHeight={360}
+                hidePoweredBy
+              />
+            ) : (
+              <div className="w-full h-[360px] flex items-center justify-center text-muted-foreground">
+                Unable to load spot DEX data right now.
+              </div>
+            )}
+          </div>
         </div>
       </ContentWrapper>
 
       {/* Level 3: Hypercore + HyperEVM */}
       <div id="level-3-hypercore" />
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
+        <div className="w-full flex flex-col items-center gap-6">
           <Blurb
             title="Level 3: Hypercore + HyperEVM"
-            description="Placeholder: Hypercore powers intent settlement; HyperEVM scales application liquidity. Together they anchor TVL growth and token flows across the stack."
+            description="Hypercore powers intent settlement; HyperEVM scales application liquidity. Together they anchor TVL growth and token flows across the stack."
+            textAlignment="center"
+          />
+        </div>
+      </ContentWrapper>
+      
+      {/* Chart 5: TVL Breakdown - Centered text */}
+      <ContentWrapper>
+        <div className="flex flex-col gap-8 items-center">
+          <Blurb
+            title="TVL Breakdown: The Capital Stack"
+            description="Total Value Locked tells the story of capital formation. HLP (Hyperliquid Liquidity Provider) tokens represent the core perps market making pool—the engine room of the exchange. Spot TVL captures the settlement layer where traders park collateral. Apps TVL shows nascent but growing ecosystem activity. This isn't just about size; it's about composition. A healthy exchange needs all three layers firing, with HLP providing the liquidity backbone that makes everything else possible."
             textAlignment="center"
           />
           <div className="w-full max-w-[1000px]">
@@ -379,14 +411,17 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
+      
+      {/* Chart 6: HyperEVM Stablecoins - Right-aligned text */}
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
-          <Blurb
-            title="HyperEVM Stablecoin Balances (Daily)"
-            description="Total supply of stablecoins issued on HyperEVM, broken out by token."
-            textAlignment="center"
-          />
-          <div className="w-full max-w-[1000px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="HyperEVM Stablecoin Ecosystem"
+              description="HyperEVM's stablecoin supply growth reveals the platform's evolution from trading venue to financial infrastructure. Each token represents a different use case: USDC for institutional flows, USDT for retail adoption, and emerging alternatives for specific verticals. The stacked growth pattern shows not just adoption, but diversification—a sign of a maturing ecosystem. As more stablecoins migrate onchain, HyperEVM becomes the settlement layer for a new generation of financial applications."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
             <Chart
               title="HyperEVM Stablecoin Balances"
               data={HYPEREVM_STABLECOIN_STACKED as any}
@@ -399,14 +434,15 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
+      
+      {/* Chart 7: HyperUnit Flows - Left-aligned text */}
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
           <Blurb
-            title="HyperUnit Token Net Inflows (Daily)"
-            description="Daily net inflows across SOL, FART, PUMP, SPX, BONK, ETH, BTC, and USDC. Positive values indicate net deposits; negatives indicate withdrawals."
-            textAlignment="center"
+            title="HyperUnit: The Flow Engine"
+            description="Token net inflows reveal the platform's role as crypto's central clearing house. When traders deposit SOL, BONK, or meme coins like FART and PUMP, they're not just parking assets—they're signaling conviction. Positive flows during market stress show trust; negative flows during rallies show profit-taking discipline. The diversity of assets flowing through HyperUnit demonstrates its evolution from Bitcoin-focused to multi-chain liquidity hub. Each spike tells a story of narrative, momentum, and trader psychology."
           />
-          <div className="w-full max-w-[1000px]">
+          <div className="col-span-2">
             <Chart
               title="HyperUnit Token Net Inflows"
               data={HYPERLIQUID_INCLUDES_HYPERUNIT_DATA as any}
@@ -419,11 +455,13 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
+      
+      {/* Chart 8: USDC TVL - Centered text */}
       <ContentWrapper>
         <div className="flex flex-col gap-8 items-center">
           <Blurb
-            title="Hyperliquid USDC TVL (Weekly)"
-            description="Weekly USDC deposits held on-platform, aggregated by week."
+            title="USDC: The Stability Anchor"
+            description="USDC TVL growth reflects institutional adoption patterns. Unlike volatile crypto assets, stablecoin deposits signal serious intent—traders and institutions parking working capital for systematic strategies. The steady upward trend shows Hyperliquid earning trust as a custody solution, not just a trading venue. Each plateau represents consolidation; each growth spurt shows new capital allocation decisions. This is the foundation upon which everything else is built."
             textAlignment="center"
           />
           <div className="w-full max-w-[1000px]">
@@ -439,14 +477,17 @@ export default async function Overview() {
           </div>
         </div>
       </ContentWrapper>
+      
+      {/* Chart 9: HyperUnit Total TVL - Right-aligned text */}
       <ContentWrapper>
-        <div className="flex flex-col gap-8 items-center">
-          <Blurb
-            title="HyperUnit Total TVL (Weekly)"
-            description="Combined TVL across all assets on HyperUnit over time."
-            textAlignment="center"
-          />
-          <div className="w-full max-w-[1000px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
+          <div className="md:order-2">
+            <Blurb
+              title="HyperUnit Total TVL: The Full Picture"
+              description="The combined TVL across all HyperUnit assets tells the complete capital formation story. This isn't just about individual tokens—it's about the platform's role in the broader crypto capital stack. Growth phases correlate with market cycles, but the underlying trend shows sticky capital finding a permanent home. As DeFi matures, platforms like HyperUnit become the infrastructure layer where serious money parks for serious strategies. The total is greater than the sum of its parts."
+            />
+          </div>
+          <div className="col-span-2 md:order-1">
             <Chart
               title="HyperUnit Total TVL"
               data={HYPERUNIT_TVL_DATA as any}
@@ -460,151 +501,8 @@ export default async function Overview() {
         </div>
       </ContentWrapper>
 
-      {/* Social proof */}
-      <div
-        className="w-full flex items-center justify-center gap-12 pt-18 pb-18"
-        style={{ background: 'var(--gradient-background)' }}
-      >
-        <ContentWrapper>
-          <Quotes quotes={QUOTES} />
-        </ContentWrapper>
-      </div>
-
-      {/* Download CTA */}
-      <div
-        className="w-full flex items-center justify-center pt-24 pb-24"
-        style={{ background: 'var(--gradient-background-download)' }}
-      >
-        <ContentWrapper id="download-report">
-          <div className="flex flex-col md:flex-row items-center gap-8 relative">
-            <div
-              className="absolute left-0 top-1/2 -translate-x-1/2"
-              style={{
-                width: '508px',
-                height: '2px',
-                background:
-                  'linear-gradient(180deg, #5E4EB5 0%, rgba(255, 255, 255, 0) 100%)',
-                transform: 'rotate(90deg)',
-                opacity: 0.1
-              }}
-            />
-            <div
-              className="absolute right-0 top-1/2 translate-x-1/2"
-              style={{
-                width: '508px',
-                height: '2px',
-                background:
-                  'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #5E4EB5 100%)',
-                transform: 'rotate(90deg)',
-                opacity: 0.1
-              }}
-            />
-            <Image
-              src={ReportImage}
-              alt="Report Download"
-              width={555}
-              height={100}
-            />
-            <div className="flex flex-col gap-8">
-              <p className="text-[var(--color-pluto-purple-500)] text-sm font-medium font-[family-name:var(--font-geist-mono)]">
-                2025 REPORT
-              </p>
-              <Blurb
-                title="Get a Copy of Our Report Here"
-                description="Discover the latest stablecoin trends, data, and insights shaping 2025. Download your copy today."
-                textAlignment="left"
-              />
-              <DownloadReportForm disableForm />
-            </div>
-          </div>
-        </ContentWrapper>
-      </div>
-
-      {/* Appendix */}
-      <div id="appendix" />
-      <ContentWrapper>
-        <div className="w-full flex flex-col items-center gap-6">
-          <Blurb
-            title="Appendix: Stablecoin Context"
-            description="Background readings on broader stablecoin flows to contextualize Hyperliquid’s growth."
-            textAlignment="center"
-          />
-        </div>
-      </ContentWrapper>
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="Top Blockchains Used for Stablecoin Transactions in 2024"
-              description="The most popular blockchains by share of value sent: Tron, Ethereum, Polygon (L2), and BSC."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
-            <Chart
-              title="Stablecoin Volume by Blockchain"
-              data={STABLECOIN_VOLUME_BY_CHAIN_DATA}
-              dataConfig={STABLECOIN_VOLUME_BY_CHAIN_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              isTimeSeries
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <Blurb
-            title="The Most Used Stablecoins for Global Transactions"
-            description="USDT dominates global settlement volumes, followed by USDC."
-          />
-          <div className="col-span-2">
-            <Chart
-              title="Stablecoin Payments by Token"
-              data={STABLECOIN_VOLUME_BY_CURRENCY_DATA}
-              dataConfig={STABLECOIN_VOLUME_BY_CURRENCY_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              isTimeSeries
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-      <ContentWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-16">
-          <div className="md:order-2">
-            <Blurb
-              title="Which Countries Send the Most Stablecoins?"
-              description="Geographic breakdown of stablecoin originators across the US, Singapore, Hong Kong, Japan, the UK and more."
-            />
-          </div>
-          <div className="col-span-2 md:order-1">
-            <Chart
-              title="Percent of Stablecoin Flows by Country"
-              data={STABLECOIN_FLOWS_BY_COUNTRY_DATA}
-              dataConfig={STABLECOIN_FLOWS_BY_COUNTRY_CONFIG}
-              valueFormat={VALUE_FORMAT.percentage}
-              hideLegend
-            />
-          </div>
-        </div>
-      </ContentWrapper>
-
-      {/* Partners */}
-      <ContentWrapper>
-        <div className="flex flex-col items-center justify-center gap-8">
-          <p className="text-4xl font-bold">Artemis Data Partners</p>
-          <p className="text-muted-foreground">
-            Join us to define the stablecoin data standard of the future
-          </p>
-          <LogoGrid dataPartners={DATA_PARTNERS} />
-          <Link
-            href="https://ry0v9n8oa4l.typeform.com/to/pibk76PA"
-            target="_blank"
-          >
-            <Button variant="cta" className="mt-3">
-              Join Us
-            </Button>
-          </Link>
-        </div>
-      </ContentWrapper>
+ 
+      
     </div>
   )
 }
