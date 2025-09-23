@@ -7,7 +7,7 @@ const BlurbHero = () => {
   return (
     <div className="w-full flex flex-col gap-4 max-w-4xl">
       <h1 className="text-foreground font-semibold text-[32px] md:text-[48px] leading-[32px] md:leading-[48px] text-left">
-        Stablecoin Payments from the Ground Up
+        Hyperliquid For All
       </h1>
       <div className="flex flex-col gap-4">
         <p className="text-muted-foreground text-md">In partnership with</p>

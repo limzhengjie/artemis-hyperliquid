@@ -25,37 +25,37 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Hyperliquid For All | Artemis',
   description:
-    'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
+    'We are building the best Hyperliquid dashboard for the community - builders, analysts, traders and institutions.',
   keywords:
     'hyperliquid for all, Artemis, hyperliquid, hyperliquid analytics, hyperliquid market data, hyperliquid blockchain, hyperliquid payments, hyperliquid b2b, hyperliquid p2p',
   openGraph: {
     title: 'Hyperliquid For All | Artemis',
     description:
-      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
+      'We are building the best Hyperliquid dashboard for the community - builders, analysts, traders and institutions.',
     url: 'https://whyhyperliquid.com',
     siteName: 'Hyperliquid For All | Artemis',
     type: 'website',
     images: [
       {
-        url: '/report.png',
+        url: '/hyperliquid-preview.png',
         width: 1200,
         height: 630,
-        alt: 'Stablecoin Payments from the Ground Up | Artemis'
+        alt: 'Hyperliquid For All | Artemis'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Stablecoin Payments from the Ground Up | Artemis',
+    title: 'Hyperliquid For All | Artemis',
     description:
-      'Comprehensive stablecoin market insights, and deep dives into the stablecoin ecosystem. Track stablecoin geographic activity and payments volume.',
-    images: ['/report.png']
+      'We are building the best Hyperliquid dashboard for the community - builders, analysts, traders and institutions.',
+    images: ['/hyperliquid-preview.png']
   },
   other: {
-    'og:image': '/report.png',
+    'og:image': '/hyperliquid-preview.png',
     'og:image:width': '1200',
     'og:image:height': '630',
-    'og:image:alt': 'Stablecoin Payments from the Ground Up | Artemis'
+    'og:image:alt': 'Hyperliquid For All | Artemis'
   }
 }
 
