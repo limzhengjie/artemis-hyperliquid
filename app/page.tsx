@@ -224,7 +224,7 @@ export default async function Overview() {
                 DeFi Premier Operating System
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
-                Hyperliquid's gameplan is simple:  
+                Hyperliquid gameplan is simple:  
                 <p>
                 <strong className="text-foreground">
                   Win Perps. Own Spot. Grow Apps.</strong></p>
