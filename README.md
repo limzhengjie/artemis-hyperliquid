@@ -4,6 +4,12 @@ A research dashboard by Zheng Jie Lim for exploring Hyperliquid perpetual volume
 
 The project demonstrates more than charting: dated observations, venue coverage, missing-data handling and reproducible research output. The live application uses Artemis data. Historical research datasets remain bundled and are labeled as snapshots.
 
+## The question
+
+**Can I trust a market-share number when a venue’s data is missing?** The goal is to measure Hyperliquid’s share of a fixed cohort without inflating it through an incomplete denominator. Start with three complete venue series, remove observations, then simulate a stale source and an outage. A successful result keeps known volume visible while withholding shares whose inputs are incomplete.
+
+This is a reproducible data-quality experiment using fictional values, not evidence of Hyperliquid’s actual market position.
+
 ## Run the demo
 
 Requires Node.js 22.13+ and npm. No API keys, database, account or environment file.

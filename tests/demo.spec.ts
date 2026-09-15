@@ -129,6 +129,8 @@ test('chart inspection follows pointer, touch and keyboard without inventing mis
   await expect(tooltip).toBeVisible()
   await page.screenshot({ path: testInfo.outputPath('chart-inspection.png') })
   await expect(tooltip).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(tooltip).toBeHidden()
   await page.getByLabel('Data scenario').selectOption('offline')
   await expect(tooltip).toBeHidden()
   await chart.focus()
