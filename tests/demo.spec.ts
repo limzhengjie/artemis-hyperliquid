@@ -114,7 +114,7 @@ test('chart inspection follows pointer, touch and keyboard without inventing mis
     const screen = point.matrixTransform(element.getScreenCTM()!)
     return { x: screen.x, y: screen.y }
   })
-  if (testInfo.project.name === 'mobile') await page.touchscreen.tap(point.x, point.y)
+  if (testInfo.project.use.hasTouch) await page.touchscreen.tap(point.x, point.y)
   else await page.mouse.move(point.x, point.y)
   await expect(tooltip).toBeVisible()
   await expect(tooltip).toContainText('15 Aug 2026')
