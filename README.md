@@ -18,6 +18,8 @@ Open **http://127.0.0.1:4348**. Alternatively, double-click `demo-dist/index.htm
 
 Try **Missing observations**: Hyperliquid's own volume remains visible, but its share becomes unavailable when another venue is missing. **Stale source** preserves the older observations and their real date. **Source unavailable** demonstrates an outage without fabricated zeroes.
 
+Hover or tap anywhere in the chart to inspect the nearest date and all three venue values. Missing values stay labeled unavailable. With the chart focused, use arrow keys to move between dates, Home/End to jump and Escape to close the details. The footer links back to the personal site's Projects page.
+
 The demo values are fictional, fixed to August 2026, and not estimates of actual activity. The three-venue cohort is deliberately small; it is not the whole market. Fixture data never substitutes for a failed live request. The demo runs through the same normalization and share calculations as the live dashboard.
 
 ## Run the application

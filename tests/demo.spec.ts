@@ -87,3 +87,54 @@ test('keyboard controls and focus are usable', async ({ page }) => {
   ).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('#rows tr')).toHaveCount(7)
 })
+
+test('chart inspection follows pointer, touch and keyboard without inventing missing values', async ({ page }, testInfo) => {
+  await page.goto('/')
+  await page.getByLabel('Data scenario').selectOption('missing')
+  const chart = page.locator('#chart')
+  const tooltip = page.locator('#chart-tooltip')
+  await chart.focus()
+  await page.keyboard.press('Home')
+  await expect(tooltip).toContainText('1 Aug 2026')
+  await page.keyboard.press('End')
+  await expect(tooltip).toContainText('31 Aug 2026')
+  await expect(tooltip.locator('[data-value="lighter"]')).toHaveText('Unavailable')
+  await expect(tooltip.locator('[data-value="share"]')).toHaveText('Unavailable')
+  await expect(tooltip.locator('[data-value="hype"]')).toContainText('$')
+  await page.keyboard.press('Escape')
+  await expect(tooltip).toBeHidden()
+  // A fresh tap must keep its selected date when the SVG gains focus.
+  await chart.evaluate(element => (element as SVGSVGElement).blur())
+
+  const point = await chart.evaluate(svg => {
+    const element = svg as SVGSVGElement
+    const point = element.createSVGPoint()
+    point.x = 48 + (element.viewBox.baseVal.width - 60) * 14 / 30
+    point.y = 150
+    const screen = point.matrixTransform(element.getScreenCTM()!)
+    return { x: screen.x, y: screen.y }
+  })
+  if (testInfo.project.name === 'mobile') await page.touchscreen.tap(point.x, point.y)
+  else await page.mouse.move(point.x, point.y)
+  await expect(tooltip).toBeVisible()
+  await expect(tooltip).toContainText('15 Aug 2026')
+  await expect(tooltip.locator('[data-value="lighter"]')).toHaveText('Unavailable')
+  const fits = await tooltip.evaluate(element => {
+    const bounds = element.getBoundingClientRect()
+    const frame = element.parentElement!.getBoundingClientRect()
+    return bounds.left >= frame.left && bounds.right <= frame.right
+  })
+  expect(fits).toBe(true)
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  await expect(tooltip).toBeVisible()
+  await page.screenshot({ path: testInfo.outputPath('chart-inspection.png') })
+  await expect(tooltip).toBeVisible()
+  await page.getByLabel('Data scenario').selectOption('offline')
+  await expect(tooltip).toBeHidden()
+  await chart.focus()
+  await page.keyboard.press('End')
+  await expect(tooltip).toContainText('Unavailable')
+  expect(await chart.locator('[data-inspection-dot]').count()).toBe(0)
+  await page.getByRole('button', { name: '7 days', exact: true }).click()
+  await expect(tooltip).toBeHidden()
+})
