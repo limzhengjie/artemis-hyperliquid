@@ -11,15 +11,15 @@ export default function YellowCardInfo() {
       </p>
 
       <p>
-        Stablecoins address critical issues with Africa's currency and banking
+        Stablecoins address critical issues with Africa&apos;s currency and banking
         systems. Over 70% of African countries face FX shortages declared as
-        crises. In many markets, local bank debit cards can't be used
-        internationally, banks can't process cross-border payments, and USD
+        crises. In many markets, local bank debit cards can&apos;t be used
+        internationally, banks can&apos;t process cross-border payments, and USD
         access is severely limited.
       </p>
 
       <p>
-        Stablecoins aren't replacing local currency transactions — they're
+        Stablecoins aren&apos;t replacing local currency transactions — they&apos;re
         replacing payments that previously relied on the SWIFT network, which is
         expensive, slow, and inefficient. Stablecoins offer a faster, cheaper,
         and simpler alternative.

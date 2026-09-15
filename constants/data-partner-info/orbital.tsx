@@ -3,7 +3,7 @@ export default function OrbitalInfo() {
     <div className="w-full flex flex-col items-start gap-4">
       <p>
         Powerful global payment platform unifying stablecoin speed and
-        traditional payments. Orbital's enterprise-grade platform enables
+        traditional payments. Orbital&apos;s enterprise-grade platform enables
         businesses to receive, exchange, and settle funds across all major
         stablecoins, traditional currencies, and 80+ exotic currencies.
       </p>
@@ -14,7 +14,7 @@ export default function OrbitalInfo() {
         C2B payments.
       </p>
       <p>
-        Whether you're scaling cross-border payments, optimizing treasury
+        Whether you&apos;re scaling cross-border payments, optimizing treasury
         management, or integrating digital assets into your financial ecosystem,
         Orbital provides the payment infrastructure to move money smarter.
       </p>

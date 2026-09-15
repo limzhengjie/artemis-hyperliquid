@@ -41,21 +41,11 @@ export const formatBigNumber = (
     : Math.abs((Number(number) * 100) / 100).toFixed(1)
 }
 
-export function formatValue(value: number, format: ValueFormat) {
-  if (format === VALUE_FORMAT.number) {
-    return formatBigNumber(value)
-  }
-  // if (format === VALUE_FORMAT.currency) {
-  //   return Intl.NumberFormat('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD'
-  //   }).format(value)
-  // }
-  if (format === VALUE_FORMAT.currency) {
-    return `$${formatBigNumber(value)}`
-  }
-  if (format === VALUE_FORMAT.percentage) {
-    return `${value.toFixed(1)}%`
-  }
+export function formatValue(value: number | null, format: ValueFormat) {
+  if (value === null || !Number.isFinite(value)) return '—'
+  const sign = value < 0 ? '−' : ''
+  if (format === VALUE_FORMAT.number) return `${sign}${formatBigNumber(value)}`
+  if (format === VALUE_FORMAT.currency) return `${sign}$${formatBigNumber(value)}`
+  if (format === VALUE_FORMAT.percentage) return `${value.toFixed(1)}%`
   return value.toString()
 }

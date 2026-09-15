@@ -3,7 +3,7 @@ export default function AcctualInfo() {
     <div className="w-full flex flex-col items-start gap-4">
       <p>
         Acctual is designed to help you manage payments, invoices, and transfers
-        in both crypto and fiat. Whether you're invoicing clients, paying bills,
+        in both crypto and fiat. Whether you&apos;re invoicing clients, paying bills,
         or converting funds.
       </p>
       <p>Acctual helps you create and manage invoices so that you can:</p>

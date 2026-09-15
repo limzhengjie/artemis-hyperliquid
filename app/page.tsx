@@ -6,9 +6,9 @@ import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
 
 
 
-import { getCurrentDate, getStartDate } from '@/lib/dates'
+import { getStartDate } from '@/lib/dates'
 
-import { fetchHyperliquidPerpVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume, fetchOpenInterestByVenue } from '@/lib/fetchHyperliquidData'
+import { PERP_VENUES, fetchHyperliquidPerpVolume, fetchPerpVolumeByVenue, fetchAllSpotDEXVolume, fetchOpenInterestByVenue } from '@/lib/fetchHyperliquidData'
 import { BINANCE_HYPERLIQUID_SPOT_DATA, BINANCE_PERP_WEEKLY } from '@/constants/data/binance-hyperliquid'
 import { HYPERLIQUID_INCLUDES_HYPERUNIT_DATA, HYPERLIQUID_INCLUDES_HYPERUNIT_CONFIG } from '@/constants/data/hyperunit-flows'
 import { HYPERLIQUID_USDC_TVL_DATA, HYPERLIQUID_USDC_TVL_CONFIG } from '@/constants/data/hyperliquid-usdc-tvl'
@@ -17,6 +17,7 @@ import { HYPERUNIT_TVL_DATA, HYPERUNIT_TVL_CONFIG } from '@/constants/data/hyper
 import { TVL_DATA } from '@/constants/data/overview'
 import { loadHyperevmStablecoinsStackedData, HYPEREVM_STABLECOIN_STACKED_CONFIG } from '@/constants/data/hyperevm-stablecoins'
 
+import { aggregateWeeks, comparison, finiteValue, qualityNote } from '@/lib/market-data'
 import type { ChartConfig } from '@/components/ui/chart'
 
 import Chart from '@/components/chart'
@@ -29,107 +30,30 @@ import StatSummaryTile from '@/components/stat-summary-tile'
 // Removed unused BlurbHero
 
 export default async function Overview() {
-  const endDate = getCurrentDate()
+  // Daily metrics are evaluated through the last completed UTC day.
+  const endDate = getStartDate(1) as string
+  const startDate = getStartDate(365) as string
+  const [hypeResult, perpsResult, spotResult, oiResult, HYPEREVM_STABLECOIN_STACKED] = await Promise.all([
+    fetchHyperliquidPerpVolume(getStartDate(730) as string, endDate),
+    fetchPerpVolumeByVenue(startDate, endDate),
+    fetchAllSpotDEXVolume(startDate, endDate),
+    fetchOpenInterestByVenue(startDate, endDate),
+    loadHyperevmStablecoinsStackedData()
+  ])
+  const allPerpsVolumeData = perpsResult.rows
+  const allSpotDEXVolumeData = spotResult.rows
+  const allOpenInterestData = oiResult.rows
+  const hyperliquidPerpVolume2YearDailySeries = hypeResult.rows.map(row => ({date:row.date,value:finiteValue(row.hype)}))
+  const hyperliquidPerpVolume1YearSeries = hyperliquidPerpVolume2YearDailySeries.filter(row=>row.date>=startDate && hypeResult.asOf !== null && row.date<=hypeResult.asOf)
+  const hyperliquidPerpVolume2YearSeries = aggregateWeeks(hyperliquidPerpVolume2YearDailySeries)
+  const latestHyperliquidPerpVolume = hyperliquidPerpVolume1YearSeries.at(-1)?.value ?? null
+  const latestPerpVolumeChange = comparison(hyperliquidPerpVolume1YearSeries,1).value
 
-  const hyperliquidPerpVolume2YearData = await fetchHyperliquidPerpVolume(
-    getStartDate(365 * 2) as string,
-    endDate as string,
-  )
-
-  const hyperliquidPerpVolume1YearData = await fetchHyperliquidPerpVolume(
-    getStartDate(365 * 1 + 10) as string, // 10 days to buffer extra days to ensure we have data for the last 365 days
-    endDate as string
-  )
-
-  // Map Hype-only keyed rows -> { date, value } series for sparkline/tiles
-  const hyperliquidPerpVolume2YearDailySeries = (hyperliquidPerpVolume2YearData as Array<Record<string, unknown>>).map(row => ({
-    date: row.date as string,
-    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
+  // Both sides must represent the same complete Monday–Sunday interval.
+  const weeklyHype = new Map(hyperliquidPerpVolume2YearSeries.map(row=>[row.date,row.value]))
+  const PERP_VOLUME_BINANCE_HYPERLIQUID_DATA = BINANCE_PERP_WEEKLY.map(entry=>({
+    date:entry.date, Binance:finiteValue(entry.Binance), Hyperliquid:weeklyHype.get(entry.date)??null
   }))
-  const hyperliquidPerpVolume1YearSeries = (hyperliquidPerpVolume1YearData as Array<Record<string, unknown>>).map(row => ({
-    date: row.date as string,
-    value: Number((row as Record<string, unknown>).hype ?? (row as Record<string, unknown>).HYPE ?? 0)
-  }))
-
-  // Helper function to get week start (Monday)
-  function getWeekStartForSparkline(dateStr: string) {
-    const d = new Date(dateStr)
-    const day = d.getUTCDay() // 0=Sun..6=Sat
-    const diffToMonday = (day + 6) % 7
-    const ms = d.getTime() - diffToMonday * 24 * 60 * 60 * 1000
-    const monday = new Date(ms)
-    const yyyy = monday.getUTCFullYear()
-    const mm = String(monday.getUTCMonth() + 1).padStart(2, '0')
-    const dd = String(monday.getUTCDate()).padStart(2, '0')
-    return `${yyyy}-${mm}-${dd}`
-  }
-
-  // Aggregate daily data to weekly for the sparkline
-  const weeklyVolumeMap: Record<string, number> = {}
-  hyperliquidPerpVolume2YearDailySeries.forEach(item => {
-    const weekStart = getWeekStartForSparkline(item.date)
-    weeklyVolumeMap[weekStart] = (weeklyVolumeMap[weekStart] || 0) + item.value
-  })
-
-  // Convert back to series format for sparkline
-  const hyperliquidPerpVolume2YearSeries = Object.entries(weeklyVolumeMap)
-    .map(([date, value]) => ({ date, value }))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-
-  const latestHyperliquidPerpVolume =
-    hyperliquidPerpVolume1YearSeries?.[hyperliquidPerpVolume1YearSeries.length - 1]?.value || 0
-
-  const latestHyperliquidPerpVolumeChange =
-    (hyperliquidPerpVolume1YearSeries?.[hyperliquidPerpVolume1YearSeries.length - 1]?.value || 0) -
-    (hyperliquidPerpVolume1YearSeries?.[hyperliquidPerpVolume1YearSeries.length - 2]?.value || 0)
-
-  // Alias for clarity with current hero label
-  const latestPerpVolumeChange = latestHyperliquidPerpVolumeChange
-
-  const allPerpsVolumeData = await fetchPerpVolumeByVenue(
-    getStartDate(365) as string,
-    endDate as string
-  )
-
-  const allSpotDEXVolumeData = await fetchAllSpotDEXVolume(
-    getStartDate(365) as string,
-    endDate as string
-  )
-
-  const allOpenInterestData = await fetchOpenInterestByVenue(
-    getStartDate(365) as string
-  )
-
-  // HyperEVM Stablecoin balances from CSV, aggregated by token
-  const HYPEREVM_STABLECOIN_STACKED = await loadHyperevmStablecoinsStackedData()
-
-  // Build Binance vs Hyperliquid Weekly Perp Comparison (reuse logic from /binance-hyperliquid)
-  function getWeekStart(dateStr: string) {
-    const d = new Date(dateStr)
-    const day = d.getUTCDay() // 0=Sun..6=Sat
-    const diffToMonday = (day + 6) % 7
-    const ms = d.getTime() - diffToMonday * 24 * 60 * 60 * 1000
-    const monday = new Date(ms)
-    const yyyy = monday.getUTCFullYear()
-    const mm = String(monday.getUTCMonth() + 1).padStart(2, '0')
-    const dd = String(monday.getUTCDate()).padStart(2, '0')
-    return `${yyyy}-${mm}-${dd}`
-  }
-
-  const weeklyHypeMap: Record<string, number> = {}
-  ;(allPerpsVolumeData || []).forEach((row: Record<string, unknown>) => {
-    const v = Number(row.hype || 0)
-    if (!isNaN(v)) {
-      const wk = getWeekStart(row.date as string)
-      weeklyHypeMap[wk] = (weeklyHypeMap[wk] || 0) + v
-    }
-  })
-
-  const PERP_VOLUME_BINANCE_HYPERLIQUID_DATA = BINANCE_PERP_WEEKLY.map(entry => ({
-    date: entry.date as string,
-    Binance: Number(entry.Binance),
-    Hyperliquid: Number(weeklyHypeMap[entry.date] || 0)
-  })) as Array<{ date: string; Binance: number; Hyperliquid: number }>
 
   const PERP_VOLUME_BINANCE_HYPERLIQUID_CONFIG = {
     Hyperliquid: { label: 'Hyperliquid Perps', color: '#00D4AA', type: CHART_TYPES.stacked100, stackId: 'perpsBH' },
@@ -151,7 +75,7 @@ export default async function Overview() {
 
   // Removed unused ALL_PERPS_CONFIG
 
-  const PERP_VOLUME_BY_SYMBOL_CONFIG: ChartConfig = {
+  const ALL_PERP_CONFIG: ChartConfig = {
     aevo: { label: 'Aevo', color: '#8B5CF6', type: CHART_TYPES.stacked100, stackId: 'perps' },
     apex: { label: 'Apex', color: '#3B82F6', type: CHART_TYPES.stacked100, stackId: 'perps' },
     avantis: { label: 'Avantis', color: '#10B981', type: CHART_TYPES.stacked100, stackId: 'perps' },
@@ -170,19 +94,9 @@ export default async function Overview() {
     lighter: { label: 'Lighter', color: '#06B6D4', type: CHART_TYPES.stacked100, stackId: 'perps' }
   }
 
-  // Remap Spot DEX keys to match config and guard empty
-  const remapSpotRow = (row: Record<string, unknown>) => ({
-    date: row.date as string,
-    ray: Number(row.ray ?? row.raydium ?? 0),
-    cake: Number(row.cake ?? row.pancakeswap ?? 0),
-    hype: Number(row.hype ?? 0),
-    orca: Number(row.orca ?? 0),
-    uni: Number(row.uni ?? row.uniswap ?? 0)
-  })
-  const spotDEXSeries = Array.isArray(allSpotDEXVolumeData)
-    ? (allSpotDEXVolumeData as Array<{ date: string; [k: string]: number | string }>).map(remapSpotRow)
-    : []
+  const PERP_VOLUME_BY_SYMBOL_CONFIG = Object.fromEntries(Object.entries(ALL_PERP_CONFIG).filter(([key])=>PERP_VENUES.includes(key)))
 
+  const spotDEXSeries = allSpotDEXVolumeData
 
   const SPOT_VOLUME_BY_SYMBOL_CONFIG: ChartConfig = {
     ray: { label: 'Raydium', color: '#9945FF', type: CHART_TYPES.stacked100, stackId: 'spot' },
@@ -195,9 +109,9 @@ export default async function Overview() {
   // Build stacked-only series for the chart (HLP, SPOT, APPS only)
   const TVL_STACKED = (TVL_DATA as Array<Record<string, unknown>>).map(d => ({
     date: d.DATE as string,
-    TVL_HLP: Number.isFinite(Number(d.TVL_HLP)) ? Number(d.TVL_HLP) : 0,
-    TVL_SPOT: Number.isFinite(Number(d.TVL_SPOT)) ? Number(d.TVL_SPOT) : 0,
-    TVL_APPS: Number.isFinite(Number(d.TVL_APPS)) ? Number(d.TVL_APPS) : 0
+    TVL_HLP: finiteValue(d.TVL_HLP),
+    TVL_SPOT: finiteValue(d.TVL_SPOT),
+    TVL_APPS: finiteValue(d.TVL_APPS)
   }))
 
   const TVL_STACKED_CONFIG: ChartConfig = {
@@ -225,9 +139,9 @@ export default async function Overview() {
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
                 Hyperliquid gameplan is simple:  
-                <p>
+                <span className="block">
                 <strong className="text-foreground">
-                  Win Perps. Own Spot. Grow Apps.</strong></p>
+                  Win Perps. Own Spot. Grow Apps.</strong></span>
                 <br className="hidden sm:block" />
 
                 The flywheel has already started spinning: Ready to see the evidence?
@@ -240,7 +154,8 @@ export default async function Overview() {
             </div>
             <div className="flex-1 w-full max-w-lg">
               <StatSummaryTile
-                mainStatLabel="PERP VOLUME"
+                mainStatLabel={`LATEST REPORTED DAILY VOLUME${hypeResult.asOf ? ` · ${hypeResult.asOf}` : ''}`}
+                sourceNote={qualityNote(hypeResult)}
               mainStat={{
                   value: latestHyperliquidPerpVolume,
                 type: VALUE_FORMAT.currency
@@ -316,7 +231,7 @@ export default async function Overview() {
       <ContentWrapper className="max-w-none px-4 sm:px-8 lg:px-16 xl:px-32">
         <div className="w-full flex flex-col items-center gap-8 mb-12">
           <Blurb
-            title="Perp DEX Volume by Venue — why Hyperliquid dominates"
+            title="Perp volume across eight tracked venues"
             description="The perp landscape is consolidating into Hyperliquid because execution and risk are better where it matters. Early players like dYdX and GMX built solid businesses, but Hyperliquid's on-chain price-time order book + deterministic liquidations keep top-of-book thick and spreads tight when others thin out. HLP standardizes market-making/liquidation flow, so books stay supported in volatility."
             textAlignment="center"
           />
@@ -324,8 +239,9 @@ export default async function Overview() {
         <div className="mb-20">
           {allPerpsVolumeData && allPerpsVolumeData.length > 0 ? (
             <Chart
-              title="Perp DEX Volume by Venue — why Hyperliquid dominates"
+              title="Perp volume across eight tracked venues"
               data={allPerpsVolumeData}
+              sourceNote={`${qualityNote(perpsResult)} · Fixed eight-venue cohort; not the whole market`}
               dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
               valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
@@ -335,7 +251,7 @@ export default async function Overview() {
             />
           ) : (
             <div className="w-full h-[500px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-xl border border-border">
-              Unable to load data right now.
+              {qualityNote(perpsResult)}
             </div>
           )}
         </div>
@@ -348,8 +264,9 @@ export default async function Overview() {
             <Chart
               title="Open Interest by Protocol"
               data={[...allOpenInterestData]}
+              sourceNote={qualityNote(oiResult)}
               dataConfig={OPEN_INTEREST_BY_SYMBOL_CONFIG}
-              valueFormat={VALUE_FORMAT.currency}
+              valueFormat={VALUE_FORMAT.percentage}
               isTimeSeries
               chartHeight={380}
               hidePoweredBy
@@ -411,17 +328,18 @@ export default async function Overview() {
           <div className="lg:col-span-2">
             {spotDEXSeries && spotDEXSeries.length > 0 ? (
               <Chart
-                title="Spot DEX Volume (Daily)"
+                title="Share of tracked spot volume (Daily)"
                 data={spotDEXSeries}
+                sourceNote={qualityNote(spotResult)}
                 dataConfig={SPOT_VOLUME_BY_SYMBOL_CONFIG}
-                valueFormat={VALUE_FORMAT.currency}
+                valueFormat={VALUE_FORMAT.percentage}
                 isTimeSeries
                 chartHeight={380}
                 hidePoweredBy
               />
             ) : (
               <div className="w-full h-[380px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-xl border border-border">
-                Unable to load spot DEX data right now.
+                {qualityNote(spotResult)}
               </div>
             )}
           </div>

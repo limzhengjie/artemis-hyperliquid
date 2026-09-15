@@ -40,7 +40,7 @@ export default function BinanceInfo() {
 
       <p>
         Binance Pay is now integrated with Pix, the instant payment system
-        developed by Brazil's Central Bank and used by over 174 million people
+        developed by Brazil&apos;s Central Bank and used by over 174 million people
         and 15m businesses, enabling real-time crypto-to-reais payments.
       </p>
 
@@ -61,7 +61,7 @@ export default function BinanceInfo() {
         </li>
         <li>
           <strong>Direct Debit & Pre-Authorization:</strong> Enable recurring or
-          automatic payments with customer's one-time authorisation — ideal for
+          automatic payments with customer&apos;s one-time authorisation — ideal for
           subscriptions, travel or transport use-cases, and more
         </li>
         <li>

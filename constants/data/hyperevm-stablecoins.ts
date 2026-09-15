@@ -22,7 +22,7 @@ export type HyperevmStablecoinToken = (typeof TOKEN_KEYS)[number]
 
 export type HyperevmStablecoinRow = {
   date: string
-} & Partial<Record<HyperevmStablecoinToken, number>>
+} & Partial<Record<HyperevmStablecoinToken, number | null>>
 
 // Map raw CSV names to canonical keys used in the chart config
 function normalizeTokenName(raw: string): HyperevmStablecoinToken | undefined {
@@ -69,7 +69,7 @@ export async function loadHyperevmStablecoinsStackedData(): Promise<HyperevmStab
   // Expect header: day,contract_address,name,total_supply,total_stablecoin_supply
   const [, ...rows] = lines
 
-  const byDate: Record<string, Partial<Record<HyperevmStablecoinToken, number>>> = {}
+  const byDate: Record<string, Partial<Record<HyperevmStablecoinToken, number | null>>> = {}
 
   for (const line of rows) {
     const parts = line.split(',')
@@ -81,7 +81,7 @@ export async function loadHyperevmStablecoinsStackedData(): Promise<HyperevmStab
     const key = normalizeTokenName(nameRaw)
     if (!key) continue
 
-    const totalSupply = Number(totalSupplyStr)
+    const totalSupply = totalSupplyStr.trim() === '' ? NaN : Number(totalSupplyStr)
     if (!Number.isFinite(totalSupply)) continue
 
     if (!byDate[day]) byDate[day] = {}
@@ -97,7 +97,7 @@ export async function loadHyperevmStablecoinsStackedData(): Promise<HyperevmStab
       if (typeof value === 'number' && Number.isFinite(value)) {
         base[token] = value
       } else {
-        base[token] = 0
+        base[token] = null
       }
     }
     return base

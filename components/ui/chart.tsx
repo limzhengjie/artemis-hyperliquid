@@ -128,6 +128,7 @@ function ChartTooltipContent({
   hideLabel = false,
   hideIndicator = false,
   labelFormatter,
+  label: hoveredLabel,
   labelClassName,
   formatter,
   valueFormatter,
@@ -166,7 +167,11 @@ function ChartTooltipContent({
   )
 
   const enableTotalValue =
-    allItemsHaveStackId && (allItemsHaveBarType || allItemsHaveStacked100Type)
+    allItemsHaveStackId && (allItemsHaveBarType || allItemsHaveStacked100Type) &&
+    new Set(Object.values(config).map(item=>item.stackId)).size === 1 &&
+    Object.keys(config).every(key=>payload?.some(item=>
+      item.dataKey === (keyMapping[key] ?? key) && typeof item.value === 'number' && Number.isFinite(item.value)
+    ))
 
   const reverseKeyMapping: Record<string, string> = {}
   Object.entries(keyMapping).forEach(([originalKey, percentageKey]) => {
@@ -190,7 +195,7 @@ function ChartTooltipContent({
     if (labelFormatter) {
       return (
         <div className={cn('font-medium', labelClassName)}>
-          {labelFormatter(value, payload)}
+          {labelFormatter(hoveredLabel, payload)}
         </div>
       )
     }
@@ -202,6 +207,7 @@ function ChartTooltipContent({
     return <div className={cn('font-medium', labelClassName)}>{value}</div>
   }, [
     labelFormatter,
+    hoveredLabel,
     payload,
     hideLabel,
     labelClassName,
@@ -224,7 +230,7 @@ function ChartTooltipContent({
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
-        {payload
+        {[...payload]
           .sort((a, b) => (b.value as number) - (a.value as number))
           .map((item, index) => {
             const dataKey = `${nameKey || item.name || item.dataKey || 'value'}`
@@ -370,6 +376,7 @@ function ChartTooltipContentSparkline({
     const value = item.payload.date
 
     const formattedDate = new Date(value).toLocaleDateString('en-US', {
+                  timeZone: 'UTC',
       month: 'short',
       day: 'numeric',
       year: 'numeric'
