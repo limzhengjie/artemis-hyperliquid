@@ -13,7 +13,7 @@ import { ValueFormat } from '@/constants/chart'
 import { formatValue } from '@/lib/utils'
 
 interface Props {
-  data: { date: string; value: number }[]
+  data: { date: string; value: number | null }[]
   valueFormat: ValueFormat
 }
 
@@ -24,11 +24,10 @@ const Sparkline = ({ data, valueFormat }: Props) => {
     }
   } satisfies ChartConfig
 
-  const hasEnough = Array.isArray(data) && data.length >= 2
-  const safeData = Array.isArray(data) ? data.filter(d => Number.isFinite(d.value)) : []
-  const isNegative = hasEnough
-    ? safeData[safeData.length - 1]?.value < safeData[0]?.value
-    : false
+  const safeData = data.map(point=>({...point,value:typeof point.value==='number'&&Number.isFinite(point.value)?point.value:null}))
+  const first = safeData[0]?.value
+  const last = safeData.at(-1)?.value
+  const isNegative = first != null && last != null && last < first
 
   const color = isNegative ? 'var(--color-negative)' : 'var(--color-positive)'
 
@@ -63,7 +62,8 @@ const Sparkline = ({ data, valueFormat }: Props) => {
         </defs>
         <Area
           dataKey="value"
-          type="natural"
+          type="linear"
+          connectNulls={false}
           fill="url(#colorGradient)"
           stroke={color}
           activeDot={{ stroke: 'white', strokeWidth: 2, r: 4 }}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { percentageRows, isDay } from '@/lib/market-data'
 import Image from 'next/image'
 
 import {
@@ -37,11 +38,12 @@ import { formatValue } from '@/lib/utils'
 import ArtemisLogo from '@/components/(layout)/artemis-logo'
 
 type ChartData = {
-  [key: string]: number | string
+  [key: string]: number | string | null
 }
 
 interface Props {
   title: string
+  sourceNote?: string
   data: ChartData[]
   dataConfig: ChartConfig
   isTimeSeries?: boolean
@@ -57,6 +59,7 @@ interface Props {
 
 const Chart = ({
   title,
+  sourceNote,
   data,
   dataConfig,
   isTimeSeries = false,
@@ -113,57 +116,20 @@ const Chart = ({
 
   const xAxisHeight = calculateXAxisHeight()
 
-  const processDataForStacked100 = (originalData: ChartData[]) => {
-    // create a deep copy of the data
-    const processedData = JSON.parse(JSON.stringify(originalData))
-
-    // Find all stackable keys (stacked100 type with same stackId)
-    const stackableKeys: Record<string, string[]> = {}
-    let hasStacked100 = false
-
-    Object.entries(dataConfig).forEach(([key, config]) => {
-      if (
-        (config.type as ChartType) === CHART_TYPES.stacked100 &&
-        config.stackId
-      ) {
-        hasStacked100 = true
-        if (!stackableKeys[config.stackId]) {
-          stackableKeys[config.stackId] = []
-        }
-        stackableKeys[config.stackId].push(key)
-      }
-    })
-
-    // if no stacked100 charts, return original data
-    if (!hasStacked100) return originalData
-
-    // calculate percentages for each stack
-    processedData.forEach((item: ChartData) => {
-      Object.entries(stackableKeys).forEach(([stackId, keys]) => {
-        // calculate total for this stack
-        const total = keys.reduce((sum, key) => {
-          return (
-            sum + (typeof item[key] === 'number' ? (item[key] as number) : 0)
-          )
-        }, 0)
-
-        // Convert each value to percentage and store in a new field
-        if (total > 0) {
-          keys.forEach(key => {
-            if (typeof item[key] === 'number') {
-              // Create a new field for the percentage value that includes the stackId
-              item[`${key}_percentage_${stackId}`] =
-                ((item[key] as number) / total) * 100
-            }
-          })
-        }
-      })
-    })
-    return processedData
-  }
-
-  // process data for stacked100 chart types
-  const chartData = processDataForStacked100(data)
+  const groups: Record<string,string[]> = {}
+  Object.entries(dataConfig).forEach(([key,config])=>{
+    if (config.type === CHART_TYPES.stacked100 && config.stackId) {
+      (groups[config.stackId] ??= []).push(key)
+    }
+  })
+  const chartData = percentageRows(data,groups)
+  const hasValues = chartData.some(row=>Object.keys(dataConfig).some(key=>{
+    const config=dataConfig[key]
+    const value=row[config.type===CHART_TYPES.stacked100&&config.stackId?`${key}_percentage_${config.stackId}`:key]
+    return typeof value==='number'&&Number.isFinite(value)
+  }))
+  const lastDate = data.map(row=>row.date).filter(isDay).sort().at(-1)
+  const note = sourceNote ?? `Research snapshot${lastDate?` · Through ${lastDate}`:''} · Bundled data; not a live feed`
 
   // Helper function to determine date range and appropriate formatting
   const getDateRangeInfo = () => {
@@ -247,6 +213,7 @@ const Chart = ({
               // For data spanning more than 1 year or many data points, show month + year
               if (dateRangeInfo.isLongRange) {
                 return date.toLocaleDateString('en-US', {
+                  timeZone: 'UTC',
                   month: 'short',
                   year: '2-digit'
                 })
@@ -254,6 +221,7 @@ const Chart = ({
               // For shorter time ranges, show month + day
               else {
                 return date.toLocaleDateString('en-US', {
+                  timeZone: 'UTC',
                   month: 'short',
                   day: 'numeric'
                 })
@@ -291,6 +259,7 @@ const Chart = ({
                   const date = new Date(label)
                   // Tooltips always show full date for clarity
                   return date.toLocaleDateString('en-US', {
+                  timeZone: 'UTC',
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric'
@@ -470,15 +439,24 @@ const Chart = ({
     )
   }
 
+  if (!hasValues) return (
+    <section className="w-full rounded-xl border p-6" aria-label={title || 'Chart'}>
+      {title && <h2 className="text-lg font-semibold">{title}</h2>}
+      <p className="py-12 text-center text-muted-foreground">No complete observations for this chart. Missing data is not zero.</p>
+      <p className="text-xs text-muted-foreground">{note}</p>
+    </section>
+  )
+
   if (bare) {
     return (
+      <div className="w-full"><p className="mb-3 text-xs text-muted-foreground">{note}</p>
       <ChartContainer
         config={dataConfig}
         className="w-full"
         style={{ height: `${chartHeight}px` }}
       >
         {renderChart()}
-      </ChartContainer>
+      </ChartContainer></div>
     )
   }
 
@@ -486,6 +464,7 @@ const Chart = ({
     <Card className="w-full gap-4 p-4 md:p-6 relative">
       <CardHeader>
         <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
+        <p className="text-xs text-muted-foreground">{note}</p>
       </CardHeader>
       <CardContent className="p-0 flex flex-col gap-4">
         <ChartContainer

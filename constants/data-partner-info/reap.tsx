@@ -4,7 +4,7 @@ export default function ReapInfo() {
       <p>
         Reap is a financial technology company providing stablecoin-enabled
         infrastructure for the modern business, enabling borderless finance
-        globally. As Asia's leading stablecoin-enabled card issuer, Reap
+        globally. As Asia&apos;s leading stablecoin-enabled card issuer, Reap
         processes billions in stablecoin-funded payments each month.
       </p>
 
@@ -19,16 +19,16 @@ export default function ReapInfo() {
 
       <p>
         Through our API-driven embedded finance solutions, businesses can
-        integrate Reap's stablecoin-enabled services—from Visa card issuance to
+        integrate Reap&apos;s stablecoin-enabled services—from Visa card issuance to
         cross-border payments—directly into their systems and to build new
         solutions.
       </p>
 
       <p>
-        Our clients include the world's largest cryptocurrency exchange and fast
+        Our clients include the world&apos;s largest cryptocurrency exchange and fast
         growing neobanks such as KAST. Headquartered in Hong Kong, Reap adheres
         to the highest regulatory and compliance requirements of one of the
-        world's top financial hubs, with access to major financial institutions
+        world&apos;s top financial hubs, with access to major financial institutions
         and global currencies for efficient and cost-effective money movement.
       </p>
     </div>

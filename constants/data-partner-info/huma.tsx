@@ -22,7 +22,7 @@ export default function HumaInfo() {
           VISA/Mastercard network
         </li>
         <li>
-          Marketplace Payment Acceleration: Pilot with Amazon's payment partners
+          Marketplace Payment Acceleration: Pilot with Amazon&apos;s payment partners
           enables supplier payments in Asia in under 3 hours instead of days.
           Amazon makes ~$1T in payments annually, typically collecting from US
           buyers and paying Asian suppliers

@@ -11,7 +11,7 @@ export default function BVNKInfo() {
       <p>BVNK addresses this by:</p>
       <ul className="list-disc pl-5 space-y-1">
         <li>
-          BVNK's auto-conversion capabilities mean businesses don't need to
+          BVNK&apos;s auto-conversion capabilities mean businesses don&apos;t need to
           touch stablecoins directly - they can hold funds in USD, GBP, or EUR
         </li>
         <li>
@@ -26,11 +26,11 @@ export default function BVNKInfo() {
       </p>
       <ul className="list-disc pl-5 space-y-1">
         <li>
-          One of the world's largest merchant acquirers, Worldpay, uses BVNK's
+          One of the world&apos;s largest merchant acquirers, Worldpay, uses BVNK&apos;s
           embedded wallets to enable instant global payouts in stablecoins for
           its clients - to partners, customers, contractors, creators, sellers
           across more than 180 markets. Payouts come from fiat balances, so
-          there's no need for Worldpay or its clients to handle or hold crypto
+          there&apos;s no need for Worldpay or its clients to handle or hold crypto
         </li>
         <li>
           Employer of record platform Deel uses BVNK to pay more than 10,000
@@ -47,7 +47,7 @@ export default function BVNKInfo() {
       </ul>
 
       <p>
-        BVNK's infrastructure connects major stablecoins with traditional
+        BVNK&apos;s infrastructure connects major stablecoins with traditional
         banking capabilities, supported by regulatory licenses across multiple
         jurisdictions. The company recently launched Layer1, a self-custody
         infrastructure product that allows financial institutions to integrate
@@ -56,7 +56,7 @@ export default function BVNKInfo() {
       </p>
 
       <p>
-        BVNK's approach of unifying traditional and blockchain financial systems
+        BVNK&apos;s approach of unifying traditional and blockchain financial systems
         positions it as a key enabler for the next phase of digital payment
         innovation.
       </p>

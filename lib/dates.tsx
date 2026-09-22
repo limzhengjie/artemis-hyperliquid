@@ -12,6 +12,6 @@ export const getCurrentDate = () => {
 
 export const getStartDate = (daysBack: number) => {
   const startDate = new Date()
-  startDate.setDate(startDate.getDate() - daysBack)
+  startDate.setUTCDate(startDate.getUTCDate() - daysBack)
   return getISOStringWithoutTime(startDate)
 }

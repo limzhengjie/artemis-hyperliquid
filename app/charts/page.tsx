@@ -1,7 +1,8 @@
 import Chart from '@/components/chart'
+import { qualityNote } from '@/lib/market-data'
 import { VALUE_FORMAT, CHART_TYPES } from '@/constants/chart'
-import { getCurrentDate, getStartDate } from '@/lib/dates'
-import { fetchAllPerpsVolume } from '@/lib/fetchHyperliquidData'
+import { getStartDate } from '@/lib/dates'
+import { PERP_VENUES, fetchPerpVolumeByVenue } from '@/lib/fetchHyperliquidData'
 
 import {
   STABLECOIN_ACTIVITY_BY_TYPE_DATA,
@@ -42,15 +43,15 @@ import {
 } from '@/constants/data/use-case'
 
 const Charts = async () => {
-  const endDate = getCurrentDate()
+  const endDate = getStartDate(1)
   const startDate = getStartDate(180) as string
 
-  const PERP_VOLUME_BY_SYMBOL_DATA = await fetchAllPerpsVolume(
+  const PERP_VOLUME_BY_SYMBOL_DATA = await fetchPerpVolumeByVenue(
     startDate,
     endDate as string
   )
 
-  const PERP_VOLUME_BY_SYMBOL_CONFIG = {
+  const ALL_PERP_CONFIG = {
     aevo: { label: 'Aevo', color: '#8C7CF7', type: CHART_TYPES.stacked100, stackId: 'perps' },
     apex: { label: 'Apex', color: '#70A9FF', type: CHART_TYPES.stacked100, stackId: 'perps' },
     avantis: { label: 'Avantis', color: '#51B495', type: CHART_TYPES.stacked100, stackId: 'perps' },
@@ -70,11 +71,14 @@ const Charts = async () => {
     lighter: { label: 'Lighter', color: '#26A69A', type: CHART_TYPES.stacked100, stackId: 'perps' }
   } as const
 
+  const PERP_VOLUME_BY_SYMBOL_CONFIG = Object.fromEntries(Object.entries(ALL_PERP_CONFIG).filter(([key])=>PERP_VENUES.includes(key)))
+
   return (
     <div className="w-full max-w-6xl mx-auto p-12 flex flex-col items-center gap-8 font-[family-name:var(--font-geist-sans)]">
       <Chart
-        title="Perp Volume Share by Venue"
-        data={[...PERP_VOLUME_BY_SYMBOL_DATA]}
+        title="Perp volume share · Eight tracked venues"
+        data={PERP_VOLUME_BY_SYMBOL_DATA.rows}
+        sourceNote={`${qualityNote(PERP_VOLUME_BY_SYMBOL_DATA)} · Fixed eight-venue cohort; not the whole market`}
         dataConfig={PERP_VOLUME_BY_SYMBOL_CONFIG}
         valueFormat={VALUE_FORMAT.percentage}
         isTimeSeries

@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Reproducible demo / browser evidence
+/demo-dist/
+/test-results/
+/playwright-report/

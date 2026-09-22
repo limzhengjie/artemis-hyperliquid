@@ -90,7 +90,7 @@ export default function RootLayout({
             </PostHogProvider>
           </TooltipProvider>
         </ThemeProvider>
-        <Analytics />
+        {process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' && <Analytics />}
       </body>
     </html>
   )
